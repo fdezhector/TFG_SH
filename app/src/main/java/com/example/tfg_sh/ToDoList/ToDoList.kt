@@ -3,7 +3,6 @@ package com.example.tfg
 import java.util.Date
 import kotlin.collections.ArrayList
 
-
 class ToDoList {
     // getters / setters
     var titulo: String? = null
@@ -33,13 +32,7 @@ class ToDoList {
         lista_tareas.add(tarea)
     }
 
-    fun editarTarea(
-        tarea: Tarea,
-        nombre: String?,
-        fecha_inicio: Date?,
-        fecha_fin: Date?,
-        prioridad: String?
-    ) {
+    fun editarTarea(tarea: Tarea, nombre: String?, fecha_inicio: Date?, fecha_fin: Date?, prioridad: String?) {
         tarea.nombre = nombre
         tarea.fecha_inicio = fecha_inicio
         tarea.fecha_fin = fecha_fin

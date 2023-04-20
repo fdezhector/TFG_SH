@@ -18,13 +18,7 @@ class Evento {
         this.fecha_fin = fecha_fin
     }
 
-    constructor(
-        titulo: String?,
-        ubicacion: String?,
-        descripcion: String?,
-        fecha_inicio: Date?,
-        fecha_fin: Date?
-    ) {
+    constructor(titulo: String?, ubicacion: String?, descripcion: String?, fecha_inicio: Date?, fecha_fin: Date?) {
         this.titulo = titulo
         this.ubicacion = ubicacion
         this.descripcion = descripcion

@@ -5,15 +5,14 @@ import java.util.Date
 
 class Nota {
     //getters / setters
-    val id: Int
-    val fecha_nota: Date
-    val lista_toDoList: ArrayList<ToDoList>
-    val diario: Diario
-    val evento: Evento
+    private val id: Int
+    private val fecha_nota: Date = Date()
+    private val lista_toDoList: ArrayList<ToDoList>
+    private val diario: Diario
+    private val evento: Evento
 
     // constructores
     init {
-        fecha_nota = Date()
         id = setId(fecha_nota)
         lista_toDoList = ArrayList()
         diario = Diario()
