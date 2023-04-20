@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">TFG_SH</string>
+    <string name="app_name">TFG</string>
+    <string name="editar">Editar</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="titulo">Título</string>
+    <string name="descripcion">Descripción</string>
 </resources>

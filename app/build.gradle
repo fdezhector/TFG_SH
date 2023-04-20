@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.tfg_sh'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.tfg_sh"
         minSdk 28
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
