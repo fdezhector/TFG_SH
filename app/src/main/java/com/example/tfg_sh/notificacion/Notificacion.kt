@@ -1,4 +1,4 @@
-package com.example.tfg
+package com.example.tfg_sh.notificacion
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

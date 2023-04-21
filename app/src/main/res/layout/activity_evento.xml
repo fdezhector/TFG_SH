@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".evento.EventoActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideVer1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideVer2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="1"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@id/guideHor1"
+        app:layout_constraintBottom_toTopOf="@id/guideHor2"
+        app:layout_constraintStart_toEndOf="@id/guideVer1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/panel"
+        android:layout_margin="10dp"
+        >
+
+        <EditText
+            android:id="@+id/editTextTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            android:inputType="text"
+            android:minHeight="48dp"
+
+            android:text="@string/titulo"
+            android:autofillHints="Título"
+
+            android:labelFor="@id/editTextTitulo"/>
+
+        <EditText
+            android:id="@+id/editTextUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextTitulo"
+            android:layout_margin="5dp"
+            android:minHeight="48dp"
+
+            android:text="@string/ubicacion"
+            android:autofillHints="Ubicación"
+
+            android:inputType="text"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/editTextUbicacion"
+            android:background="@color/transparent">
+
+            <Button
+                android:id="@+id/button_fecha_inicio"
+                style="?android:spinnerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2.5dp"
+
+                android:background="@color/transparent"
+                android:text="@string/inicio"
+                android:textAlignment="textStart"
+                android:textColor="@color/negro"
+                android:textSize="18sp">
+
+            </Button>
+
+            <View style="@style/Separator" android:layout_below="@id/button_fecha_inicio"></View>
+
+            <Button
+                android:id="@+id/button_fecha_fin"
+                style="?android:spinnerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_fecha_inicio"
+                android:layout_margin="2.5dp"
+
+                android:background="@color/transparent"
+                android:text="@string/fin"
+                android:textAlignment="textStart"
+                android:textColor="@color/negro"
+                android:textSize="18sp">
+
+            </Button>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Descripcion"
+
+        android:background="@color/purple_200"
+        android:gravity="start|top"
+        android:hint="@string/descripcion"
+        android:inputType="textMultiLine"
+
+        android:minHeight="48dp"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:textColorHint="@color/hintColor"
+
+        app:layout_constraintBottom_toTopOf="@id/guideHor3"
+        app:layout_constraintTop_toBottomOf="@id/guideHor2"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

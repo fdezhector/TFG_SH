@@ -1,17 +1,18 @@
-package com.example.tfg
+package com.example.tfg_sh.evento
 
 import java.util.Date
 
 class Evento {
-    //Atributos
+
     private var titulo: String? = null
     private var ubicacion: String? = null
     private var descripcion: String? = null
     private var fecha_inicio: Date? = null
     private var fecha_fin: Date? = null
 
-    //To-do Recordatorio notificacion
+    //Todo Recordatorio notificacion
     constructor() {}
+
     constructor(titulo: String?, fecha_inicio: Date?, fecha_fin: Date?) {
         this.titulo = titulo
         this.fecha_inicio = fecha_inicio

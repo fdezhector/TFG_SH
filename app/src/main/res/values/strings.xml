@@ -4,4 +4,7 @@
     <string name="cerrar">Cerrar</string>
     <string name="titulo">Título</string>
     <string name="descripcion">Descripción</string>
+    <string name="fin">Fin</string>
+    <string name="inicio">Inicio</string>
+    <string name="ubicacion">Ubicación</string>
 </resources>

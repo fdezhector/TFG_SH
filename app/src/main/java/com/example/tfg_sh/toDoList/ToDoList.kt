@@ -1,10 +1,9 @@
-package com.example.tfg
+package com.example.tfg_sh.toDoList
 
 import java.util.Date
 import kotlin.collections.ArrayList
 
 class ToDoList {
-    // getters / setters
     var titulo: String? = null
     var categoria: String? = null
     var lista_tareas: ArrayList<Tarea>

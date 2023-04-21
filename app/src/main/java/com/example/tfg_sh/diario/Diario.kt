@@ -1,8 +1,8 @@
 package com.example.tfg
 
 class Diario {
-    //Getter y Setter
-    //To-do Color
+
+    //Todo Color
     //Atributos
     private var descripcion: String? = null
     private var etiquetas: ArrayList<String>? = null

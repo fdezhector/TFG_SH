@@ -1,11 +1,10 @@
-package com.example.tfg
+package com.example.tfg_sh.toDoList
 
 import java.util.Date
 
 class Tarea {
     var id = 0
 
-    // getters / setters
     var nombre: String? = null
     var isRealizada = false
     var fecha_inicio: Date? = null

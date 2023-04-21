@@ -1,5 +1,7 @@
-package com.example.tfg
+package com.example.tfg_sh.toDoList
 
+import com.example.tfg.Diario
+import com.example.tfg_sh.evento.Evento
 import java.text.SimpleDateFormat
 import java.util.Date
 
