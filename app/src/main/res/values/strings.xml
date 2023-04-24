@@ -7,4 +7,6 @@
     <string name="fin">Fin</string>
     <string name="inicio">Inicio</string>
     <string name="ubicacion">Ubicación</string>
+    <string name="borrar_dia">Borrar</string>
+    <string name="guardar">Guardar</string>
 </resources>

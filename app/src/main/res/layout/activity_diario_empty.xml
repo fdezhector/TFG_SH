@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".diario.DiarioActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".Diario">
+
+        <ImageButton
+            android:id="@+id/button_cerrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/cerrar"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Escribir en el diario..."
+            android:textColor="@color/gris"
+            android:textSize="16sp"
+            android:textStyle="italic" />
+
+        <ImageButton
+            android:id="@+id/button_editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+
+            android:layout_centerInParent="true"
+            android:background="@color/transparent"
+            android:contentDescription="@string/editar"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            app:srcCompat="@drawable/edit_icon_48" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/button_editar"
+            android:layout_marginTop="245dp"
+            android:background="@color/purple_200"
+            android:columnCount="3" >
+
+
+            <ImageButton
+                android:id="@+id/anterior"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_column="0"
+                app:srcCompat="@drawable/left_arrow"
+                android:background="@drawable/circle"
+                android:contentDescription="anterior_dia" />
+
+            <TextView
+                android:id="@+id/fecha"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="16sp"
+                android:layout_columnWeight="1"
+                android:textAlignment="center"
+                android:layout_gravity="center" />
+
+            <ImageButton
+                android:id="@+id/siguiente"
+                android:layout_margin="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/right_arrow"
+                android:layout_column="2"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:contentDescription="siguiente_dia" />
+        </GridLayout>
+
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
