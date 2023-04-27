@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".diario.DiarioActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".diario.DiarioActivity">
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/relativeLayout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/button_cerrar"
@@ -27,8 +31,8 @@
             android:id="@+id/button_guardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/guardar"
@@ -38,12 +42,130 @@
             android:id="@+id/button_borrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/button_guardar"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/button_guardar"
             android:background="@color/transparent"
             android:contentDescription="@string/borrar_dia"
             app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/guideHor1">
+
+        <TextView
+            android:id="@+id/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Color del día:"
+            android:textSize="13sp"
+            android:textColor="@color/gris"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:id="@+id/layoutEmotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/textColor">
+
+            <ImageButton
+                android:id="@+id/color1"
+                android:scaleType="center"
+                android:background="@color/transparent"
+                app:tint="@color/purple_depressed"
+                android:tintMode="multiply"
+
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_launcher_foreground"/>
+
+            <ImageButton
+                android:id="@+id/color2"
+                android:scaleType="center"
+                android:background="@color/transparent"
+                app:tint="@color/purple_sad"
+                android:tintMode="multiply"
+
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_launcher_foreground"/>
+
+            <ImageButton
+                android:id="@+id/color3"
+                android:scaleType="center"
+                android:background="@color/transparent"
+                app:tint="@color/blue_neutral"
+                android:tintMode="multiply"
+
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_launcher_foreground"/>
+
+            <ImageButton
+                android:id="@+id/color4"
+                android:scaleType="center"
+                android:background="@color/transparent"
+                app:tint="@color/green_joy"
+                android:tintMode="multiply"
+
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_launcher_foreground"/>
+
+            <ImageButton
+                android:id="@+id/color5"
+                android:scaleType="center"
+                android:background="@color/transparent"
+                app:tint="@color/green_super"
+                android:tintMode="multiply"
+
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_launcher_foreground"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tagList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_below="@id/layoutEmotes"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:layout_below="@id/tagList"
+
+            android:inputType="textMultiLine"
+
+            android:hint="Cambiar un poco esto"
+            android:textColorHint="@color/gris"
+            />
+
 
     </RelativeLayout>
 
