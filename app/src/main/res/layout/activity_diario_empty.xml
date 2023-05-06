@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -17,13 +16,24 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".Diario">
 
+        <View
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:background="@color/transparent" />
+
         <ImageButton
             android:id="@+id/button_cerrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/cerrar"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
@@ -32,6 +42,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/horizontal_guideline"
             android:layout_centerInParent="true"
             android:text="Escribir en el diario..."
             android:textColor="@color/gris"
@@ -54,11 +65,10 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="72dp"
-            android:layout_below="@id/button_editar"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="245dp"
             android:background="@color/purple_200"
             android:columnCount="3" >
-
 
             <ImageButton
                 android:id="@+id/anterior"
@@ -96,7 +106,6 @@
                 android:contentDescription="siguiente_dia" />
         </GridLayout>
 
-
-
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,11 @@
 package com.example.tfg_sh.toDoList
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.example.tfg_sh.Utils
 import com.example.tfg_sh.databinding.ActivityToDoListMainBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,9 +32,13 @@ class ToDoListMain : AppCompatActivity() {
             setRecycler()
         }
         setRecycler()
+
+        toDoList.buttonCerrar.setOnClickListener{ Utils.goToPreviousScreen(this) }
+
     }
-        fun setRecycler(){
-            toDoList.recyclerView.adapter = Adaptador(DataObject.getTodosLosDatos())
-            toDoList.recyclerView.layoutManager = LinearLayoutManager(this)
-        }
+    private fun setRecycler(){
+        toDoList.recyclerView.adapter = Adaptador(DataObject.getTodosLosDatos())
+        toDoList.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
 }

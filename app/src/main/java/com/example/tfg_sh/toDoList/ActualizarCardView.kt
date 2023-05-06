@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.room.Room
+import com.example.tfg_sh.Utils
 import com.example.tfg_sh.databinding.ActivityActualizarCardViewBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -65,6 +66,9 @@ class ActualizarCardView : AppCompatActivity() {
                 volverToDoListMain()
             }
         }
+
+
+        task.buttonCerrar.setOnClickListener{ Utils.goToPreviousScreen(this) }
 
     }
 

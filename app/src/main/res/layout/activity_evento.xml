@@ -75,8 +75,7 @@
             android:inputType="text"
             android:minHeight="48dp"
 
-            android:text="@string/titulo"
-            android:autofillHints="Título"
+            android:hint="Título"
 
             android:labelFor="@id/editTextTitulo"/>
 
@@ -88,8 +87,7 @@
             android:layout_margin="5dp"
             android:minHeight="48dp"
 
-            android:text="@string/ubicacion"
-            android:autofillHints="Ubicación"
+            android:hint="Ubicación"
 
             android:inputType="text"/>
 
@@ -105,8 +103,11 @@
                 style="?android:spinnerStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2.5dp"
 
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginBottom="2.5dp"
                 android:background="@color/transparent"
                 android:text="@string/inicio"
                 android:textAlignment="textStart"

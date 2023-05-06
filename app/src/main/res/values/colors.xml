@@ -8,16 +8,17 @@
     <color name="green_super">#329E04</color>
 
     <!-- Colores neutros -->
-    <color name="gris">#D1D1D1</color>
-    <color name="focused">#A9DADADA</color>
     <color name="negro">#070707</color>
     <color name="background">#111111</color>
-    <color name="hintColor">#801B1B1B</color>
     <color name="separatorColor">#373737</color>
+    <color name="hintColor">#ACACAC</color>
+    <color name="focused">#A9DADADA</color>
+    <color name="gris">#D1D1D1</color>
     <color name="transparent">#00FFFFFF</color>
 
     <!-- Default -->
     <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_250">#B957FF</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
