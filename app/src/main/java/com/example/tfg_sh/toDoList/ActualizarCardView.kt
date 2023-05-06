@@ -3,41 +3,73 @@ package com.example.tfg_sh.toDoList
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Data
-import com.example.tfg_sh.R
-import kotlinx.android.synthetic.main.activity_actualizar_card_view.create_priority
-import kotlinx.android.synthetic.main.activity_actualizar_card_view.create_title
-import kotlinx.android.synthetic.main.activity_actualizar_card_view.delete_button
-import kotlinx.android.synthetic.main.activity_actualizar_card_view.update_button
+import android.widget.Toast
+import androidx.room.Room
+import com.example.tfg_sh.databinding.ActivityActualizarCardViewBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ActualizarCardView : AppCompatActivity() {
+    private lateinit var task: ActivityActualizarCardViewBinding
+    private lateinit var bbdd: BBDDToDoList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_actualizar_card_view)
-        val pos = intent.getIntExtra("id",-1)
+        task = ActivityActualizarCardViewBinding.inflate(layoutInflater)
+        setContentView(task.root)
+        bbdd = Room.databaseBuilder(
+            applicationContext, BBDDToDoList::class.java, "To_Do"
+        ).build()
 
-        if(pos!=1){
+        val pos = intent.getIntExtra("id", -1)
+
+        if (pos != -1) {
             val titulo = DataObject.getDatos(pos).titulo
             val prioridad = DataObject.getDatos(pos).prioridad
-            create_title.setText(titulo)
-            create_priority.setText(prioridad)
+            task.createTitle.setText(titulo)
+            task.createPriority.setText(prioridad)
 
-            delete_button.setOnClickListener {
+            task.deleteButton.setOnClickListener {
                 DataObject.borrarUno(pos)
+                GlobalScope.launch {
+                    bbdd.dao().deleteTarea(
+                        ToDoList
+                            (
+                            pos + 1,
+                            task.createTitle.text.toString(),
+                            task.createPriority.text.toString()
+                        )
+                    )
+                }
+                Toast.makeText(this, "Se ha borrado la tarea correctamente", Toast.LENGTH_LONG)
+                    .show()
                 volverToDoListMain()
             }
 
-            update_button.setOnClickListener {
-                DataObject.actualizarDatos(pos,titulo,prioridad)
+            task.updateButton.setOnClickListener {
+                DataObject.actualizarDatos(
+                    pos,
+                    task.createTitle.text.toString(),
+                    task.createPriority.text.toString()
+                )
+                GlobalScope.launch {
+                    bbdd.dao().updateTarea(
+                        ToDoList
+                            (
+                            pos + 1, task.createTitle.text.toString(),
+                            task.createPriority.text.toString()
+                        )
+                    )
+                }
+                Toast.makeText(this, "Se ha actualizado la tarea correctamente", Toast.LENGTH_LONG)
+                    .show()
                 volverToDoListMain()
             }
-
         }
 
     }
 
-    fun volverToDoListMain(){
-        val intent = Intent(this,ToDoListMain::class.java)
+    fun volverToDoListMain() {
+        val intent = Intent(this, ToDoListMain::class.java)
         startActivity(intent)
     }
 }

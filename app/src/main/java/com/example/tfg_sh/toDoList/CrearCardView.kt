@@ -3,23 +3,34 @@ package com.example.tfg_sh.toDoList
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tfg_sh.MainActivity
-import com.example.tfg_sh.R
-import kotlinx.android.synthetic.main.activity_crear_card_view.create_priority
-import kotlinx.android.synthetic.main.activity_crear_card_view.create_title
-import kotlinx.android.synthetic.main.activity_crear_card_view.save_button
+import androidx.room.Room
+import com.example.tfg_sh.databinding.ActivityCrearCardViewBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CrearCardView : AppCompatActivity() {
+    private lateinit var task: ActivityCrearCardViewBinding
+    private lateinit var bbdd: BBDDToDoList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crear_card_view)
-        save_button.setOnClickListener {
-            if (create_title.text.toString().trim { it <= ' ' }.isNotEmpty()
-                && create_priority.text.toString().trim { it <= ' ' }.isNotEmpty()
+        task = ActivityCrearCardViewBinding.inflate(layoutInflater)
+        setContentView(task.root)
+        //Crear BBDD
+        bbdd = Room.databaseBuilder(
+            applicationContext, BBDDToDoList::class.java, "To_Do"
+        ).build()
+
+        task.saveButton.setOnClickListener {
+            if (task.createTitle.text.toString().trim { it <= ' ' }.isNotEmpty()
+                && task.createPriority.text.toString().trim { it <= ' ' }.isNotEmpty()
             ) {
-                var titulo = create_title.getText().toString()
-                var prioridad = create_priority.getText().toString()
+                val titulo = task.createTitle.getText().toString()
+                val prioridad = task.createPriority.getText().toString()
                 DataObject.setDatos(titulo, prioridad)
+                GlobalScope.launch {
+                    bbdd.dao().insertTarea(ToDoList(0, titulo, prioridad))
+                }
+
                 val intent = Intent(this, ToDoListMain::class.java)
                 startActivity(intent)
 

@@ -5,20 +5,24 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_sh.R
-import kotlinx.android.synthetic.main.view.view.*
 
+//TODO Mirar como mejorar este recyclerView
 class Adaptador(var data: List<CardViewInfo>) : RecyclerView.Adapter<Adaptador.viewHolder>() {
+
     class viewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var titulo = itemView.title
-        var prioridad = itemView.priority
-        var layout = itemView.mylayout
+        var titulo = itemView.findViewById<TextView>(R.id.title)
+        var prioridad = itemView.findViewById<TextView>(R.id.priority)
+        var layout = itemView.findViewById<LinearLayout>(R.id.mylayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        var itemView = LayoutInflater.from(parent.context).inflate(R.layout.view, parent, false)
-        return viewHolder(itemView)
+        val inflater = LayoutInflater.from(parent.context)
+        val task = inflater.inflate(R.layout.view,parent,false)
+        return viewHolder(task)
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
