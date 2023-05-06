@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -14,24 +15,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG_SH"
         tools:targetApi="31">
-        <receiver android:name=".notificacion.NotificacionAlarma"
+        <activity
+            android:name=".toDoList.ActualizarCardView"
+            android:exported="false" />
+        <activity
+            android:name=".toDoList.ToDoListMain"
+            android:exported="false" />
+        <activity android:name=".PantallaInicio" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".toDoList.CrearCardView"
+            android:exported="false" />
+
+        <receiver
+            android:name=".notificacion.NotificacionAlarma"
             android:enabled="true" />
+
         <activity
-            android:name="com.example.tfg_sh.toDoList.ToDoListActivity"
+            android:name=".evento.EventoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.tfg_sh.evento.EventoActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name="com.example.tfg_sh.diario.DiarioActivity"
+            android:name=".diario.DiarioActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

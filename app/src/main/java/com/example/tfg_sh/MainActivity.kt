@@ -9,12 +9,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.tfg_sh.databinding.ActivityMainBinding
 import com.example.tfg_sh.diario.DiarioActivity
 import com.example.tfg_sh.evento.EventoActivity
 import com.example.tfg_sh.notificacion.NotificacionAlarma
-import com.example.tfg_sh.toDoList.ToDoListActivity
+import com.example.tfg_sh.toDoList.ToDoListMain
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         main.vistaToDoList.setOnClickListener {
             scheduleNotificacion()
-            val vistaToDoListActivity: Intent = Intent(applicationContext, ToDoListActivity::class.java)
+            val vistaToDoListActivity: Intent = Intent(applicationContext,ToDoListMain::class.java)
             startActivity(vistaToDoListActivity)
 
         }
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 "MySuperChannel",
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "SUSCRIBETE"
+                description = "canal de nuestra notificación"
             }
 
             val notificationManager: NotificationManager =
