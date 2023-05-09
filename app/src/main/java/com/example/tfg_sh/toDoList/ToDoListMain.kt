@@ -2,6 +2,8 @@ package com.example.tfg_sh.toDoList
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -28,13 +30,24 @@ class ToDoListMain : AppCompatActivity() {
             val intent = Intent(this,CrearCardView::class.java)
             startActivity(intent)
         }
-
+        val alertDialog = AlertDialog.Builder(this)
         toDoList.deleteAll.setOnClickListener {
-            DataObject.borrarTodos()
-            GlobalScope.launch {
-                bbdd.dao().borrarTodasTareas()
-            }
-            setRecycler()
+            alertDialog.setTitle("Eliminar tareas")
+                .setMessage("¿Quieres borrar todas las tareas?")
+                .setCancelable(true)
+                .setPositiveButton("Si"){dialogInterface,it ->
+                    DataObject.borrarTodos()
+                    GlobalScope.launch {
+                        bbdd.dao().borrarTodasTareas()
+                    }
+                    setRecycler()
+                    Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG)
+                        .show()
+                }
+                .setNegativeButton("No"){dialogInterface,it ->
+                    dialogInterface.cancel()
+                }
+                .show()
         }
         setRecycler()
 
