@@ -67,13 +67,13 @@ class ActualizarCardView : AppCompatActivity() {
             }
         }
 
-
         task.buttonCerrar.setOnClickListener{ Utils.goToPreviousScreen(this) }
-
     }
 
     fun volverToDoListMain() {
         val intent = Intent(this, ToDoListMain::class.java)
+        // La flag asegurará que no se cree una nueva instancia de la actividad si ya se encuentra en la pila
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
     }
 }

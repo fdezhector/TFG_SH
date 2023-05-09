@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.TFG_SH" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,7 +16,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <!-- Colores del calendarView -->
+    <!-- CalendarView -->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
         <item name="colorAccent">#C3DADADA</item>
         <item name="colorPrimary">@color/gris</item>
@@ -35,5 +37,11 @@
         <item name="android:layout_marginHorizontal">10dp</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/separatorColor</item>
+    </style>
+
+    <!-- Spinner -->
+    <style name="custom_spinner">
+        <item name="android:textColor">@color/gris</item>
+        <item name="android:dropDownVerticalOffset">20dp</item>
     </style>
 </resources>
