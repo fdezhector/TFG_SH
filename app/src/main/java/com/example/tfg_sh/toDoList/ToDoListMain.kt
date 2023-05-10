@@ -2,11 +2,13 @@ package com.example.tfg_sh.toDoList
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.databinding.ActivityToDoListMainBinding
 import kotlinx.coroutines.GlobalScope
@@ -26,38 +28,69 @@ class ToDoListMain : AppCompatActivity() {
             applicationContext, BBDDToDoList::class.java, "To_Do"
         ).build()
 
-        toDoList.add.setOnClickListener {
-            val intent = Intent(this,CrearCardView::class.java)
-            startActivity(intent)
-        }
-        val alertDialog = AlertDialog.Builder(this)
-        toDoList.deleteAll.setOnClickListener {
-            alertDialog.setTitle("Eliminar tareas")
-                .setMessage("¿Quieres borrar todas las tareas?")
-                .setCancelable(true)
-                .setPositiveButton("Si"){dialogInterface,it ->
-                    DataObject.borrarTodos()
-                    GlobalScope.launch {
-                        bbdd.dao().borrarTodasTareas()
+        toDoList.actionsButton.setOnClickListener { view ->
+            val popupMenu = PopupMenu(this, view)
+            popupMenu.inflate(R.menu.actions_menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.agregarTarea -> {
+                        agregarTarea()
+                        true
                     }
-                    setRecycler()
-                    Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG)
-                        .show()
+                    R.id.eliminarTareas -> {
+                        eliminarTareas()
+                        true
+                    }
+                    R.id.filtrar -> {
+                        filtrarPorPrioridad() // TODO filtrar por prioridad
+                        true
+                    }
+                    else -> false
                 }
-                .setNegativeButton("No"){dialogInterface,it ->
-                    dialogInterface.cancel()
-                }
-                .show()
+            }
+            popupMenu.show()
         }
+
         setRecycler()
 
-        toDoList.buttonCerrar.setOnClickListener{ Utils.goToPreviousScreen(this) }
+        toDoList.buttonCerrar.setOnClickListener{ Utils.goToMainScreen(this) }
 
     }
 
-    private fun setRecycler(){
+    fun setRecycler(){
         toDoList.recyclerView.adapter = Adaptador(DataObject.getTodosLosDatos())
         toDoList.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun agregarTarea(){
+        val intent = Intent(this,CrearCardView::class.java)
+        startActivity(intent)
+    }
+
+    private fun eliminarTareas(){
+        val alertDialog = AlertDialog.Builder(this)
+
+        alertDialog.setTitle("Eliminar tareas")
+            .setMessage("¿Quieres borrar todas las tareas?")
+            .setCancelable(true)
+            .setPositiveButton("Si"){dialogInterface,it ->
+                DataObject.borrarTodos()
+                GlobalScope.launch {
+                    bbdd.dao().borrarTodasTareas()
+                }
+                setRecycler()
+                Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG)
+                    .show()
+            }
+            .setNegativeButton("No"){dialogInterface,it ->
+                dialogInterface.cancel()
+            }
+            .show()
+    }
+
+    private fun filtrarPorPrioridad(){
+
     }
 
 }

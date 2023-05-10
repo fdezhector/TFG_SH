@@ -26,8 +26,8 @@ class DiarioActivity : AppCompatActivity() {
 
         diarioEmpty.buttonEditar.setOnClickListener { startEditActivity() }
 
-        diarioEmpty.buttonCerrar.setOnClickListener { Utils.goToPreviousScreen(this) }
-        diarioEdit.buttonCerrar.setOnClickListener { Utils.goToPreviousScreen(this) }
+        diarioEmpty.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
+        diarioEdit.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
 
     }
 

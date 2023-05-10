@@ -48,16 +48,14 @@
             android:textColorHint="#BFBBBB"
             android:textColor="@color/white"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/create_priority"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Prioridad"
-            android:padding="15dp"
-            android:background="@drawable/custom_edit_text"
-            android:textColorHint="#BFBBBB"
-            android:textColor="@color/white" />
+            android:textColor="@color/gris"
+            style="@style/custom_spinner"
+            />
 
         <LinearLayout
             android:layout_width="250dp"

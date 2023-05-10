@@ -34,8 +34,6 @@ class CrearCardView : AppCompatActivity() {
         // definimos el estilo de los desplegables
         adaptador.setDropDownViewResource(R.layout.dropdown_menu_item)
 
-        task.createPriority.prompt = "Selecciona una prioridad:"
-
         // relacionamos el adaptador con el spinner del xml
         task.createPriority.adapter = adaptador
 

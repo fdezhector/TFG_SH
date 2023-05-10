@@ -31,23 +31,13 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Tus Tareas"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="40sp" />
-        <Button
-            android:id="@+id/deleteAll"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="#FF5722"
-            android:text="X"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            />
     </LinearLayout>
 
     <FrameLayout
@@ -60,10 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!-- TODO: quitar boton rojo, añadir lista desplegable al botón de abajo con añadir tarea y borrar todas las tareas y filtros-->
-
         <Button
-            android:id="@+id/add"
+            android:id="@+id/actions_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center|right|bottom"
