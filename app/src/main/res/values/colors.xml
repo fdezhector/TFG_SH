@@ -11,8 +11,9 @@
     <color name="negro">#070707</color>
     <color name="background">#111111</color>
     <color name="separatorColor">#373737</color>
-    <color name="hintColor">#ACACAC</color>
+    <color name="pressed">#88DADADA</color>
     <color name="focused">#A9DADADA</color>
+    <color name="hintColor">#ACACAC</color>
     <color name="gris">#D1D1D1</color>
     <color name="transparent">#00FFFFFF</color>
 

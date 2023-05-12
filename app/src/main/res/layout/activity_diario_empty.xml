@@ -54,12 +54,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView"
-
             android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+
             android:background="@color/transparent"
             android:contentDescription="@string/editar"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
+            android:minWidth="45dp"
+            android:minHeight="45dp"
             app:srcCompat="@drawable/edit_icon_48" />
 
         <GridLayout

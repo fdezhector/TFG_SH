@@ -17,18 +17,24 @@
 
         <ImageButton
             android:id="@+id/button_cerrar"
-            android:onClick="goBack"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/cerrar"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
         <ImageButton
             android:id="@+id/button_guardar"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -40,10 +46,15 @@
 
         <ImageButton
             android:id="@+id/button_borrar"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_toLeftOf="@id/button_guardar"
             android:background="@color/transparent"
             android:contentDescription="@string/borrar_dia"
@@ -148,16 +159,61 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutRecycler"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layoutEmotes">
+            android:layout_below="@id/layoutEmotes"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/black"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+
+                    android:text="Emociones"
+                    android:textAlignment="center"
+                    android:textColor="@color/gris"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/add_emotion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+
+                    android:background="@drawable/circular_button_2"
+                    android:minWidth="23dp"
+                    android:minHeight="23dp"
+
+                    android:scaleType="center"
+                    android:src="@android:drawable/ic_input_add"
+                    app:tint="@color/black" />
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/emotionList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="5dp"
 
                 tools:listitem="@layout/item_emotion" />
         </LinearLayout>
@@ -174,9 +230,9 @@
 
             android:inputType="textMultiLine"
             android:textColor="@color/gris"
-            android:hint="Cambiar un poco esto / imagenes botones"
-            android:textColorHint="@color/hintColor"
-            />
+            android:textSize="15dp"
+            android:hint="Escribe cómo te has sentido hoy..."
+            android:textColorHint="@color/hintColor" />
 
 
     </RelativeLayout>
