@@ -2,10 +2,9 @@ package com.example.tfg_sh.diario
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tfg_sh.Utils
 import com.example.tfg_sh.databinding.ActivityDiarioEditBinding
 import com.example.tfg_sh.databinding.ActivityDiarioEmptyBinding
-
-import com.example.tfg_sh.Utils
 
 class DiarioActivity : AppCompatActivity() {
 
@@ -24,17 +23,28 @@ class DiarioActivity : AppCompatActivity() {
             startEditActivity()
         }
 
+        // diario vacio
+
         diarioEmpty.buttonEditar.setOnClickListener { startEditActivity() }
-
         diarioEmpty.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
+
+
+
+
+        // editar diario
+
+        diarioEdit.addEmotion.setOnClickListener {
+            // TODO popup window para mostrar la lista de emociones / si no se consigue -> que se abra otra ventana y listo
+        }
+
         diarioEdit.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
-
-
 
     }
 
     private fun startEditActivity(){
         setContentView(diarioEdit.root)
     }
+
+
 
 }

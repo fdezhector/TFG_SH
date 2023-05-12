@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_sh.R
 
-//TODO Mirar como mejorar este recyclerView
+// TODO Mirar como mejorar este recyclerView
 class Adaptador(var data: List<CardViewInfo>) : RecyclerView.Adapter<Adaptador.viewHolder>() {
 
     class viewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

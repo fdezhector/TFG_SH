@@ -9,6 +9,7 @@
     android:background="@drawable/panel_emotion">
 
     <TextView
+        android:id="@+id/text_emotion"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingHorizontal="7dp"
