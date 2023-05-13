@@ -8,14 +8,114 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/button_cerrar"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/cerrar"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <ImageButton
+            android:id="@+id/button_guardar"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/guardar"
+            app:srcCompat="@android:drawable/ic_menu_save" />
+
+        <ImageButton
+            android:id="@+id/button_borrar"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toLeftOf="@id/button_guardar"
+            android:background="@color/transparent"
+            android:contentDescription="@string/borrar_dia"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    </RelativeLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideHor1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0"
+        app:layout_constraintGuide_percent="0.075"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/guideHor1"
+
+        android:padding="15dp"
+        android:layout_margin="15dp"
+
+        android:background="@color/black">
+
+        <EditText
+            android:id="@+id/título"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gris"
+
+            android:hint="Título"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/gris"/>
+
+        <EditText
+            android:id="@+id/ubicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gris"
+
+            android:hint="Ubicación"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/gris"/>
+
+        <Button
+            android:id="@+id/button_fecha_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/button_fecha_fin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideHor2"
@@ -23,140 +123,33 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
         android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.35"
+        app:layout_constraintGuide_percent="0.45"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideHor3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="1"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideVer1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideVer2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="1"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        app:layout_constraintTop_toBottomOf="@id/guideHor1"
-        app:layout_constraintBottom_toTopOf="@id/guideHor2"
-        app:layout_constraintStart_toEndOf="@id/guideVer1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/panel"
-        android:layout_margin="10dp"
-        >
-
-        <EditText
-            android:id="@+id/editTextTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-
-            android:inputType="text"
-            android:minHeight="48dp"
-
-            android:hint="Título"
-
-            android:labelFor="@id/editTextTitulo"/>
-
-        <EditText
-            android:id="@+id/editTextUbicacion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editTextTitulo"
-            android:layout_margin="5dp"
-            android:minHeight="48dp"
-
-            android:hint="Ubicación"
-
-            android:inputType="text"/>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/editTextUbicacion"
-            android:background="@color/transparent">
-
-            <Button
-                android:id="@+id/button_fecha_inicio"
-                style="?android:spinnerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="2.5dp"
-                android:layout_marginTop="2.5dp"
-                android:layout_marginEnd="2.5dp"
-                android:layout_marginBottom="2.5dp"
-                android:background="@color/transparent"
-                android:text="@string/inicio"
-                android:textAlignment="textStart"
-                android:textColor="@color/negro"
-                android:textSize="18sp">
-
-            </Button>
-
-            <View style="@style/Separator" android:layout_below="@id/button_fecha_inicio"></View>
-
-            <Button
-                android:id="@+id/button_fecha_fin"
-                style="?android:spinnerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/button_fecha_inicio"
-                android:layout_margin="2.5dp"
-
-                android:background="@color/transparent"
-                android:text="@string/fin"
-                android:textAlignment="textStart"
-                android:textColor="@color/negro"
-                android:textSize="18sp">
-
-            </Button>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Descripcion"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/guideHor2"
 
-        android:background="@color/purple_200"
-        android:gravity="start|top"
-        android:hint="@string/descripcion"
-        android:inputType="textMultiLine"
+        android:padding="15dp"
+        android:layout_margin="15dp"
 
-        android:minHeight="48dp"
-        android:padding="10dp"
-        android:textColor="@color/negro"
-        android:textColorHint="@color/hintColor"
+        android:background="@color/black">
 
-        app:layout_constraintBottom_toTopOf="@id/guideHor3"
-        app:layout_constraintTop_toBottomOf="@id/guideHor2"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gris"
 
+            android:hint="Descripción"
+            android:textColorHint="@color/hintColor"
+            android:textColor="@color/gris"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

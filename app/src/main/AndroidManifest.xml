@@ -15,10 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG_SH"
         tools:targetApi="31">
-        <activity
+
+        <!--<activity
             android:name=".toDoList.ActualizarCardView"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize"/>-->
         <activity
             android:name=".toDoList.ToDoListMain"
             android:launchMode="singleTop"
@@ -33,10 +34,10 @@
             </intent-filter>
         </activity>
 
-        <activity
+       <!-- <activity
             android:name=".toDoList.CrearCardView"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize"/>-->
 
         <receiver
             android:name=".notificacion.NotificacionAlarma"
