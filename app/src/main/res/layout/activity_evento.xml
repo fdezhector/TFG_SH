@@ -105,15 +105,70 @@
             android:textColorHint="@color/hintColor"
             android:textColor="@color/gris"/>
 
-        <Button
-            android:id="@+id/button_fecha_inicio"
+        <LinearLayout
+            android:id="@+id/layout_fecha_inicio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="3dp"
+            android:clickable="true">
 
-        <Button
-            android:id="@+id/button_fecha_fin"
+            <TextView
+                android:id="@+id/text_fecha_inicio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hora inicio"
+                android:textSize="18sp"
+                android:textColor="@color/gris" />
+
+            <TextView
+                android:id="@+id/text_hora_fecha_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:text="9:00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/gris"
+                android:textAlignment="center"
+                android:background="@color/transparent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_fecha_fin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="3dp"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/text_fecha_fin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hora fin"
+                android:textSize="18sp"
+                android:textColor="@color/gris"/>
+
+            <TextView
+                android:id="@+id/text_hora_fecha_fin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:text="18:00"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/gris"
+                android:textAlignment="center"
+                android:background="@color/transparent" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -146,8 +201,22 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gris"
 
+            android:maxLength="200"
+            android:inputType="textMultiLine"
+
             android:hint="Descripción"
             android:textColorHint="@color/hintColor"
+            android:textColor="@color/gris"/>
+
+        <TextView
+            android:id="@+id/contador_palabras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:layout_gravity="right"
+
+            android:text="0 / 250"
             android:textColor="@color/gris"/>
 
     </LinearLayout>

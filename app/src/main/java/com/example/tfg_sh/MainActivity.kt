@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
                 val id = Utils.setId(fechaNota)
                 var nota: Nota? = existeNota(dao, id)
-                //TODO mirar condicion esta creando la fecha todo el rato y comprobar las FK de cada entidad
+                //TODO mirar condicion está creando la fecha todo el rato y comprobar las FK de cada entidad
                 if (nota == null) {
                     nota = Nota(id, fechaNota.toString())
                     lifecycleScope.launch {
