@@ -10,12 +10,12 @@ import androidx.room.PrimaryKey
             parentColumns = ["id"],
             childColumns = ["notaId"],
             onDelete = ForeignKey.CASCADE)
-    ])
+    ]
+)
 data class Diario(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    var etiquetas: String,
-    var descripcion: String,
-    //FOREING KEY DE NOTA
+    val id: Int =0,
+    var etiquetas: String?,
+    var descripcion: String?,
     val notaId: Int
 )

@@ -12,18 +12,15 @@ import androidx.room.PrimaryKey
             childColumns = ["notaId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
-)
+    ])
 data class Evento(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    var titulo: String,
-    var descripcion: String,
-    var ubicacion: String,
-    var horaInicio: String,
-    var horaFin: String,
+    val id: Int =0,
+    var titulo: String?,
+    var descripcion: String?,
+    var ubicacion: String?,
+    var horaInicio: String?,
+    var horaFin: String?,
     //FOREING KEY DE NOTA
     val notaId:Int
-){
-
-}
+)

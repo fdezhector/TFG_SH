@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Nota(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val fecha: String
+    val fecha: String?
 )

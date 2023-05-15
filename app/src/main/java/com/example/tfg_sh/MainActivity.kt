@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
+import com.example.tfg_sh.bbdd.entidades.Diario
+import com.example.tfg_sh.bbdd.entidades.Evento
 import com.example.tfg_sh.bbdd.entidades.Nota
 import com.example.tfg_sh.databinding.ActivityMainBinding
 import com.example.tfg_sh.diario.DiarioActivity
@@ -21,6 +23,7 @@ import com.example.tfg_sh.notificacion.NotificacionAlarma
 import com.example.tfg_sh.toDoList.ToDoListMain
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,20 +45,17 @@ class MainActivity : AppCompatActivity() {
 
         main.calendarView.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
             override fun onSelectedDayChange(
-                calendario: CalendarView,
-                year: Int,
-                month: Int,
-                dayOfMonth: Int
+                calendario: CalendarView, year: Int, month: Int, dayOfMonth: Int
             ) {
                 //Comprobar si existe o no una nota
                 val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
                 val id = Utils.setId(fechaNota)
-                var nota: Nota? = existeNota(dao, id)
-                //TODO mirar condicion está creando la fecha todo el rato y comprobar las FK de cada entidad
-                if (nota == null) {
-                    nota = Nota(id, fechaNota.toString())
-                    lifecycleScope.launch {
-                        dao.insertNota(nota)
+                lifecycleScope.launch {
+                    var nota: Nota?
+                    nota = existeNota(dao, id)
+                    //Si no existe, creamos todas las entidades
+                    if (nota == null) {
+                        insertarTodasEntidades(nota, id, fechaNota, dao)
                     }
                 }
             }
@@ -80,13 +80,34 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private suspend fun insertarTodasEntidades(
+        nota: Nota?, id: Int, fechaNota: Date, dao: BetterYouDao
+    ) {
+        var nota1 = nota
+        nota1 = Nota(id, fechaNota.toString())
+        dao.insertNota(nota1)
+        dao.insertDiario(
+            Diario(
+                etiquetas = null, descripcion = null, notaId = nota1.id
+            )
+        )
+        dao.insertEvento(
+            Evento(
+                titulo = null,
+                descripcion = null,
+                ubicacion = null,
+                horaInicio = null,
+                horaFin = null,
+                notaId = nota1.id
+            )
+        )
+    }
+
     //Esto es para crear el canal de la notificacion
     private fun crearCanal() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                ID_CANAL,
-                "MySuperChannel",
-                NotificationManager.IMPORTANCE_DEFAULT
+                ID_CANAL, "MySuperChannel", NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
                 description = "canal de nuestra notificación"
             }
@@ -110,19 +131,12 @@ class MainActivity : AppCompatActivity() {
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP,
-            Calendar.getInstance().timeInMillis + 10000,
-            pendingIntent
+            AlarmManager.RTC_WAKEUP, Calendar.getInstance().timeInMillis + 10000, pendingIntent
         ) //3 parametro cuando va a salir la notificacion
     }
 
-    private fun existeNota(dao: BetterYouDao, id: Int): Nota? {
-        var nota: Nota? = null
-
-        lifecycleScope.launch {
-            nota = dao.getNota(id)
-        }
-        return nota
+    private suspend fun existeNota(dao: BetterYouDao, id: Int): Nota? {
+        return dao.getNota(id)
     }
 }
 

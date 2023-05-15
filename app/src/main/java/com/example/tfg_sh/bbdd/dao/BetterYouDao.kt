@@ -1,5 +1,6 @@
 package com.example.tfg_sh.bbdd.dao
 
+import androidx.annotation.MainThread
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -14,13 +15,14 @@ import com.example.tfg_sh.bbdd.entidades.Tarea
 @Dao
 interface BetterYouDao {
     //NOTA
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert (onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertNota(nota:Nota)
+    @MainThread
     @Query("select * from nota where id = :id")
-    suspend fun getNota(id:Int):Nota
+    suspend fun getNota(id:Int):Nota?
 
     //EVENTO
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert (onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertEvento(evento: Evento)
     @Update
     suspend fun updateEvento(evento: Evento)
@@ -30,7 +32,7 @@ interface BetterYouDao {
     suspend fun getEvento(id: Int):Evento
 
     //DIARIO
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDiario(diario: Diario)
     @Update
     suspend fun updateDiario(diario: Diario)
@@ -40,7 +42,7 @@ interface BetterYouDao {
     suspend fun getDiario(id: Int):Diario
 
     //TAREA
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTarea(tarea: Tarea)
     @Update
     suspend fun updateTarea(tarea: Tarea)
