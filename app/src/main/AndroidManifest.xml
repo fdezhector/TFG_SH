@@ -15,44 +15,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG_SH"
         tools:targetApi="31">
-
-        <!--<activity
+        <activity
+            android:name=".toDoList.UpdateTareaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".toDoList.InsertTareaActivity"
+            android:exported="false" />
+        <!--
+        <activity
             android:name=".toDoList.ActualizarCardView"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>-->
+            android:windowSoftInputMode="adjustResize"/>
+        -->
         <activity
             android:name=".toDoList.ToDoListMain"
-            android:launchMode="singleTop"
-            android:exported="false" />
-
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".PantallaInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-       <!-- <activity
+        <!--
+ <activity
             android:name=".toDoList.CrearCardView"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>-->
-
+            android:windowSoftInputMode="adjustResize"/>
+        -->
         <receiver
             android:name=".notificacion.NotificacionAlarma"
             android:enabled="true" />
 
         <activity
             android:name=".evento.EventoActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".diario.DiarioActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

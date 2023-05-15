@@ -51,5 +51,5 @@ interface BetterYouDao {
     @Query("delete from tarea")
     suspend fun deleteAllTareas()
     @Query("select * from tarea")
-    suspend fun getAllTareas():List<Tarea>
+    fun getAllTareas():List<Tarea>
 }

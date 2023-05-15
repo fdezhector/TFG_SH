@@ -39,6 +39,13 @@
         <item name="android:background">@color/separatorColor</item>
     </style>
 
+    <!-- FAB -->
+    <style name="ShapeAppearanceOverlay.MyApp.FabCircle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
     <!-- Spinner -->
     <style name="custom_spinner">
         <item name="android:textColor">@color/gris</item>
