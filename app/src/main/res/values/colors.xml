@@ -7,6 +7,19 @@
     <color name="green_joy">#D881CD33</color>
     <color name="green_super">#329E04</color>
 
+    <!-- Colores de las prioridades -->
+    <color name="prioridad_alta_1">#FFB3B3</color>
+    <color name="prioridad_alta_2">#FF8C8C</color>
+    <color name="prioridad_alta_3">#FF7A7A</color>
+
+    <color name="prioridad_media_1">#FFF0B3</color>
+    <color name="prioridad_media_2">#FFE68C</color>
+    <color name="prioridad_media_3">#FFE38C</color>
+
+    <color name="prioridad_baja_1">#B3FFB3</color>
+    <color name="prioridad_baja_2">#8CFF8C</color>
+    <color name="prioridad_baja_3">#7AFF7A</color>
+
     <!-- Colores neutros -->
     <color name="negro">#070707</color>
     <color name="background">#111111</color>

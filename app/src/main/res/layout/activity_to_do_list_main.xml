@@ -20,6 +20,29 @@
         android:contentDescription="@string/cerrar"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
+    <TextView
+        android:id="@+id/messageSinTareas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:text="¡Vaya! Parece que no tienes tareas\nAñade tu primera tarea para visualizarla"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textColor="@color/gris"/>
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/messageSinTareas"
+        android:layout_centerHorizontal="true"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="75dp"
+
+        android:backgroundTint="@color/negro"
+        android:text="Añadir Tarea"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,11 +59,22 @@
             android:textColor="@color/white"
             android:textSize="40sp"/>
 
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:paddingVertical="10dp"
+
+            android:backgroundTint="@color/negro"
+            android:text="Borrar"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tarea_recycler_view"
-            tools:listitem="@layout/item_tarea"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_tarea" />
 
     </LinearLayout>
 

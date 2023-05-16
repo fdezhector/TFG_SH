@@ -49,7 +49,7 @@
     <!-- Spinner -->
     <style name="custom_spinner">
         <item name="android:textColor">@color/gris</item>
-        <item name="android:dropDownVerticalOffset">20dp</item>
+        <item name="android:dropDownVerticalOffset">50dp</item>
     </style>
 
     <!-- TimePicker -->

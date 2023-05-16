@@ -29,8 +29,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout
+            android:id="@+id/layout_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/calendarView">
+
+            <TextView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="75dp"
+                android:text="BetterYou"
+                android:textSize="50sp"
+                android:textColor="@color/gris"
+                android:textAlignment="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="¡Haz clic en un día del calendario para empezar!"
+                android:textSize="15sp"
+                android:textColor="@color/gris"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+
+        <GridLayout
+            android:id="@+id/layout_elementos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnCount="2"
@@ -51,7 +79,8 @@
             <TextView
                 android:id="@+id/vista_diario"
                 android:padding="10dp"
-                android:layout_margin="10dp"                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:layout_rowSpan="3"
                 android:background="#2196F3"

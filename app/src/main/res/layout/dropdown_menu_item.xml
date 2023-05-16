@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dropdown_menu_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="@color/black"
+    android:background="@color/negro"
     android:textSize="17sp"
     android:textColor="@color/gris">
 

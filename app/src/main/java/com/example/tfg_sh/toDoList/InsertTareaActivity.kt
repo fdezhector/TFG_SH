@@ -1,5 +1,6 @@
 package com.example.tfg_sh.toDoList
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.R
+import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityInsertTareaBinding
@@ -25,29 +27,13 @@ class InsertTareaActivity : AppCompatActivity() {
 
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
 
-        // creamos la lista inmutable de prioridades
-        val prioridades = listOf("Alta", "Media", "Baja")
-        // creamos el adaptador para el spinner
-        val adaptador = ArrayAdapter(this, R.layout.dropdown_menu, prioridades)
-        // definimos el estilo de los desplegables
-        adaptador.setDropDownViewResource(R.layout.dropdown_menu_item)
+        // creamos el dropdown menu con las prioridades
+        Utils.initDropDownMenu(insertTarea.prioridad, this)
 
-        // relacionamos el adaptador con el spinner del xml
-        insertTarea.prioridad.adapter = adaptador
-
-        insertTarea.prioridad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedItem = parent.getItemAtPosition(position) as String
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Maneja el caso en el que no se haya seleccionado ninguna opción
-            }
-        }
-
-        insertTarea.saveButton.setOnClickListener{
+        // Operación INSERT
+        insertTarea.saveButton.setOnClickListener {
             // comprobaciones (siempre habrá una prioridad seleccionada por defecto)
-            if(insertTarea.titulo.text.isEmpty()){
+            if(insertTarea.titulo.text.isEmpty()) {
                 Toast.makeText(this, "La tarea debe tener un título", Toast.LENGTH_LONG).show()
             } else {
                 var titulo = insertTarea.titulo.text.toString()
@@ -65,5 +51,10 @@ class InsertTareaActivity : AppCompatActivity() {
 
         }
 
-    }
+        // FIXME mirar cómo mejorar la navegación hacia atrás de las pantallas
+        insertTarea.buttonCerrar.setOnClickListener {
+            Utils.goToMainScreen(this)
+        }
+
+    }// onCreate()
 }

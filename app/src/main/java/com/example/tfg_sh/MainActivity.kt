@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.CalendarView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -43,11 +44,13 @@ class MainActivity : AppCompatActivity() {
         //Canal de la notificacion
         crearCanal()
 
+        cargarVistaVacia()
+
         main.calendarView.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
-            override fun onSelectedDayChange(
-                calendario: CalendarView, year: Int, month: Int, dayOfMonth: Int
-            ) {
-                //Comprobar si existe o no una nota
+            override fun onSelectedDayChange(calendario: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
+                // cargamos el layout
+                cargarVistaElementos()
+                // comprobamos si existe o no una nota
                 val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
                 val id = Utils.setId(fechaNota)
                 lifecycleScope.launch {
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
         main.vistaEvento.setOnClickListener {
             val vistaEventoActivty = Intent(applicationContext, EventoActivity::class.java)
             startActivity(vistaEventoActivty)
@@ -74,9 +78,7 @@ class MainActivity : AppCompatActivity() {
             scheduleNotificacion()
             val vistaToDoListActivity = Intent(applicationContext, ToDoListMain::class.java)
             startActivity(vistaToDoListActivity)
-
         }
-
 
     }
 
@@ -133,6 +135,19 @@ class MainActivity : AppCompatActivity() {
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP, Calendar.getInstance().timeInMillis + 10000, pendingIntent
         ) //3 parametro cuando va a salir la notificacion
+    }
+
+    // FIXME mirar si se puede hacer estos dos métodos en uno solo
+    private fun cargarVistaVacia() {
+        main.layoutElementos.visibility = View.GONE
+        main.layoutLogo.visibility = View.VISIBLE
+    }
+
+    private fun cargarVistaElementos(){
+        if(main.layoutLogo.visibility == View.VISIBLE){
+            main.layoutLogo.visibility = View.GONE
+            main.layoutElementos.visibility = View.VISIBLE
+        }
     }
 
     private suspend fun existeNota(dao: BetterYouDao, id: Int): Nota? {
