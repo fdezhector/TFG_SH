@@ -23,6 +23,9 @@ object Utils {
         activity.startActivity(intent)
     }*/
 
+    // creamos la lista inmutable de prioridades
+    val prioridades = listOf("Alta", "Media", "Baja")
+
     fun goToMainScreen(activity: Activity){
         val intent = Intent(activity, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -44,8 +47,6 @@ object Utils {
     }
 
     fun initDropDownMenu(dropDown: Spinner, context: Context) {
-        // creamos la lista inmutable de prioridades
-        val prioridades = listOf("Alta", "Media", "Baja")
         // creamos el adaptador para el spinner
         val adaptador = ArrayAdapter(context, R.layout.dropdown_menu, prioridades)
         // definimos el estilo de los desplegables
@@ -72,9 +73,9 @@ object Utils {
 
     private fun evaluarColor(selectedItem: String, context: Context): Int {
         var dropDownColor: Int
-        if (selectedItem.equals("Alta")) {
+        if (selectedItem.equals("Alta", ignoreCase = true)) {
             dropDownColor = ContextCompat.getColor(context, R.color.prioridad_alta_3)
-        } else if (selectedItem.equals("Media")) {
+        } else if (selectedItem.equals("Media", ignoreCase = true)) {
             dropDownColor = ContextCompat.getColor(context, R.color.prioridad_media_2)
         } else {
             dropDownColor = ContextCompat.getColor(context, R.color.prioridad_baja_3)

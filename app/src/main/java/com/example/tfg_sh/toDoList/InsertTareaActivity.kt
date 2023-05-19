@@ -15,6 +15,8 @@ import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityInsertTareaBinding
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.util.Date
 
 class InsertTareaActivity : AppCompatActivity() {
 
@@ -36,14 +38,14 @@ class InsertTareaActivity : AppCompatActivity() {
             if(insertTarea.titulo.text.isEmpty()) {
                 Toast.makeText(this, "La tarea debe tener un título", Toast.LENGTH_LONG).show()
             } else {
+                var id = Date().time as Long
                 var titulo = insertTarea.titulo.text.toString()
                 var prioridad = insertTarea.prioridad.selectedItem.toString()
-
-                ObjectTarea.addTarea(titulo, prioridad)
                 lifecycleScope.launch {
-                    var tarea = Tarea(titulo = titulo, prioridad = prioridad)
+                    val tarea = Tarea(id = id, titulo = titulo, prioridad = prioridad)
                     dao.insertTarea(tarea)
                 }
+                ObjectTarea.addTarea(id, titulo, prioridad)
                 val intent = Intent(this, ToDoListMain::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)

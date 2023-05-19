@@ -43,6 +43,8 @@
             android:layout_marginTop="30dp"
             android:padding="15dp"
             android:background="@drawable/custom_edit_text"
+
+            android:maxLength="25"
             android:textColorHint="#BFBBBB"
             android:textColor="@color/gris"/>
 

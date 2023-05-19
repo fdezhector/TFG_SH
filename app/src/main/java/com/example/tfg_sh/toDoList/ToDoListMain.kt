@@ -2,7 +2,10 @@ package com.example.tfg_sh.toDoList
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -66,7 +69,7 @@ class ToDoListMain : AppCompatActivity() {
     private fun initRecyclerView() {
         val recyclerView = toDoList.tareaRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = TareaAdapter(ObjectTarea.getAll())
+        recyclerView.adapter = TareaAdapter(ObjectTarea.getAll(), this)
     }
 
     private fun actualizarVistaVacia() {
@@ -88,22 +91,33 @@ class ToDoListMain : AppCompatActivity() {
 
     private fun eliminarTareas(dao: BetterYouDao) {
         val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Eliminar tareas")
-            .setMessage("¿Quieres borrar todas las tareas?")
-            .setCancelable(true)
-            .setPositiveButton("Si") { dialogInterface, it ->
-                ObjectTarea.deleteAll()
-                lifecycleScope.launch {
-                    dao.deleteAllTareas()
-                }
-                initRecyclerView()
-                Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG)
-                    .show()
+        val customView = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+        alertDialog.setView(customView)
+        val dialog = alertDialog.create()
+
+        val titulo = customView.findViewById<TextView>(R.id.Title)
+        val mensaje = customView.findViewById<TextView>(R.id.Message)
+        val aceptar = customView.findViewById<Button>(R.id.PositiveButton)
+        val cancelar = customView.findViewById<Button>(R.id.NegativeButton)
+
+        aceptar.setOnClickListener {
+            ObjectTarea.deleteAll()
+            lifecycleScope.launch {
+                dao.deleteAllTareas()
             }
-            .setNegativeButton("No") { dialogInterface, it ->
-                dialogInterface.cancel()
-            }
-            .show()
+            initRecyclerView()
+            Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+
+        cancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        titulo.text = "Eliminar tareas"
+        mensaje.text = "¿Quieres borrar todas las tareas?"
+
+        dialog.show()
     }
 
 }

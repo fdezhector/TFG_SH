@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="15dp"
+
+        android:text="título"
+        android:textAllCaps="true"
+        android:textColor="@color/gris"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Title"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
+
+        android:text="¿Pregunta?"
+        android:textColor="@color/gris"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/NegativeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Message"
+        android:layout_marginVertical="5dp"
+        android:layout_toLeftOf="@id/PositiveButton"
+        android:background="@color/transparent"
+
+        android:text="Cancelar"
+        android:textColor="@color/gris"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/PositiveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Message"
+        android:layout_marginVertical="5dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/transparent"
+
+        android:text="Aceptar"
+        android:textColor="@color/gris"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+
+
+</RelativeLayout>

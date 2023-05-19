@@ -12,6 +12,7 @@ import com.example.tfg_sh.bbdd.entidades.Evento
 import com.example.tfg_sh.bbdd.entidades.Nota
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.toDoList.ItemTarea
+import kotlinx.coroutines.selects.select
 
 @Dao
 interface BetterYouDao {
@@ -51,6 +52,8 @@ interface BetterYouDao {
     suspend fun deleteTarea(tarea: Tarea)
     @Query("delete from tarea")
     suspend fun deleteAllTareas()
+    @Query("select * from tarea where id = :id")
+    suspend fun getTarea(id: Int):Tarea
     @Query("select * from tarea")
     suspend fun getAllTareas():List<ItemTarea>
 }

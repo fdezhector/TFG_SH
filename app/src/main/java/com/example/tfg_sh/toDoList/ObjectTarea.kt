@@ -4,12 +4,17 @@ object ObjectTarea {
 
     var listaTareas = mutableListOf<ItemTarea>()
 
-    fun addTarea(title: String, priority: String) {
-        listaTareas.add(ItemTarea(title, priority))
-    }
-
     fun getTarea(pos:Int): ItemTarea {
         return listaTareas[pos]
+    }
+
+    fun addTarea(id:Long, title: String, priority: String) {
+        listaTareas.add(ItemTarea(id, title, priority))
+    }
+
+    fun updateTarea(pos:Int, titulo:String, prioridad:String) {
+        listaTareas[pos].titulo = titulo
+        listaTareas[pos].prioridad = prioridad
     }
 
     fun deleteTarea(pos:Int) {
@@ -22,11 +27,6 @@ object ObjectTarea {
 
     fun deleteAll() {
         listaTareas.clear()
-    }
-
-    fun updateTarea(pos:Int, titulo:String, prioridad:String) {
-        listaTareas[pos].titulo = titulo
-        listaTareas[pos].prioridad = prioridad
     }
 
 }
