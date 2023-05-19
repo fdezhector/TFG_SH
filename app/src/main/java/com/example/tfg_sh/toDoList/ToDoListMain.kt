@@ -51,7 +51,7 @@ class ToDoListMain : AppCompatActivity() {
                     }
 
                     R.id.filtrar -> {
-                        //TODO filtrarPorPrioridad()
+                        filtrarPorPrioridad()
                         true
                     }
 
@@ -70,6 +70,7 @@ class ToDoListMain : AppCompatActivity() {
         val recyclerView = toDoList.tareaRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = TareaAdapter(ObjectTarea.getAll(), this)
+        actualizarVistaVacia()
     }
 
     private fun actualizarVistaVacia() {
@@ -82,6 +83,42 @@ class ToDoListMain : AppCompatActivity() {
             toDoList.addButton.visibility = View.GONE
             toDoList.tareaRecyclerView.visibility = View.VISIBLE
         }
+    }
+    private fun filtrarPorPrioridad(){
+        val view = toDoList.fab
+        val popupMenuFiltrar = PopupMenu(this, view)
+        popupMenuFiltrar.inflate(R.menu.actions_filtrar)
+        var listaFiltrada  = ObjectTarea.listaTareas
+        popupMenuFiltrar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.prioridad_alta -> {
+                    listaFiltrada = listaFiltrada.filter { itemTarea -> itemTarea.prioridad.equals("Alta",ignoreCase = true) } as MutableList<ItemTarea>
+                    actualizarRecyclerFiltrado(listaFiltrada)
+                    initRecyclerView()
+                    true
+                }
+                R.id.prioridad_media -> {
+                    listaFiltrada = listaFiltrada.filter { itemTarea -> itemTarea.prioridad.equals("Media",ignoreCase = true) } as MutableList<ItemTarea>
+                    actualizarRecyclerFiltrado(listaFiltrada)
+                    initRecyclerView()
+                    true
+                }
+                R.id.prioridad_baja -> {
+                    listaFiltrada = listaFiltrada.filter { itemTarea -> itemTarea.prioridad.equals("Baja",ignoreCase = true) } as MutableList<ItemTarea>
+                    actualizarRecyclerFiltrado(listaFiltrada)
+                    initRecyclerView()
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenuFiltrar.show()
+    }
+    //Nos creamos una lista auxiliar como copia, borramos la del recycler la borrarmos y establecemos la filtrada
+    private fun actualizarRecyclerFiltrado(listaFiltrada: MutableList<ItemTarea>) {
+        ObjectTarea.listaAuxiliar = ObjectTarea.listaTareas
+        ObjectTarea.listaTareas.clear()
+        ObjectTarea.listaTareas = listaFiltrada
     }
 
     private fun agregarTarea() {

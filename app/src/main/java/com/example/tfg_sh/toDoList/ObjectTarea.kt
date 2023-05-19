@@ -3,7 +3,7 @@ package com.example.tfg_sh.toDoList
 object ObjectTarea {
 
     var listaTareas = mutableListOf<ItemTarea>()
-
+    var listaAuxiliar = mutableListOf<ItemTarea>()
     fun getTarea(pos:Int): ItemTarea {
         return listaTareas[pos]
     }

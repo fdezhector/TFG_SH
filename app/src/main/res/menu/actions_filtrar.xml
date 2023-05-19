@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+<menu
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/filtro_alta"
+        android:id="@+id/prioridad_alta"
         android:title="Prioridad alta" />
     <item
-        android:id="@+id/filtro_media"
+        android:id="@+id/prioridad_media"
         android:title="Prioridad media" />
     <item
-        android:id="@+id/filtro_baja"
+        android:id="@+id/prioridad_baja"
         android:title="Prioridad baja" />
 </menu>
