@@ -61,6 +61,13 @@ class ToDoListMain : AppCompatActivity() {
             popupMenu.show()
         }
 
+        toDoList.resetFilter.setOnClickListener {
+            ObjectTarea.listaTareas = ObjectTarea.listaAuxiliar.toMutableList()
+            ObjectTarea.listaAuxiliar.clear()
+            actualizarVisibilidadBotonFiltro()
+            initRecyclerView()
+        }
+
         toDoList.addButton.setOnClickListener { agregarTarea() }
         toDoList.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
 
@@ -84,6 +91,7 @@ class ToDoListMain : AppCompatActivity() {
             toDoList.tareaRecyclerView.visibility = View.VISIBLE
         }
     }
+
     private fun filtrarPorPrioridad(){
         val view = toDoList.fab
         val popupMenuFiltrar = PopupMenu(this, view)
@@ -114,11 +122,21 @@ class ToDoListMain : AppCompatActivity() {
         }
         popupMenuFiltrar.show()
     }
+
     //Nos creamos una lista auxiliar como copia, borramos la del recycler la borrarmos y establecemos la filtrada
     private fun actualizarRecyclerFiltrado(listaFiltrada: MutableList<ItemTarea>) {
-        ObjectTarea.listaAuxiliar = ObjectTarea.listaTareas
+        ObjectTarea.listaAuxiliar = ObjectTarea.listaTareas.toMutableList()
         ObjectTarea.listaTareas.clear()
         ObjectTarea.listaTareas = listaFiltrada
+        actualizarVisibilidadBotonFiltro()
+    }
+
+    private fun actualizarVisibilidadBotonFiltro() {
+        if (toDoList.resetFilter.visibility == View.GONE) {
+            toDoList.resetFilter.visibility = View.VISIBLE
+        } else {
+            toDoList.resetFilter.visibility = View.GONE
+        }
     }
 
     private fun agregarTarea() {
