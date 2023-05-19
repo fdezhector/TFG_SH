@@ -1,6 +1,7 @@
 package com.example.tfg_sh.toDoList
 
 import android.content.Intent
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
@@ -61,6 +64,57 @@ class ToDoListMain : AppCompatActivity() {
             popupMenu.show()
         }
 
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                // this method is called when the item is moved.
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // this method is called when we swipe our item to the right direction.
+                // on below line we are getting the item at a particular position.
+
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val halfScreenWidth = recyclerView.width / 2
+
+                // Limita el desplazamiento horizontal hasta la mitad de la pantalla
+                val clampedDx = dX.coerceIn(-halfScreenWidth.toFloat(), halfScreenWidth.toFloat())
+
+                // Aplica el desplazamiento restringido
+                super.onChildDraw(c, recyclerView, viewHolder, clampedDx, dY, actionState, isCurrentlyActive)
+
+                // Obtiene la vista del ViewHolder
+                val itemView = viewHolder.itemView
+
+                // Calcula el porcentaje del desplazamiento en relación a la mitad de la pantalla
+                val displacementRatio = clampedDx / halfScreenWidth
+
+                // Calcula el desplazamiento máximo para volver a la posición inicial
+                val maxSwipeDistance = halfScreenWidth / 2
+
+                // Calcula el desplazamiento actual para volver a la posición inicial
+                val swipeBackDistance = (maxSwipeDistance * displacementRatio).toInt()
+
+                // Aplica la animación para volver a la posición inicial
+                itemView.translationX = swipeBackDistance.toFloat()
+            }
+        }).attachToRecyclerView(toDoList.tareaRecyclerView)
+
+
         toDoList.resetFilter.setOnClickListener {
             ObjectTarea.listaTareas = ObjectTarea.listaAuxiliar.toMutableList()
             ObjectTarea.listaAuxiliar.clear()
@@ -92,31 +146,49 @@ class ToDoListMain : AppCompatActivity() {
         }
     }
 
-    private fun filtrarPorPrioridad(){
+    private fun filtrarPorPrioridad() {
         val view = toDoList.fab
         val popupMenuFiltrar = PopupMenu(this, view)
         popupMenuFiltrar.inflate(R.menu.actions_filtrar)
-        var listaFiltrada  = ObjectTarea.listaTareas
+        var listaFiltrada = ObjectTarea.listaTareas
         popupMenuFiltrar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.prioridad_alta -> {
-                    listaFiltrada = listaFiltrada.filter { itemTarea -> itemTarea.prioridad.equals("Alta",ignoreCase = true) } as MutableList<ItemTarea>
+                    listaFiltrada = listaFiltrada.filter { itemTarea ->
+                        itemTarea.prioridad.equals(
+                            "Alta",
+                            ignoreCase = true
+                        )
+                    } as MutableList<ItemTarea>
                     actualizarRecyclerFiltrado(listaFiltrada)
                     initRecyclerView()
                     true
                 }
+
                 R.id.prioridad_media -> {
-                    listaFiltrada = listaFiltrada.filter { itemTarea -> itemTarea.prioridad.equals("Media",ignoreCase = true) } as MutableList<ItemTarea>
+                    listaFiltrada = listaFiltrada.filter { itemTarea ->
+                        itemTarea.prioridad.equals(
+                            "Media",
+                            ignoreCase = true
+                        )
+                    } as MutableList<ItemTarea>
                     actualizarRecyclerFiltrado(listaFiltrada)
                     initRecyclerView()
                     true
                 }
+
                 R.id.prioridad_baja -> {
-                    listaFiltrada = listaFiltrada.filter { itemTarea -> itemTarea.prioridad.equals("Baja",ignoreCase = true) } as MutableList<ItemTarea>
+                    listaFiltrada = listaFiltrada.filter { itemTarea ->
+                        itemTarea.prioridad.equals(
+                            "Baja",
+                            ignoreCase = true
+                        )
+                    } as MutableList<ItemTarea>
                     actualizarRecyclerFiltrado(listaFiltrada)
                     initRecyclerView()
                     true
                 }
+
                 else -> false
             }
         }
@@ -161,7 +233,8 @@ class ToDoListMain : AppCompatActivity() {
                 dao.deleteAllTareas()
             }
             initRecyclerView()
-            Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG)
+                .show()
             dialog.dismiss()
         }
 
