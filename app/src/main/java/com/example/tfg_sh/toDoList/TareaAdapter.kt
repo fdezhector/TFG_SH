@@ -23,7 +23,6 @@ class TareaAdapter(private val listaTareas: List<ItemTarea>, private val context
             val intent = Intent(context, UpdateTareaActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             intent.putExtra("position", position)
-            //intent.putExtra("id", item.id)
             context.startActivity(intent)
         }
 

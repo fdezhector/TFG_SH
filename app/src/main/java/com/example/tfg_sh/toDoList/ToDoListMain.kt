@@ -19,7 +19,9 @@ import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
+import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityToDoListMainBinding
+import com.example.tfg_sh.databinding.ItemTareaBinding
 import kotlinx.coroutines.launch
 
 class ToDoListMain : AppCompatActivity() {
@@ -65,11 +67,7 @@ class ToDoListMain : AppCompatActivity() {
         }
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 // this method is called when the item is moved.
                 return false
             }
@@ -80,15 +78,12 @@ class ToDoListMain : AppCompatActivity() {
 
             }
 
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
+            override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                val itemTareaBinding = ItemTareaBinding.bind(viewHolder.itemView)
+                // FIXME
+                /*val position = viewHolder.bindingAdapterPosition
+                val tarea = ObjectTarea.listaTareas[position]*/
+
                 val halfScreenWidth = recyclerView.width / 2
 
                 // Limita el desplazamiento horizontal hasta la mitad de la pantalla
@@ -104,13 +99,40 @@ class ToDoListMain : AppCompatActivity() {
                 val displacementRatio = clampedDx / halfScreenWidth
 
                 // Calcula el desplazamiento máximo para volver a la posición inicial
-                val maxSwipeDistance = halfScreenWidth / 2
+                val maxSwipeDistance = halfScreenWidth / 5
 
                 // Calcula el desplazamiento actual para volver a la posición inicial
                 val swipeBackDistance = (maxSwipeDistance * displacementRatio).toInt()
 
                 // Aplica la animación para volver a la posición inicial
                 itemView.translationX = swipeBackDistance.toFloat()
+
+                val editButton = itemTareaBinding.swipeEditButton
+                val deleteButton = itemTareaBinding.swipeDeleteButton
+
+                editButton.visibility = View.VISIBLE
+                deleteButton.visibility = View.VISIBLE
+
+                // FIXME añadir funcionalidad correcta a los swipebuttons
+                /*editButton.setOnClickListener {
+                    val intent = Intent(this@ToDoListMain, UpdateTareaActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    intent.putExtra("position", position)
+                    startActivity(intent)
+                }
+
+                deleteButton.setOnClickListener {
+                    ObjectTarea.deleteTarea(position)
+                    lifecycleScope.launch {
+                        dao.deleteTarea(Tarea(tarea.id, tarea.titulo, tarea.prioridad))
+                    }
+                }*/
+
+                if (swipeBackDistance == 0) {
+                    editButton.visibility = View.GONE
+                    deleteButton.visibility = View.GONE
+                }
+
             }
         }).attachToRecyclerView(toDoList.tareaRecyclerView)
 

@@ -20,6 +20,16 @@
     <color name="prioridad_baja_2">#8CFF8C</color>
     <color name="prioridad_baja_3">#7AFF7A</color>
 
+    <!-- Otros -->
+    <color name="delete_red_light">#E57373</color>
+    <color name="delete_red_medium">#E65151</color>
+    <color name="delete_red_dark">#8B0000</color>
+
+    <color name="edit_green_light">#4CAF50</color>
+    <color name="edit_green_medium">#388E3C</color>
+    <color name="edit_green_dark">#1B5E20</color>
+
+
     <!-- Colores neutros -->
     <color name="negro">#070707</color>
     <color name="background">#111111</color>

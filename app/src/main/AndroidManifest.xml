@@ -21,31 +21,19 @@
         <activity
             android:name=".toDoList.InsertTareaActivity"
             android:exported="false" />
-        <!--
-        <activity
-            android:name=".toDoList.ActualizarCardView"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
-        -->
         <activity
             android:name=".toDoList.ToDoListMain"
             android:exported="false"
             android:launchMode="singleTop" />
         <activity
             android:name=".PantallaInicio"
-            android:exported="true">
+            android:exported="true"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
- <activity
-            android:name=".toDoList.CrearCardView"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
-        -->
         <receiver
             android:name=".notificacion.NotificacionAlarma"
             android:enabled="true" />

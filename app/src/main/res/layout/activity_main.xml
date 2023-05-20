@@ -57,7 +57,55 @@
                 android:textAlignment="center"/>
         </RelativeLayout>
 
-        <GridLayout
+        <RelativeLayout
+            android:id="@+id/layout_elementos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/calendarView">
+
+            <TextView
+                android:id="@+id/vista_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/vista_diario"
+
+                android:paddingVertical="10dp"
+
+                android:background="#F44336"
+                android:textSize="50sp"
+                android:text="Evento" />
+
+            <TextView
+                android:id="@+id/vista_toDoList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vista_evento"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@id/vista_diario"
+
+                android:paddingVertical="10dp"
+
+                android:background="#4CAF50"
+                android:text="ToDoList"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/vista_diario"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+
+                android:background="#2196F3"
+                android:padding="10dp"
+                android:text="Diario"
+                android:textSize="60sp" />
+
+        </RelativeLayout>
+
+        <!--<GridLayout
             android:id="@+id/layout_elementos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -98,7 +146,7 @@
                 android:textSize="35sp"
                 android:text="ToDoList" />
 
-        </GridLayout>
+        </GridLayout>-->
 
     </RelativeLayout>
 

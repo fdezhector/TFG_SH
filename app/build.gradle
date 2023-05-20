@@ -47,6 +47,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // Lottie animations
+    implementation 'com.airbnb.android:lottie:4.2.0'
+    // Agregar swipe a los items del recycler
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
     // Room
     implementation "androidx.room:room-runtime:2.5.1"
