@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
@@ -31,5 +32,6 @@ class PantallaInicio : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }, 3000)
+        Log.e("FILEDIR", getExternalFilesDir(null).toString())
     }
 }

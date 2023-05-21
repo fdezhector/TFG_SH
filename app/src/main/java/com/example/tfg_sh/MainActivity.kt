@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.CalendarView
@@ -15,15 +16,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
+import com.example.tfg_sh.bbdd.entidades.DatosBBDD
 import com.example.tfg_sh.bbdd.entidades.Diario
 import com.example.tfg_sh.bbdd.entidades.Evento
 import com.example.tfg_sh.bbdd.entidades.Nota
+import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityMainBinding
 import com.example.tfg_sh.diario.DiarioActivity
 import com.example.tfg_sh.evento.EventoActivity
 import com.example.tfg_sh.notificacion.NotificacionAlarma
 import com.example.tfg_sh.toDoList.ToDoListMain
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.Calendar
 import java.util.Date
 
@@ -66,6 +71,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         main.vistaEvento.setOnClickListener {
+            //exportarBBDD(dao,this)
+            //importarBBDD(dao,this)
             val vistaEventoActivty = Intent(applicationContext, EventoActivity::class.java)
             startActivity(vistaEventoActivty)
         }
@@ -161,6 +168,46 @@ class MainActivity : AppCompatActivity() {
 
     private suspend fun existeNota(dao: BetterYouDao, id: Int): Nota? {
         return dao.getNota(id)
+    }
+
+    private fun exportarBBDD(dao: BetterYouDao,context:Context){
+        Log.e("FILEDIR", getExternalFilesDir(null).toString())
+        //Voy creando las listas de todas las entidades de la BBDD
+        lifecycleScope.launch{
+            var diarios = dao.getAllDiarios()
+            var eventos = dao.getAllEventos()
+            var tareas = dao.getAllTareas() as List<Tarea>
+            var notas = dao.getAllNotas()
+
+            var datos = DatosBBDD(diarios,eventos,notas,tareas)
+            //Parseo JSON
+            val gson = Gson()
+            val json = gson.toJson(datos)
+            //Creamos el fichero
+            val file = File(context.getExternalFilesDir(null), "data.json")
+            file.writeText(json)
+        }
+    }
+    //FIXME Importar y exportar funcionan solo que cuando importamos tenemos que solucionar que cuando esta cargada la aplicacion no se aplica al recycler view de manera que tenemos que reiniciar para que se carguen los datos de la bbdd
+    private fun importarBBDD(dao: BetterYouDao,context:Context) {
+        try {
+            //Obtén la referencia al archivo JSON en el almacenamiento externo.
+            val file = File(context.getExternalFilesDir(null), "data.json")
+            //Leo el archivo
+            val jsonString = file.readText()
+            //Convierto el archivo en objetos de tipo DatosBBDD
+            val gson = Gson()
+            val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
+            //Insertamos todos los datos en la BBDD
+            lifecycleScope.launch {
+                dao.insertAllDiarios(datos.diarios)
+                dao.insertAllEventos(datos.eventos)
+                dao.insertAllTareas(datos.tareas)
+                dao.insertAllNotas(datos.notas)
+            }
+        } catch (e: Exception) {
+            Log.e("ImportarBBDD", "Error al importar los datos desde el archivo JSON", e)
+        }
     }
 }
 

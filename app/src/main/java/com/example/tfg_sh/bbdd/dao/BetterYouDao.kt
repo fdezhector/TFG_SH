@@ -12,18 +12,23 @@ import com.example.tfg_sh.bbdd.entidades.Evento
 import com.example.tfg_sh.bbdd.entidades.Nota
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.toDoList.ItemTarea
-import kotlinx.coroutines.selects.select
 
 @Dao
 interface BetterYouDao {
     //NOTA
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAllNotas(notas: List<Nota>)
     @Insert (onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertNota(nota:Nota)
     @MainThread
     @Query("select * from nota where id = :id")
     suspend fun getNota(id:Int):Nota?
+    @Query("select * from nota")
+    suspend fun getAllNotas():List<Nota>
 
     //EVENTO
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAllEventos(eventos: List<Evento>)
     @Insert (onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertEvento(evento: Evento)
     @Update
@@ -32,8 +37,12 @@ interface BetterYouDao {
     suspend fun deleteEvento(evento: Evento)
     @Query("select * from evento where id = :id")
     suspend fun getEvento(id: Int):Evento
+    @Query("select * from evento")
+    suspend fun getAllEventos():List<Evento>
 
     //DIARIO
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAllDiarios(diario: List<Diario>)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDiario(diario: Diario)
     @Update
@@ -42,8 +51,11 @@ interface BetterYouDao {
     suspend fun deleteDiario(diario: Diario)
     @Query("select * from diario where id = :id")
     suspend fun getDiario(id: Int):Diario
-
+    @Query("select * from diario")
+    suspend fun getAllDiarios():List<Diario>
     //TAREA
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAllTareas(tarea: List<Tarea>)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTarea(tarea: Tarea)
     @Update
