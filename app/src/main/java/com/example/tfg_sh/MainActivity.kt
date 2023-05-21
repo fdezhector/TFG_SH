@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
                 val id = Utils.setId(fechaNota)
                 lifecycleScope.launch {
-                    var nota: Nota?
+                    val nota: Nota?
                     nota = existeNota(dao, id)
                     //Si no existe, creamos todas las entidades
                     if (nota == null) {
@@ -76,7 +76,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         main.vistaToDoList.setOnClickListener {
-            scheduleNotificacion()
+            val titulo = "Notificacion de prueba"
+            val textoCorto = "Tienes que ingresar a la app para realizar tus tareas"
+            val textoDetallado = "Tienes pendientes muchas tareas, deberias ir realizandolas o se te van a acumular"
+            scheduleNotificacion(titulo,textoCorto,textoDetallado)
             val vistaToDoListActivity = Intent(applicationContext, ToDoListMain::class.java)
             startActivity(vistaToDoListActivity)
         }
@@ -110,21 +113,24 @@ class MainActivity : AppCompatActivity() {
     private fun crearCanal() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                ID_CANAL, "MySuperChannel", NotificationManager.IMPORTANCE_DEFAULT
+                ID_CANAL, "CanalDeNotificacion", NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
                 description = "canal de nuestra notificación"
             }
 
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
             notificationManager.createNotificationChannel(channel)
         }
     }
 
     //Esto nos sirve para ponerle un timer a la app y que la notificacion salga mas tarde
-    private fun scheduleNotificacion() {
-        val intent = Intent(applicationContext, NotificacionAlarma::class.java)
+    private fun scheduleNotificacion(titulo: String,textoCorto:String,textoDetallado : String) {
+        val intent = Intent(applicationContext, NotificacionAlarma::class.java).apply {
+            putExtra("titulo", titulo)
+            putExtra("textoCorto",textoCorto )
+            putExtra("textoDetallado", textoDetallado)
+        }
         val pendingIntent = PendingIntent.getBroadcast(
             applicationContext,
             NotificacionAlarma.NOTIFICATION_ID,

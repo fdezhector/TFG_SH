@@ -1,6 +1,5 @@
 package com.example.tfg_sh.notificacion
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -17,11 +16,14 @@ class NotificacionAlarma : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, p1: Intent?) {
-        crearNotificacionSimple(context)
+        val titulo = p1?.getStringExtra("titulo") ?: "Título de la notificación"
+        val textoCorto = p1?.getStringExtra("textoCorto") ?: "Texto corto de la notificación"
+        val textoDetallado = p1?.getStringExtra("textoDetallado") ?: "Texto detallado de la notificación"
+        crearNotificacionSimple(context,titulo,textoCorto,textoDetallado)
     }
 
-    //TODO parametrizarlo un poco
-    private fun crearNotificacionSimple(context: Context) {
+    //FIXME parametrizarlo un poco
+    private fun crearNotificacionSimple(context: Context,titulo: String,textoCorto:String,textoDetallado : String) {
 
         val intent = Intent(
             context,
@@ -37,12 +39,12 @@ class NotificacionAlarma : BroadcastReceiver() {
 
         val esperaIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, flag)
 
-        var notificacion = NotificationCompat.Builder(context, MainActivity.ID_CANAL)
+        val notificacion = NotificationCompat.Builder(context, MainActivity.ID_CANAL)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("Mi titulo")
-            .setContentText("Ejemplo de notificación")
+            .setContentTitle(titulo)
+            .setContentText(textoCorto)
             .setStyle(
-                NotificationCompat.BigTextStyle().bigText("Hola")
+                NotificationCompat.BigTextStyle().bigText(textoDetallado)
             ) //Notificaciones expandibles
             .setPriority(NotificationCompat.PRIORITY_DEFAULT) //Esto actua solo android 7.1 abajo
             .setContentIntent(esperaIntent)
