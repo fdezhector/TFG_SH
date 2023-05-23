@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.checkbox.MaterialCheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recyclerEmotion"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:padding="2dp"
-
-    android:background="@drawable/panel_emotion">
-
-    <TextView
-        android:id="@+id/text_emotion"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="7dp"
-        android:gravity="center"
-
-        android:text="emotion"
-        android:textSize="15sp"
-        android:textAlignment="center"
-        android:textColor="@color/gris"
-        android:layout_gravity="center" />
-
-    <ImageButton
-        android:id="@+id/button_cerrar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@color/transparent"
-        android:layout_gravity="center"
-        android:contentDescription="@string/cerrar"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
-
-</LinearLayout>
+    android:padding="10dp"
+    android:background="@color/background"
+    android:text="Emotion"
+    android:textSize="16sp"
+    android:textColor="@color/gris">
+</com.google.android.material.checkbox.MaterialCheckBox>

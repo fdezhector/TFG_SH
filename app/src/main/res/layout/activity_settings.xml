@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings"
+    android:background="@color/background">
+
+    <!--TODO cambiar color y tamaño de los iconos de importar y exportar -->
+    <!-- Añadir dropdown para escoger a qué hora debe saltar la notificación para rellenar el diario -->
+
+    <RelativeLayout
+        android:id="@+id/layout_importar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:elevation="20dp"
+
+        android:layout_above="@id/layout_exportar"
+
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="30dp"
+        android:padding="5dp"
+
+        android:background="@color/negro">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+
+            android:src="@drawable/import_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Importar BetterYou (JSON)"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/gris"
+            android:textAllCaps="true"
+            android:letterSpacing="0.15"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_exportar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:elevation="20dp"
+
+        android:layout_above="@id/horizontal_guideline"
+
+        android:layout_marginHorizontal="30dp"
+        android:padding="5dp"
+
+        android:background="@color/negro">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/export_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exportar BetterYou (JSON)"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/gris"
+            android:textAllCaps="true"
+            android:letterSpacing="0.15"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/horizontal_guideline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@color/transparent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/horizontal_guideline"
+        android:layout_centerHorizontal="true"
+        android:text="Escoge una hora para recibir la notificación del diario:"
+        android:textSize="13sp"
+        android:textColor="@color/gris"
+        android:fontFamily="sans-serif"/>
+
+    <Spinner
+        android:id="@+id/hora_notificacion_diario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+
+        android:background="@color/negro"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
+
+        android:spinnerMode="dropdown"
+        android:dropDownWidth="match_parent"
+
+        android:textColor="@color/gris"
+        style="@style/custom_spinner"/>
+
+    <include android:id="@+id/bottom_nav" layout="@layout/bottom_nav"/>
+
+</RelativeLayout>

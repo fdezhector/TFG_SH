@@ -21,17 +21,20 @@ import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityToDoListMainBinding
+import com.example.tfg_sh.databinding.BottomNavBinding
 import com.example.tfg_sh.databinding.ItemTareaBinding
 import kotlinx.coroutines.launch
 
 class ToDoListMain : AppCompatActivity() {
 
     private lateinit var toDoList: ActivityToDoListMainBinding
+    private lateinit var bottomNav: BottomNavBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         toDoList = ActivityToDoListMainBinding.inflate(layoutInflater)
         setContentView(toDoList.root)
+        bottomNav = BottomNavBinding.bind(toDoList.bottomNav.root)
 
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
 
@@ -144,8 +147,11 @@ class ToDoListMain : AppCompatActivity() {
             initRecyclerView()
         }
 
+        //
         toDoList.addButton.setOnClickListener { agregarTarea() }
         toDoList.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
+        bottomNav.buttonHome.setOnClickListener { Utils.goToMainScreen(this) }
+        bottomNav.buttonSettings.setOnClickListener { Utils.goToSettings(this) }
 
     }//onCreate
 

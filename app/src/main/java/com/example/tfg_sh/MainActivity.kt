@@ -22,6 +22,7 @@ import com.example.tfg_sh.bbdd.entidades.Evento
 import com.example.tfg_sh.bbdd.entidades.Nota
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityMainBinding
+import com.example.tfg_sh.databinding.BottomNavBinding
 import com.example.tfg_sh.diario.DiarioActivity
 import com.example.tfg_sh.evento.EventoActivity
 import com.example.tfg_sh.notificacion.NotificacionAlarma
@@ -35,6 +36,7 @@ import java.util.Date
 class MainActivity : AppCompatActivity() {
 
     private lateinit var main: ActivityMainBinding
+    private lateinit var bottomNav: BottomNavBinding
 
     companion object {
         //Id  canal inmutable
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         //Instancia BBDD
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
         setContentView(main.root)
+        bottomNav = BottomNavBinding.bind(main.bottomNav.root)
         //Canal de la notificacion
         crearCanal()
 
@@ -73,12 +76,12 @@ class MainActivity : AppCompatActivity() {
         main.vistaEvento.setOnClickListener {
             //exportarBBDD(dao,this)
             //importarBBDD(dao,this)
-            val vistaEventoActivty = Intent(applicationContext, EventoActivity::class.java)
+            val vistaEventoActivty = Intent(this, EventoActivity::class.java)
             startActivity(vistaEventoActivty)
         }
 
         main.vistaDiario.setOnClickListener {
-            val vistaDiarioActivity = Intent(applicationContext, DiarioActivity::class.java)
+            val vistaDiarioActivity = Intent(this, DiarioActivity::class.java)
             startActivity(vistaDiarioActivity)
         }
 
@@ -87,8 +90,12 @@ class MainActivity : AppCompatActivity() {
             val textoCorto = "Tienes que ingresar a la app para realizar tus tareas"
             val textoDetallado = "Tienes pendientes muchas tareas, deberias ir realizandolas o se te van a acumular"
             scheduleNotificacion(titulo,textoCorto,textoDetallado)
-            val vistaToDoListActivity = Intent(applicationContext, ToDoListMain::class.java)
+            val vistaToDoListActivity = Intent(this, ToDoListMain::class.java)
             startActivity(vistaToDoListActivity)
+        }
+
+        bottomNav.buttonSettings.setOnClickListener {
+            Utils.goToSettings(this)
         }
 
     }
@@ -101,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         dao.insertNota(nota1)
         dao.insertDiario(
             Diario(
-                etiquetas = null, descripcion = null, notaId = nota1.id
+                emociones = null, descripcion = null, notaId = nota1.id
             )
         )
         dao.insertEvento(
@@ -170,45 +177,7 @@ class MainActivity : AppCompatActivity() {
         return dao.getNota(id)
     }
 
-    private fun exportarBBDD(dao: BetterYouDao,context:Context){
-        Log.e("FILEDIR", getExternalFilesDir(null).toString())
-        //Voy creando las listas de todas las entidades de la BBDD
-        lifecycleScope.launch{
-            var diarios = dao.getAllDiarios()
-            var eventos = dao.getAllEventos()
-            var tareas = dao.getAllTareas() as List<Tarea>
-            var notas = dao.getAllNotas()
 
-            var datos = DatosBBDD(diarios,eventos,notas,tareas)
-            //Parseo JSON
-            val gson = Gson()
-            val json = gson.toJson(datos)
-            //Creamos el fichero
-            val file = File(context.getExternalFilesDir(null), "data.json")
-            file.writeText(json)
-        }
-    }
-    //FIXME Importar y exportar funcionan solo que cuando importamos tenemos que solucionar que cuando esta cargada la aplicacion no se aplica al recycler view de manera que tenemos que reiniciar para que se carguen los datos de la bbdd
-    private fun importarBBDD(dao: BetterYouDao,context:Context) {
-        try {
-            //Obtén la referencia al archivo JSON en el almacenamiento externo.
-            val file = File(context.getExternalFilesDir(null), "data.json")
-            //Leo el archivo
-            val jsonString = file.readText()
-            //Convierto el archivo en objetos de tipo DatosBBDD
-            val gson = Gson()
-            val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
-            //Insertamos todos los datos en la BBDD
-            lifecycleScope.launch {
-                dao.insertAllDiarios(datos.diarios)
-                dao.insertAllEventos(datos.eventos)
-                dao.insertAllTareas(datos.tareas)
-                dao.insertAllNotas(datos.notas)
-            }
-        } catch (e: Exception) {
-            Log.e("ImportarBBDD", "Error al importar los datos desde el archivo JSON", e)
-        }
-    }
 }
 
 

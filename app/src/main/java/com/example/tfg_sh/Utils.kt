@@ -8,12 +8,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
-import kotlin.reflect.KClass
 
 object Utils {
     // FIXME mirar el tema de las flags y este método
@@ -32,7 +30,13 @@ object Utils {
         activity.startActivity(intent)
     }
 
-    fun setId(fecha_nota: Date?): Int {
+    fun goToSettings(activity: Activity){
+        val intent = Intent(activity, Settings::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        activity.startActivity(intent)
+    }
+
+    fun setId(fecha_nota: Date): Int {
         // el id será la fecha del día de la nota
         // por ejemplo: 5 de abril de 2023 --> id = 5042023
         val sdf = SimpleDateFormat("dd/MM/yyyy")

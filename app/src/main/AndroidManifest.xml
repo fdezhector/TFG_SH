@@ -18,6 +18,9 @@
         android:theme="@style/Theme.TFG_SH"
         tools:targetApi="31">
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
             android:name=".toDoList.UpdateTareaActivity"
             android:exported="false" />
         <activity
@@ -33,9 +36,11 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".notificacion.NotificacionAlarma"
             android:enabled="true" />

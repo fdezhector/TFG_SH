@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="BetterYou"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
+        android:textColor="@color/gris"
         android:textSize="40sp"
         android:fontFamily="sans-serif"/>
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Controla tu día a día"
         android:layout_gravity="center_horizontal"
-        android:textColor="#8A8686"
+        android:textColor="@color/gris"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textSize="16sp"
@@ -35,7 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:lottie_fileName="blue-loading-animation.json"
+        android:layout_marginTop="10dp"
+        app:lottie_fileName="horizontal-loading.json"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
 

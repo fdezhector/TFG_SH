@@ -57,96 +57,62 @@
                 android:textAlignment="center"/>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/layout_elementos"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/calendarView">
+            android:layout_below="@id/calendarView"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/vista_evento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@id/vista_diario"
+            <RelativeLayout
+                android:id="@+id/layout_elementos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                android:paddingVertical="10dp"
+                <TextView
+                    android:id="@+id/vista_evento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/vista_diario"
 
-                android:background="#F44336"
-                android:textSize="50sp"
-                android:text="Evento" />
+                    android:paddingVertical="10dp"
 
-            <TextView
-                android:id="@+id/vista_toDoList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/vista_evento"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@id/vista_diario"
+                    android:background="#F44336"
+                    android:textSize="50sp"
+                    android:text="Evento" />
 
-                android:paddingVertical="10dp"
+                <TextView
+                    android:id="@+id/vista_toDoList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vista_evento"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@id/vista_diario"
 
-                android:background="#4CAF50"
-                android:text="ToDoList"
-                android:textSize="35sp" />
+                    android:paddingVertical="10dp"
 
-            <TextView
-                android:id="@+id/vista_diario"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                    android:background="#4CAF50"
+                    android:text="ToDoList"
+                    android:textSize="35sp" />
 
-                android:background="#2196F3"
-                android:padding="10dp"
-                android:text="Diario"
-                android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/vista_diario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
 
-        </RelativeLayout>
+                    android:background="#2196F3"
+                    android:padding="10dp"
+                    android:text="Diario"
+                    android:textSize="60sp" />
 
-        <!--<GridLayout
-            android:id="@+id/layout_elementos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:columnCount="2"
-            android:rowCount="3"
-            android:layout_below="@id/calendarView">
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/vista_evento"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_columnSpan="1"
-                android:background="#F44336"
-                android:textSize="50sp"
-                android:text="Evento" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/vista_diario"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_rowSpan="3"
-                android:background="#2196F3"
-                android:textSize="60sp"
-                android:text="Diario" />
-
-            <TextView
-                android:id="@+id/vista_toDoList"
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_rowSpan="2"
-                android:background="#4CAF50"
-                android:textSize="35sp"
-                android:text="ToDoList" />
-
-        </GridLayout>-->
+        <include android:id="@+id/bottom_nav" layout="@layout/bottom_nav"/>
 
     </RelativeLayout>
 

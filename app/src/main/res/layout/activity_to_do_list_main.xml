@@ -84,9 +84,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/add_task"
         app:fabSize="normal"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FabCircle" />
+
+    <include android:id="@+id/bottom_nav" layout="@layout/bottom_nav"/>
+
 </RelativeLayout>
