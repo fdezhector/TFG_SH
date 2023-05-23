@@ -1,14 +1,20 @@
 package com.example.tfg_sh
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
+import com.example.tfg_sh.notificacion.NotificacionAlarma
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -49,6 +55,12 @@ object Utils {
         calendar.set(year, month, dayOfMonth)
         return calendar.time
     }
+    fun obtenerHora(horaSinFormatear: String):Date{
+        val format = SimpleDateFormat("HH:mm")
+        val hora: Date = format.parse(horaSinFormatear)
+
+        return hora
+    }
 
     fun initDropDownMenu(dropDown: Spinner, context: Context) {
         // creamos el adaptador para el spinner
@@ -75,6 +87,40 @@ object Utils {
         }
     }
 
+
+
+     fun scheduleNotificacion(context: Context,titulo: String,textoCorto:String,textoDetallado : String,delay:Int) {
+        val intent = Intent(context, NotificacionAlarma::class.java).apply {
+            putExtra("titulo", titulo)
+            putExtra("textoCorto",textoCorto )
+            putExtra("textoDetallado", textoDetallado)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            NotificacionAlarma.NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP, Calendar.getInstance().timeInMillis + delay, pendingIntent
+        )
+    }
+
+    fun crearCanal(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                PantallaInicio.ID_CANAL, "CanalBetterYou", NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Canal para la notificacion de la aplicacion BetterYou"
+            }
+
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     private fun evaluarColor(selectedItem: String, context: Context): Int {
         var dropDownColor: Int
         if (selectedItem.equals("Alta", ignoreCase = true)) {
@@ -86,4 +132,7 @@ object Utils {
         }
         return dropDownColor
     }
+
 }
+
+

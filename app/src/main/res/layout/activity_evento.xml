@@ -86,7 +86,7 @@
         android:background="@color/black">
 
         <EditText
-            android:id="@+id/título"
+            android:id="@+id/titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gris"

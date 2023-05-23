@@ -1,21 +1,15 @@
 package com.example.tfg_sh.toDoList
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityInsertTareaBinding
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.util.Date
 
 class InsertTareaActivity : AppCompatActivity() {
@@ -35,7 +29,7 @@ class InsertTareaActivity : AppCompatActivity() {
         // Operación INSERT
         insertTarea.saveButton.setOnClickListener {
             // comprobaciones (siempre habrá una prioridad seleccionada por defecto)
-            if(insertTarea.titulo.text.isEmpty()) {
+            if(insertTarea.titulo.text.isNullOrEmpty()) {
                 Toast.makeText(this, "La tarea debe tener un título", Toast.LENGTH_LONG).show()
             } else {
                 var id = Date().time as Long

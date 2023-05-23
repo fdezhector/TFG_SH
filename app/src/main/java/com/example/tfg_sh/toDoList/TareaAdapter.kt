@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_sh.R
 
-class TareaAdapter(private val listaTareas: List<ItemTarea>, private val context: Context) : RecyclerView.Adapter<TareaViewHolder>() {
+class  TareaAdapter(private val listaTareas: List<ItemTarea>, private val context: Context) : RecyclerView.Adapter<TareaViewHolder>() {
     // TODO comentar
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TareaViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

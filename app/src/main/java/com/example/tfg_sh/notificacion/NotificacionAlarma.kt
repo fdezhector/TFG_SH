@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.tfg_sh.MainActivity
+import com.example.tfg_sh.PantallaInicio
 
 class NotificacionAlarma : BroadcastReceiver() {
 
@@ -22,7 +23,6 @@ class NotificacionAlarma : BroadcastReceiver() {
         crearNotificacionSimple(context,titulo,textoCorto,textoDetallado)
     }
 
-    //FIXME parametrizarlo un poco
     private fun crearNotificacionSimple(context: Context,titulo: String,textoCorto:String,textoDetallado : String) {
 
         val intent = Intent(
@@ -39,7 +39,7 @@ class NotificacionAlarma : BroadcastReceiver() {
 
         val esperaIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, flag)
 
-        val notificacion = NotificationCompat.Builder(context, MainActivity.ID_CANAL)
+        val notificacion = NotificationCompat.Builder(context, PantallaInicio.ID_CANAL)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle(titulo)
             .setContentText(textoCorto)
