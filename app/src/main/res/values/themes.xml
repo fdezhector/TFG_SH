@@ -18,12 +18,12 @@
 
     <!-- CalendarView -->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">#C3DADADA</item>
-        <item name="colorPrimary">@color/gris</item>
+        <item name="colorAccent">@color/hintColor</item>
     </style>
 
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
         <item name="android:textColor">@color/gris</item>
+        <item name="android:colorActivatedHighlight">@color/gris</item>
         <item name="android:weekNumberColor">@color/gris</item>
     </style>
 
@@ -45,7 +45,6 @@
         <item name="cornerSize">50%</item>
     </style>
 
-
     <!-- Spinner -->
     <style name="custom_spinner">
         <item name="android:textColor">@color/gris</item>
@@ -58,8 +57,8 @@
         <item name="android:colorAccent">@color/background</item>
         <item name="android:colorControlActivated">@color/background</item>
         <item name="android:colorControlNormal">@color/negro</item>
-        <item name="android:textColorPrimary">@color/gris</item>
-        <item name="android:textColorSecondary">@color/gris</item>
+        <item name="android:textColorPrimary">@color/negro</item>
+        <item name="android:textColorSecondary">@color/negro</item>
         <item name="android:colorControlHighlight">@color/focused</item>
     </style>
 

@@ -53,13 +53,6 @@ class EventoActivity : AppCompatActivity() {
             if (eventoBinding.titulo.text.isNullOrEmpty()) {
                 Toast.makeText(this, "El evento debe tener un título", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else if (eventoBinding.ubicacion.text.isNullOrEmpty()) {
-                Toast.makeText(this, "El evento debe tener una ubicación", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            } else if (eventoBinding.descripcion.text.isNullOrEmpty()) {
-                Toast.makeText(this, "El evento debe tener una descripción", Toast.LENGTH_LONG)
-                    .show()
-                return@setOnClickListener
             } else if (eventoBinding.textHoraFechaInicio.text.isNullOrEmpty() && eventoBinding.textHoraFechaFin.text.isNullOrEmpty()) {
                 Toast.makeText(
                     this,
@@ -73,7 +66,7 @@ class EventoActivity : AppCompatActivity() {
             val horaFin = Utils.obtenerHora(eventoBinding.textHoraFechaFin.text.toString())
 
             if (horaInicio > horaFin && horaFin < horaInicio) {
-                Toast.makeText(this, "La hora elegida no es correcta", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "La hora de fin debe ser posterior a la hora de inicio", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -81,7 +74,7 @@ class EventoActivity : AppCompatActivity() {
             Utils.goToMainScreen(this)
             Toast.makeText(
                 this,
-                "Se ha introducido con éxito el evento " + eventoBinding.titulo.text.toString(),
+                "Evento guardado: " + eventoBinding.titulo.text.toString(),
                 Toast.LENGTH_LONG
             ).show()
 

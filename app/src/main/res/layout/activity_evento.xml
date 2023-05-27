@@ -34,16 +34,19 @@
 
         <ImageButton
             android:id="@+id/button_guardar"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/guardar"
-            app:srcCompat="@android:drawable/ic_menu_save" />
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            app:srcCompat="@drawable/save" />
 
         <ImageButton
             android:id="@+id/button_borrar"
@@ -59,7 +62,7 @@
             android:layout_toLeftOf="@id/button_guardar"
             android:background="@color/transparent"
             android:contentDescription="@string/borrar_dia"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:srcCompat="@drawable/delete" />
 
     </RelativeLayout>
 
@@ -83,7 +86,7 @@
         android:padding="15dp"
         android:layout_margin="15dp"
 
-        android:background="@color/black">
+        android:background="@color/negro">
 
         <EditText
             android:id="@+id/titulo"
@@ -136,6 +139,13 @@
                 android:background="@color/transparent" />
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="3dp"
+            android:background="@color/hintColor" />
 
         <LinearLayout
             android:id="@+id/layout_fecha_fin"
@@ -193,7 +203,7 @@
         android:padding="15dp"
         android:layout_margin="15dp"
 
-        android:background="@color/black">
+        android:background="@color/negro">
 
         <EditText
             android:id="@+id/descripcion"

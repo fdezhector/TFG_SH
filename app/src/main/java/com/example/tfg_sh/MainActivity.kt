@@ -1,8 +1,10 @@
 package com.example.tfg_sh
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.CalendarView
 import androidx.appcompat.app.AppCompatActivity
@@ -67,9 +69,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         main.vistaToDoList.setOnClickListener {
-            val titulo = "Notificacion de prueba"
-            val textoCorto = "Tienes que ingresar a la app para realizar tus tareas"
-            val textoDetallado = "Tienes pendientes muchas tareas, deberias ir realizandolas o se te van a acumular"
             val vistaToDoListActivity = Intent(this, ToDoListMain::class.java)
             startActivity(vistaToDoListActivity)
         }
@@ -112,16 +111,39 @@ class MainActivity : AppCompatActivity() {
     private fun cargarVistaElementos(){
         if(main.layoutLogo.visibility == View.VISIBLE){
             main.layoutLogo.visibility = View.GONE
-            main.layoutElementos.visibility = View.VISIBLE
-            val animation = AnimationUtils.loadAnimation(this, R.anim.anim_elementos)
-            main.layoutElementos.startAnimation(animation)
+
+            val animationLogo = AnimationUtils.loadAnimation(this, R.anim.anim_layout_logo)
+            main.layoutLogo.startAnimation(animationLogo)
+
+            animationLogo.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // No aplica
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    main.layoutElementos.visibility = View.VISIBLE
+
+                    val animationToDoList = AnimationUtils.loadAnimation(this@MainActivity, R.anim.anim_todolist)
+                    main.vistaToDoList.startAnimation(animationToDoList)
+
+                    val animationEvento = AnimationUtils.loadAnimation(this@MainActivity, R.anim.anim_evento)
+                    main.vistaEvento.startAnimation(animationEvento)
+
+                    val animationDiario = AnimationUtils.loadAnimation(this@MainActivity, R.anim.anim_diario)
+                    main.vistaDiario.startAnimation(animationDiario)
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // No aplica
+                }
+            })
+
         }
     }
 
     private suspend fun existeNota(dao: BetterYouDao, id: Int): Nota? {
         return dao.getNota(id)
     }
-
 
 }
 

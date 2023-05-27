@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,113 +7,125 @@
     tools:context=".MainActivity"
     android:background="@color/background">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"
+        android:theme="@style/CalenderViewCustom"
+        android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/layout_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_nav"
+        android:layout_below="@+id/calendarView">
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:dateTextAppearance="@style/CalenderViewDateCustomText"
-            android:theme="@style/CalenderViewCustom"
-            android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_above="@id/logo"
+            android:layout_centerInParent="true"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:src="@drawable/betteryou_v1" />
 
-        <RelativeLayout
-            android:id="@+id/layout_logo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/calendarView">
-
-            <TextView
-                android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="75dp"
-                android:text="BetterYou"
-                android:textSize="50sp"
-                android:textColor="@color/gris"
-                android:textAlignment="center"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/logo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:text="¡Haz clic en un día del calendario para empezar!"
-                android:textSize="15sp"
-                android:textColor="@color/gris"
-                android:textAlignment="center"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/calendarView"
-            android:orientation="vertical">
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/textview2"
+            android:text="BetterYou"
+            android:textSize="50sp"
+            android:textColor="@color/gris"
+            android:textAlignment="center"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_elementos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/vista_evento"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@id/vista_diario"
-
-                    android:paddingVertical="10dp"
-
-                    android:background="#F44336"
-                    android:textSize="50sp"
-                    android:text="Evento" />
-
-                <TextView
-                    android:id="@+id/vista_toDoList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/vista_evento"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toLeftOf="@id/vista_diario"
-
-                    android:paddingVertical="10dp"
-
-                    android:background="#4CAF50"
-                    android:text="ToDoList"
-                    android:textSize="35sp" />
-
-                <TextView
-                    android:id="@+id/vista_diario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-
-                    android:background="#2196F3"
-                    android:padding="10dp"
-                    android:text="Diario"
-                    android:textSize="60sp" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <include android:id="@+id/bottom_nav" layout="@layout/bottom_nav"/>
-
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:text="¡Haz clic en un día del calendario para empezar!"
+            android:textSize="15sp"
+            android:textColor="@color/gris"
+            android:textAlignment="center"/>
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/layout_elementos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/calendarView"
+        android:layout_above="@id/bottom_nav">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/guideVerHalf">
+
+            <ImageView
+                android:id="@+id/vistaEvento"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/guideHorizontalHalf"
+                android:layout_margin="5dp"
+                android:background="@color/negro"
+                android:src="@drawable/event_icon" />
+
+            <View
+                android:id="@+id/guideHorizontalHalf"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerInParent="true"
+                android:background="@color/transparent" />
+
+            <ImageView
+                android:id="@+id/vistaToDoList"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/guideHorizontalHalf"
+                android:layout_margin="5dp"
+                android:background="@color/negro"
+                android:src="@drawable/todolist_icon"/>
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/guideVerHalf"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/transparent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/guideVerHalf">
+
+            <ImageView
+                android:id="@+id/vistaDiario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:background="@color/negro"
+                android:src="@drawable/diary_icon"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include android:id="@+id/bottom_nav" layout="@layout/bottom_nav"/>
+
+</RelativeLayout>
+

@@ -2,7 +2,6 @@ package com.example.tfg_sh.diario
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -100,7 +99,7 @@ class DiarioActivity : AppCompatActivity() {
         // Mostrar el PopupWindow en la posición deseada
         popupWindow.showAtLocation(diarioEdit.addEmotion, Gravity.BOTTOM, 0, desiredY)
 
-        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_elementos)
+        val animation = AnimationUtils.loadAnimation(this, R.anim.anim_evento)
         popupView.startAnimation(animation)
     }
 
