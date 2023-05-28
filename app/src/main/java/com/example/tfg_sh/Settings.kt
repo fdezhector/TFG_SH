@@ -1,11 +1,19 @@
 package com.example.tfg_sh
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CheckedTextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
+import androidx.core.view.marginLeft
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
@@ -39,6 +47,23 @@ class Settings : AppCompatActivity() {
         //TODO aplicar a los dos onClickListener de importar y exportar un alertDialog.
         // Para importar: se le pedirá que escoja un archivo JSON de su sistema (escalable a que se le pida un archivo JSON de Google Drive)
         // Para exportar: se le avisará con qué significa exportar BetterYou
+
+        settings.layoutAbout.setOnClickListener {
+            val url = "https://github.com/fdezhector/TFG_SH"
+            // Creamos un Intent con la acción ACTION_VIEW y la URL
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+            //FIXME mirarlo mejor, no saca el menú para escoger navegador
+
+            // Verificamos si hay aplicaciones disponibles para abrir la URL
+            if (intent.resolveActivity(packageManager) != null) {
+                // Mostrar las opciones de "Abrir con"
+                startActivity(Intent.createChooser(intent, "Abrir con"))
+            } else {
+                // No se encontró ninguna aplicación para abrir la URL
+                // Manejar el caso según sea necesario
+            }
+        }
 
         settings.layoutImportar.setOnClickListener {
             importarBBDD(dao)
@@ -108,6 +133,10 @@ class Settings : AppCompatActivity() {
         settings.horaNotificacionDiario.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position) as String
+
+                val dropDownShownItem = this@Settings.findViewById<CheckedTextView>(R.id.dropdown_menu_layout)
+                dropDownShownItem.setTextColor(ContextCompat.getColor(this@Settings, R.color.gris))
+                dropDownShownItem.setBackgroundColor(ContextCompat.getColor(this@Settings, R.color.negro))
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

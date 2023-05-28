@@ -26,6 +26,9 @@
 
         <ImageButton
             android:id="@+id/button_cerrar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -36,7 +39,7 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/cerrar"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+            app:srcCompat="@drawable/close_icon" />
 
         <TextView
             android:id="@+id/textView"
@@ -51,17 +54,19 @@
 
         <ImageButton
             android:id="@+id/button_editar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView"
             android:layout_centerInParent="true"
-
             android:layout_marginTop="5dp"
             android:background="@color/transparent"
             android:contentDescription="@string/editar"
             android:minWidth="45dp"
             android:minHeight="45dp"
-            app:srcCompat="@drawable/edit_icon_48" />
+            app:srcCompat="@drawable/edit_icon" />
 
     </RelativeLayout>
 

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
@@ -136,9 +137,8 @@ class DiarioActivity : AppCompatActivity() {
 
     private fun setEmociones(diario: Diario) {
         diarioEdit.textViewEmociones.text = diario.emociones.toString()
-        if (diarioEdit.textViewEmociones.text.equals("null"))
-            diarioEdit.textViewEmociones.text =
-                "Selecciona las emociones que hayas sentido en el día de hoy"
+        if (diarioEdit.textViewEmociones.text.equals("null") || diarioEdit.textViewEmociones.text.equals("[]"))
+            diarioEdit.textViewEmociones.text = "Selecciona las emociones que hayas sentido en el día de hoy"
     }
 
     private fun setColorSeleccionado(diario: Diario) {
@@ -297,7 +297,7 @@ class DiarioActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerEmociones() {
-        diarioEdit.emotionList.layoutManager = LinearLayoutManager(this)
+        diarioEdit.emotionList.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false)
         diarioEdit.emotionList.adapter = EmocionesAdapter(ObjectEmocion.getAll())
     }
 

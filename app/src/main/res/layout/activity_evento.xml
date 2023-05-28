@@ -18,6 +18,9 @@
 
         <ImageButton
             android:id="@+id/button_cerrar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:minWidth="40dp"
             android:minHeight="40dp"
             android:layout_width="wrap_content"
@@ -30,10 +33,15 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/cerrar"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+            app:srcCompat="@drawable/close_icon" />
 
         <ImageButton
             android:id="@+id/button_guardar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -44,12 +52,13 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/guardar"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
-            app:srcCompat="@drawable/save" />
+            app:srcCompat="@drawable/save_icon" />
 
         <ImageButton
             android:id="@+id/button_borrar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:minWidth="40dp"
             android:minHeight="40dp"
             android:layout_width="wrap_content"
@@ -62,7 +71,7 @@
             android:layout_toLeftOf="@id/button_guardar"
             android:background="@color/transparent"
             android:contentDescription="@string/borrar_dia"
-            app:srcCompat="@drawable/delete" />
+            app:srcCompat="@drawable/delete_icon" />
 
     </RelativeLayout>
 

@@ -9,6 +9,9 @@
 
     <ImageButton
         android:id="@+id/button_cerrar"
+        app:tint="@color/gris"
+        android:scaleY="0.75"
+        android:scaleX="0.75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -17,7 +20,7 @@
         android:layout_marginTop="30dp"
         android:background="@color/transparent"
         android:contentDescription="@string/cerrar"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        app:srcCompat="@drawable/close_icon"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,17 +48,18 @@
             android:background="@drawable/custom_edit_text"
 
             android:maxLength="25"
-            android:textColorHint="#BFBBBB"
+            android:textColorHint="@color/gris"
             android:textColor="@color/gris"/>
 
         <Spinner
             android:id="@+id/prioridad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="55dp"
             android:textColor="@color/gris"
             android:spinnerMode="dropdown"
             android:dropDownWidth="match_parent"
+            android:backgroundTint="@color/gris"
             style="@style/custom_spinner"/>
 
         <LinearLayout
@@ -70,8 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
-                android:paddingVertical="10dp"
-
+                android:paddingVertical="15dp"
                 android:backgroundTint="@color/negro"
                 android:text="Borrar"
                 android:textColor="@color/gris"/>
@@ -82,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
-                android:paddingVertical="10dp"
+                android:paddingVertical="15dp"
 
                 android:backgroundTint="@color/negro"
                 android:text="Actualizar"

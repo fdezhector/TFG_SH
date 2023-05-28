@@ -10,6 +10,9 @@
 
     <ImageButton
         android:id="@+id/button_cerrar"
+        app:tint="@color/gris"
+        android:scaleY="0.75"
+        android:scaleX="0.75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -18,7 +21,7 @@
         android:layout_marginTop="30dp"
         android:background="@color/transparent"
         android:contentDescription="@string/cerrar"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        app:srcCompat="@drawable/close_icon"/>
 
     <TextView
         android:id="@+id/messageSinTareas"
@@ -87,7 +90,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="60dp"
         android:backgroundTint="@color/white"
-        android:src="@drawable/add_task"
+        android:src="@drawable/add_icon"
         app:fabSize="normal"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FabCircle" />
 

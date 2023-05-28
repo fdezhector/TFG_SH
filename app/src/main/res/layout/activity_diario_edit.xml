@@ -7,8 +7,6 @@
     android:background="@color/background"
     tools:context=".diario.DiarioActivity">
 
-
-
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="0dp"
@@ -35,6 +33,9 @@
 
         <ImageButton
             android:id="@+id/button_cerrar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -45,12 +46,13 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:contentDescription="@string/cerrar"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+            app:srcCompat="@drawable/close_icon" />
 
         <ImageButton
             android:id="@+id/button_guardar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -63,10 +65,13 @@
             android:contentDescription="@string/guardar"
             android:minWidth="40dp"
             android:minHeight="40dp"
-            app:srcCompat="@drawable/save" />
+            app:srcCompat="@drawable/save_icon" />
 
         <ImageButton
             android:id="@+id/button_borrar"
+            app:tint="@color/gris"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -79,7 +84,7 @@
             android:contentDescription="@string/borrar_dia"
             android:minWidth="40dp"
             android:minHeight="40dp"
-            app:srcCompat="@drawable/delete" />
+            app:srcCompat="@drawable/delete_icon" />
 
     </RelativeLayout>
 
@@ -187,6 +192,7 @@
             android:layout_marginBottom="30dp"
             android:background="@color/negro"
             android:orientation="vertical"
+            android:elevation="20dp"
             android:paddingHorizontal="5dp"
             android:paddingVertical="15dp">
 
@@ -211,6 +217,9 @@
 
                 <ImageButton
                     android:id="@+id/deselect_emotions_button"
+                    app:tint="@color/gris"
+                    android:scaleY="0.75"
+                    android:scaleX="0.75"
                     android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -221,6 +230,9 @@
 
                 <ImageButton
                     android:id="@+id/done_edit_emotions_button"
+                    app:tint="@color/gris"
+                    android:scaleY="0.75"
+                    android:scaleX="0.75"
                     android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -231,12 +243,15 @@
 
                 <ImageButton
                     android:id="@+id/edit_emotions_button"
+                    app:tint="@color/gris"
+                    android:scaleY="0.75"
+                    android:scaleX="0.75"
                     android:visibility="visible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginHorizontal="15dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/edit_icon_48"
+                    android:src="@drawable/edit_icon"
                     android:layout_centerVertical="true"
                     android:background="@color/transparent"/>
             </RelativeLayout>
@@ -250,35 +265,54 @@
                 tools:listitem="@layout/item_emotion"
                 android:layout_margin="5dp"/>
 
-            <TextView
-                android:id="@+id/textViewEmociones"
-                android:visibility="visible"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="5dp"
-                android:text=""
-                android:textSize="15sp"
-                android:textColor="@color/gris"
-                android:textStyle="italic"/>
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/textViewEmociones"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textSize="15sp"
+                    android:textColor="@color/gris"
+                    android:textStyle="italic"/>
+            </ScrollView>
         </LinearLayout>
+
 
         <EditText
             android:id="@+id/descripcionDiario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/linearLayoutRecycler"
-            android:layout_margin="20dp"
-            android:background="@drawable/custom_multiline_edit_text"
+            android:elevation="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:padding="15dp"
+            android:background="@drawable/custom_edit_text"
             android:hint="Escribe cómo te has sentido hoy..."
-            android:overScrollMode="ifContentScrolls"
             android:inputType="textMultiLine"
-            android:padding="10dp"
+            android:overScrollMode="ifContentScrolls"
             android:textColor="@color/gris"
             android:textColorHint="@color/hintColor"
             android:textSize="15dp" />
 
     </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tint="@color/negro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow_upward_icon"
+        android:backgroundTint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
