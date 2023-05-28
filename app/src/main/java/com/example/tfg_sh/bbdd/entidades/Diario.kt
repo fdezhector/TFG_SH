@@ -20,5 +20,6 @@ data class Diario(
     val id: Int =0,
     var emociones: List<String>?,
     var descripcion: String?,
+    var color:String?,
     val notaId: Int
 )

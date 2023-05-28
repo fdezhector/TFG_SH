@@ -55,57 +55,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textView"
             android:layout_centerInParent="true"
-            android:layout_marginTop="5dp"
 
+            android:layout_marginTop="5dp"
             android:background="@color/transparent"
             android:contentDescription="@string/editar"
             android:minWidth="45dp"
             android:minHeight="45dp"
             app:srcCompat="@drawable/edit_icon_48" />
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="245dp"
-            android:background="@color/purple_200"
-            android:columnCount="3" >
-
-            <ImageButton
-                android:id="@+id/anterior"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_column="0"
-                app:srcCompat="@drawable/left_arrow"
-                android:background="@drawable/circle"
-                android:contentDescription="anterior_dia" />
-
-            <TextView
-                android:id="@+id/fecha"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="16sp"
-                android:layout_columnWeight="1"
-                android:textAlignment="center"
-                android:layout_gravity="center" />
-
-            <ImageButton
-                android:id="@+id/siguiente"
-                android:layout_margin="5dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/right_arrow"
-                android:layout_column="2"
-                android:layout_gravity="center"
-                android:background="@drawable/circle"
-                android:contentDescription="siguiente_dia" />
-        </GridLayout>
 
     </RelativeLayout>
 

@@ -1,6 +1,5 @@
 package com.example.tfg_sh
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         dao.insertNota(nota1)
         dao.insertDiario(
             Diario(
-                emociones = null, descripcion = null, notaId = nota1.id
+                emociones = null, descripcion = null, color = null ,notaId = nota1.id
             )
         )
         dao.insertEvento(

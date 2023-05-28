@@ -8,7 +8,8 @@ class EmocionesViewHolder(view : View) : RecyclerView.ViewHolder(view){
     val itemEmocion = ItemEmotionBinding.bind(view)
 
     fun render(emocion: ItemEmocion){
-        itemEmocion.recyclerEmotion.text = emocion.emocion
+        itemEmocion.itemRecyclerEmotion.text = emocion.emocion
+
     }
 
 }

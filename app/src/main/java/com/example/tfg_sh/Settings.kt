@@ -1,14 +1,10 @@
 package com.example.tfg_sh
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.CheckedTextView
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
@@ -58,15 +54,15 @@ class Settings : AppCompatActivity() {
     }
 
     private fun exportarBBDD(dao: BetterYouDao){
-        Log.e("FILEDIR", getExternalFilesDir(null).toString())
+        //Log.e("FILEDIR", getExternalFilesDir(null).toString())
         //Creamos las listas de todas las entidades de la BBDD
         lifecycleScope.launch{
-            var diarios = dao.getAllDiarios()
-            var eventos = dao.getAllEventos()
-            var tareas = dao.getAllTareas() as List<Tarea>
-            var notas = dao.getAllNotas()
+            val diarios = dao.getAllDiarios()
+            val eventos = dao.getAllEventos()
+            val tareas = dao.getAllTareas() as List<Tarea>
+            val notas = dao.getAllNotas()
 
-            var datos = DatosBBDD(diarios,eventos,notas,tareas)
+            val datos = DatosBBDD(diarios,eventos,notas,tareas)
             // Parseo JSON
             val gson = Gson()
             val json = gson.toJson(datos)

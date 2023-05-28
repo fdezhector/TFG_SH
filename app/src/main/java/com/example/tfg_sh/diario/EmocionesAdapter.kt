@@ -1,6 +1,5 @@
 package com.example.tfg_sh.diario
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,11 +15,6 @@ class EmocionesAdapter(private val listaEmociones: List<ItemEmocion>) : Recycler
     override fun onBindViewHolder(holder: EmocionesViewHolder, position: Int) {
         val item = listaEmociones[position]
         holder.render(item)
-
-        /*holder.itemView.setOnClickListener {
-            // todo eliminar emocion
-        }*/
-
     }
 
     override fun getItemCount(): Int {

@@ -65,6 +65,10 @@ interface BetterYouDao {
     @Query("select * from diario")
     suspend fun getAllDiarios(): List<Diario>
 
+    @Query("select * from diario where notaId = :notaId")
+    suspend fun getDiarioNotaId(notaId: Int): Diario
+
+
     //TAREA
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAllTareas(tarea: List<Tarea>)
