@@ -1,5 +1,6 @@
 package com.example.tfg_sh
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckedTextView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -27,11 +30,22 @@ import java.io.File
 class Settings : AppCompatActivity() {
 
     private lateinit var settings: ActivitySettingsBinding
-
+    private val sActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val uri: Uri? = data?.data
+            //Proceso el archivo y veo que hago con el pasarle IMPORTAR-BBDD
+            //importarBBDD(dao)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         settings = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(settings.root)
+
+
 
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
 
@@ -54,6 +68,11 @@ class Settings : AppCompatActivity() {
 
         }
 
+
+
+
+
+
         settings.layoutImportar.setOnClickListener {
             val alertDialog = AlertDialog.Builder(this)
             val customView = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
@@ -68,18 +87,8 @@ class Settings : AppCompatActivity() {
             cancelar.visibility = View.GONE
 
             aceptar.setOnClickListener {
+                openFileDialog()
 
-                /* val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                     result: ActivityResult ->
-                     if (result.resultCode == Activity.RESULT_OK) {
-                         val data: Intent? = result.data
-                         val uri: Uri? = data?.data
-                         // Procesar el archivo abierto aquí
-                     }
-                 }*/
-
-
-                //importarBBDD(dao)
                 dialog.dismiss()
             }
 
@@ -88,15 +97,8 @@ class Settings : AppCompatActivity() {
 
             dialog.show()
         }
-//    private fun openFileDialog(view: View) {
-//        val data = Intent(Intent.ACTION_OPEN_DOCUMENT)
-//        data.addCategory(Intent.CATEGORY_OPENABLE)
-//        data.type = "/"
-//        val mimeTypes = arrayOf("image/*")
-//        data.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-//        data = Intent.createChooser(data, "Choose a file")
-//        launcher.launch(data)
-//
+
+
 
         settings.layoutExportar.setOnClickListener {
             exportarBBDD(dao)
@@ -106,7 +108,13 @@ class Settings : AppCompatActivity() {
             Utils.goToMainScreen(this)
         }
     }
-
+    private fun openFileDialog() {
+        val data = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        data.addCategory(Intent.CATEGORY_OPENABLE)
+        data.type = "json/*"
+        val chooserIntent = Intent.createChooser(data, "Choose a file")
+        sActivityResultLauncher.launch(chooserIntent)
+    }
     private fun exportarBBDD(dao: BetterYouDao){
         //Log.e("FILEDIR", getExternalFilesDir(null).toString())
         //Creamos las listas de todas las entidades de la BBDD
