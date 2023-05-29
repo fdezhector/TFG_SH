@@ -2,10 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/diarioEditLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".diario.DiarioActivity">
+    tools:context=".diario.DiarioActivity"
+    android:isScrollContainer="true"
+    android:overScrollMode="ifContentScrolls">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -88,15 +91,7 @@
 
     </RelativeLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideHor1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.2"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -119,6 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/dayColor"
+            android:layout_marginHorizontal="20dp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -186,13 +182,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutEmotes"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/negro"
             android:orientation="vertical"
-            android:elevation="20dp"
+            android:elevation="15dp"
             android:paddingHorizontal="5dp"
             android:paddingVertical="15dp">
 
@@ -276,43 +272,43 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:padding="5dp"
-                    android:text=""
-                    android:textSize="15sp"
+                    android:hint="Selecciona las emociones que hayas sentido..."
+                    android:textColorHint="@color/hintColor"
+                    android:textSize="16sp"
                     android:textColor="@color/gris"
                     android:textStyle="italic"/>
             </ScrollView>
         </LinearLayout>
 
-
         <EditText
             android:id="@+id/descripcionDiario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="15dp"
             android:layout_below="@id/linearLayoutRecycler"
-            android:elevation="20dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:padding="15dp"
             android:background="@drawable/custom_edit_text"
             android:hint="Escribe cómo te has sentido hoy..."
+            android:textColorHint="@color/hintColor"
             android:inputType="textMultiLine"
             android:overScrollMode="ifContentScrolls"
             android:textColor="@color/gris"
-            android:textColorHint="@color/hintColor"
-            android:textSize="15dp" />
+            android:textSize="16dp" />
 
     </RelativeLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:tint="@color/negro"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
-        android:src="@drawable/arrow_upward_icon"
-        android:backgroundTint="@color/white"/>
+        app:layout_constraintGuide_percent="0.15"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

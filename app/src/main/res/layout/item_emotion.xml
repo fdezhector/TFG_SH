@@ -10,6 +10,6 @@
     app:buttonTint="@color/gris"
     android:elevation="25dp"
     android:text="Emotion"
-    android:textSize="16sp"
+    android:textSize="14sp"
     android:textColor="@color/gris">
 </CheckBox>

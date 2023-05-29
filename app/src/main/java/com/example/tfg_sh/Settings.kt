@@ -1,19 +1,19 @@
 package com.example.tfg_sh
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.CheckedTextView
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginLeft
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
@@ -37,37 +37,66 @@ class Settings : AppCompatActivity() {
 
         initDropDownMenu()
 
-
-
-
-
-
-
-
-        //TODO aplicar a los dos onClickListener de importar y exportar un alertDialog.
-        // Para importar: se le pedirá que escoja un archivo JSON de su sistema (escalable a que se le pida un archivo JSON de Google Drive)
-        // Para exportar: se le avisará con qué significa exportar BetterYou
+        // TODO
+        //  Para importar: se le pedirá que escoja un archivo JSON de su sistema (escalable a que se le pida un archivo JSON de Google Drive)
+        //  Para exportar: se le avisará con qué significa exportar BetterYou
 
         settings.layoutAbout.setOnClickListener {
             val url = "https://github.com/fdezhector/TFG_SH"
             // Creamos un Intent con la acción ACTION_VIEW y la URL
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
 
-            //FIXME mirarlo mejor, no saca el menú para escoger navegador
-
             // Verificamos si hay aplicaciones disponibles para abrir la URL
             if (intent.resolveActivity(packageManager) != null) {
                 // Mostrar las opciones de "Abrir con"
                 startActivity(Intent.createChooser(intent, "Abrir con"))
-            } else {
-                // No se encontró ninguna aplicación para abrir la URL
-                // Manejar el caso según sea necesario
             }
+
         }
 
         settings.layoutImportar.setOnClickListener {
-            importarBBDD(dao)
+            val alertDialog = AlertDialog.Builder(this)
+            val customView = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+            alertDialog.setView(customView)
+            val dialog = alertDialog.create()
+            //Elementos alertDialog
+            val titulo = customView.findViewById<TextView>(R.id.Title)
+            val mensaje = customView.findViewById<TextView>(R.id.Message)
+            val aceptar = customView.findViewById<Button>(R.id.PositiveButton)
+            val cancelar = customView.findViewById<Button>(R.id.NegativeButton)
+            aceptar.text = "Importar"
+            cancelar.visibility = View.GONE
+
+            aceptar.setOnClickListener {
+
+                /* val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                     result: ActivityResult ->
+                     if (result.resultCode == Activity.RESULT_OK) {
+                         val data: Intent? = result.data
+                         val uri: Uri? = data?.data
+                         // Procesar el archivo abierto aquí
+                     }
+                 }*/
+
+
+                //importarBBDD(dao)
+                dialog.dismiss()
+            }
+
+            titulo.text = "Importar BetterYou"
+            mensaje.text = "Selecciona el archivo JSON que deseas importar"
+
+            dialog.show()
         }
+//    private fun openFileDialog(view: View) {
+//        val data = Intent(Intent.ACTION_OPEN_DOCUMENT)
+//        data.addCategory(Intent.CATEGORY_OPENABLE)
+//        data.type = "/"
+//        val mimeTypes = arrayOf("image/*")
+//        data.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+//        data = Intent.createChooser(data, "Choose a file")
+//        launcher.launch(data)
+//
 
         settings.layoutExportar.setOnClickListener {
             exportarBBDD(dao)

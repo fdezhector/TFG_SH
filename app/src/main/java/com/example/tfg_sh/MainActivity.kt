@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    // FIXME mirar si se puede hacer estos dos métodos en uno solo
     private fun cargarVistaVacia() {
         main.layoutElementos.visibility = View.GONE
         main.layoutLogo.visibility = View.VISIBLE

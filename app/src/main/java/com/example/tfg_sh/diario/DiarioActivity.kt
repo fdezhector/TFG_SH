@@ -1,9 +1,13 @@
 package com.example.tfg_sh.diario
 
+import android.animation.AnimatorInflater
+import android.animation.LayoutTransition
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -28,6 +32,8 @@ class DiarioActivity : AppCompatActivity() {
 
     private lateinit var diarioEmpty: ActivityDiarioEmptyBinding
     private lateinit var diarioEdit: ActivityDiarioEditBinding
+    private var listaEmocionesStringMarcadas = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         diarioEdit = ActivityDiarioEditBinding.inflate(layoutInflater)
@@ -86,19 +92,22 @@ class DiarioActivity : AppCompatActivity() {
             color = Integer.toHexString(ContextCompat.getColor(this, R.color.green_super))
         }
 
-        val listaEmocionesMarcadas = getListaEmocionesMarcadas()
-        var listaEmocionesStringMarcadas =
-            getListaEmocionesMarcadasAsStringList(listaEmocionesMarcadas)
+
 
         diarioEdit.editEmotionsButton.setOnClickListener {
             actualizarLayout()
         }
 
         diarioEdit.doneEditEmotionsButton.setOnClickListener {
+            //val listaEmocionesStringMarcadas = getListaEmocionesMarcadasAsStringList(getListaEmocionesMarcadas())
             actualizarLayout()
-            listaEmocionesStringMarcadas =
-                getListaEmocionesMarcadasAsStringList(getListaEmocionesMarcadas())
+            //diarioEdit.textViewEmociones.text = listaEmocionesStringMarcadas.toString()
+
+            listaEmocionesStringMarcadas = getListaEmocionesMarcadasAsStringList(getListaEmocionesMarcadas())
             diarioEdit.textViewEmociones.text = listaEmocionesStringMarcadas.toString()
+
+            if(diarioEdit.textViewEmociones.text.equals("[]"))
+                diarioEdit.textViewEmociones.text = "Selecciona las emociones que hayas sentido..."
         }
 
         diarioEdit.deselectEmotionsButton.setOnClickListener {
@@ -111,6 +120,8 @@ class DiarioActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val descripcion: String = diarioEdit.descripcionDiario.text.toString()
+            //val emociones = getListaEmocionesMarcadasAsStringList(ObjectEmocion.listaEmocionesMarcadas)
+
             actualizarDiario(dao, notaId, diario, color, listaEmocionesStringMarcadas, descripcion)
             Utils.goToMainScreen(this)
             Toast.makeText(this, "Diario guardado", Toast.LENGTH_LONG).show()
@@ -136,9 +147,8 @@ class DiarioActivity : AppCompatActivity() {
     }
 
     private fun setEmociones(diario: Diario) {
-        diarioEdit.textViewEmociones.text = diario.emociones.toString()
-        if (diarioEdit.textViewEmociones.text.equals("null") || diarioEdit.textViewEmociones.text.equals("[]"))
-            diarioEdit.textViewEmociones.text = "Selecciona las emociones que hayas sentido en el día de hoy"
+        if (diario.emociones != null)
+            diarioEdit.textViewEmociones.text = diario.emociones.toString()
     }
 
     private fun setColorSeleccionado(diario: Diario) {
@@ -253,25 +263,81 @@ class DiarioActivity : AppCompatActivity() {
         dialog.show()
     }
 
+
     private fun startEditActivity() {
         setContentView(diarioEdit.root)
     }
 
     private fun actualizarLayout() {
         if (diarioEdit.doneEditEmotionsButton.visibility == View.GONE) {
-            diarioEdit.editEmotionsButton.visibility = View.GONE
-            diarioEdit.textViewEmociones.visibility = View.GONE
+            // edit_icon
+            val animationEditIcon = AnimationUtils.loadAnimation(this, R.anim.anim_edit_icon)
+            diarioEdit.editEmotionsButton.startAnimation(animationEditIcon)
+            diarioEdit.editEmotionsButton.visibility = View.INVISIBLE
 
-            diarioEdit.doneEditEmotionsButton.visibility = View.VISIBLE
-            diarioEdit.deselectEmotionsButton.visibility = View.VISIBLE
-            diarioEdit.emotionList.visibility = View.VISIBLE
+            animationEditIcon.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // No aplica
+                }
+                override fun onAnimationEnd(animation: Animation?) {
+                    // done_icon
+                    diarioEdit.doneEditEmotionsButton.visibility = View.VISIBLE
+                    val animationDone = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_done_icon)
+                    diarioEdit.doneEditEmotionsButton.startAnimation(animationDone)
+                    // deselect_icon
+                    diarioEdit.deselectEmotionsButton.visibility = View.VISIBLE
+                    val animationDeselect = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_deselect_icon)
+                    diarioEdit.deselectEmotionsButton.startAnimation(animationDeselect)
+                    // emotionsList
+                    diarioEdit.emotionList.visibility = View.VISIBLE
+                    val animationEmotionList = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_fade_in)
+                    diarioEdit.emotionList.startAnimation(animationEmotionList)
+                    // textView
+                    diarioEdit.textViewEmociones.visibility = View.GONE
+                    val animationTextView = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_fade_out)
+                    diarioEdit.textViewEmociones.startAnimation(animationTextView)
+                    //
+                    diarioEdit.editEmotionsButton.visibility = View.GONE
+                }
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // No aplica
+                }
+            })
         } else {
-            diarioEdit.editEmotionsButton.visibility = View.VISIBLE
-            diarioEdit.textViewEmociones.visibility = View.VISIBLE
+            // done_icon
+            val animationDoneIcon = AnimationUtils.loadAnimation(this, R.anim.anim_done_icon_reverse)
+            diarioEdit.doneEditEmotionsButton.startAnimation(animationDoneIcon)
+            diarioEdit.doneEditEmotionsButton.visibility = View.INVISIBLE
+            // deselect_icon
+            val animationDeselect = AnimationUtils.loadAnimation(this, R.anim.anim_deselect_icon_reverse)
+            diarioEdit.deselectEmotionsButton.startAnimation(animationDeselect)
+            diarioEdit.deselectEmotionsButton.visibility = View.INVISIBLE
 
-            diarioEdit.doneEditEmotionsButton.visibility = View.GONE
-            diarioEdit.deselectEmotionsButton.visibility = View.GONE
-            diarioEdit.emotionList.visibility = View.GONE
+            animationDoneIcon.setAnimationListener(object: Animation.AnimationListener{
+                override fun onAnimationStart(animation: Animation?) {
+                    // No aplica
+                }
+                override fun onAnimationEnd(animation: Animation?) {
+                    // edit_icon
+                    diarioEdit.editEmotionsButton.visibility = View.VISIBLE
+                    val animationEdit = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_edit_icon_reverse)
+                    diarioEdit.editEmotionsButton.startAnimation(animationEdit)
+                    // emotionsList
+                    diarioEdit.emotionList.visibility = View.GONE
+                    val animationEmotionList = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_fade_out)
+                    diarioEdit.emotionList.startAnimation(animationEmotionList)
+                    // textView
+                    diarioEdit.textViewEmociones.visibility = View.VISIBLE
+                    val animationTextView = AnimationUtils.loadAnimation(this@DiarioActivity, R.anim.anim_fade_in)
+                    diarioEdit.textViewEmociones.startAnimation(animationTextView)
+                    //
+                    diarioEdit.doneEditEmotionsButton.visibility = View.GONE
+                    diarioEdit.deselectEmotionsButton.visibility = View.GONE
+                }
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // No aplica
+                }
+            })
         }
     }
 
@@ -312,10 +378,11 @@ class DiarioActivity : AppCompatActivity() {
                 checkBox.isChecked = false
             }
         }
+
     }
 
     private fun getListaEmocionesMarcadas(): MutableList<ItemEmocion> {
-        // Reiniciamos la lista
+        // Reiniciamos la lista de emociones marcadas
         ObjectEmocion.listaEmocionesMarcadas.clear()
 
         val recylerEmociones = diarioEdit.emotionList
@@ -359,10 +426,7 @@ class DiarioActivity : AppCompatActivity() {
         return imageButtons
     }
 
-    private fun setBackgroundModeImageButton(
-        imageButtonSelected: ImageButton,
-        imageButtons: MutableList<ImageButton>
-    ) {
+    private fun setBackgroundModeImageButton(imageButtonSelected: ImageButton, imageButtons: MutableList<ImageButton>) {
         for (imageButton in imageButtons) {
             if (imageButton == imageButtonSelected) {
                 // Seleccionamos el botón actual y establecemos su tint mode como "add"
