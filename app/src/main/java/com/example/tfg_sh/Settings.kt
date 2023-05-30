@@ -61,7 +61,7 @@ class Settings : AppCompatActivity() {
 
                 cancelNotification(this@Settings)
 
-                val horaNotificacion = Utils.obtenerHora(settings.horaNotificacionDiario.selectedItem.toString())
+                val horaNotificacion = Utils.obtenerHora(selectedItem.toString())
                 // Notificacion Diario
                 Utils.scheduleNotificacion(
                     this@Settings,
@@ -208,39 +208,42 @@ class Settings : AppCompatActivity() {
     //FIXME Al importar la BBDD el recycler view de las tareas no se sincroniza
 
     private fun importarBBDD(dao: BetterYouDao, uri: Uri?) {
-        try {
-            if (uri == null) {
-                Toast.makeText(this, "No se seleccionó ningún archivo", Toast.LENGTH_LONG).show()
-                return
-            }
+        if (uri == null) {
+            Toast.makeText(this, "No se seleccionó ningún archivo", Toast.LENGTH_LONG).show()
+            return
+        }
 
-            var filePath: String? = uri.path
-            if (filePath == null) {
-                Toast.makeText(this, "No se puede obtener la ruta del archivo", Toast.LENGTH_LONG)
-                    .show()
-                return
-            }
+        var filePath: String? = uri.path
+        if (filePath == null) {
+            Toast.makeText(this, "No se puede obtener la ruta del archivo", Toast.LENGTH_LONG)
+                .show()
+            return
+        }
 
-            filePath = filePath.replace("/document/raw:", "")
+        filePath = filePath.replace("/document/raw:", "")
 
-            // Obtenemos la referencia al archivo JSON en el almacenamiento externo.
-            val file = File(filePath)
+        // Obtenemos la referencia al archivo JSON en el almacenamiento externo.
+        val file = File(filePath)
 
-            // Leemos el archivo
-            val jsonString = file.readText()
-            // Convertimos el archivo en objetos de tipo DatosBBDD
-            val gson = Gson()
-            val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
-            // Insertamos todos los datos en la BBDD
-            lifecycleScope.launch {
+        // Leemos el archivo
+        val jsonString = file.readText()
+        // Convertimos el archivo en objetos de tipo DatosBBDD
+        val gson = Gson()
+        val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
+        // Insertamos todos los datos en la BBDD
+        lifecycleScope.launch {
+            try {
                 dao.insertAllNotas(datos.notas)
                 dao.insertAllDiarios(datos.diarios)
                 dao.insertAllEventos(datos.eventos)
                 dao.insertAllTareas(datos.tareas)
+            } catch (e: Exception) {
+                Toast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG).show()
+                Log.e("ERROR SQL",e.localizedMessage)
+                Utils.goToSettings(this@Settings)
             }
-        } catch (e: Exception) {
-            Log.e("ImportarBBDD", "Error al importar los datos desde el archivo JSON", e)
         }
+
     }
 
     // Borrar la notificación

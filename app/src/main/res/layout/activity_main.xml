@@ -74,12 +74,16 @@
 
             <ImageView
                 android:id="@+id/vistaEvento"
-                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/guideHorizontalHalf"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/negro"
+                android:clickable="true"
+                app:tint="@color/separatorColor"
                 android:src="@drawable/event_icon" />
 
             <View
@@ -91,13 +95,17 @@
 
             <ImageView
                 android:id="@+id/vistaToDoList"
-                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/guideHorizontalHalf"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/negro"
-                android:src="@drawable/todolist_icon"/>
+                android:clickable="true"
+                app:tint="@color/separatorColor"
+                android:src="@drawable/todolist_icon" />
 
         </RelativeLayout>
 
@@ -117,10 +125,14 @@
                 android:id="@+id/vistaDiario"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:clickable="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/negro"
-                android:src="@drawable/diary_icon"/>
+                android:clickable="true"
+                app:tint="@color/separatorColor"
+                android:src="@drawable/diary_icon" />
 
         </RelativeLayout>
     </RelativeLayout>
