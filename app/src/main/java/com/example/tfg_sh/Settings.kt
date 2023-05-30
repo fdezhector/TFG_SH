@@ -3,8 +3,10 @@ package com.example.tfg_sh
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -187,9 +189,9 @@ class Settings : AppCompatActivity() {
     }
 
     private fun exportarBBDD(dao: BetterYouDao) {
-        //Log.e("FILEDIR", getExternalFilesDir(null).toString())
-        //Creamos las listas de todas las entidades de la BBDD
+        // Creamos las listas de todas las entidades de la BBDD
         lifecycleScope.launch {
+
             val diarios = dao.getAllDiarios()
             val eventos = dao.getAllEventos()
             val tareas = dao.getAllTareas() as List<Tarea>
@@ -199,9 +201,25 @@ class Settings : AppCompatActivity() {
             // Parseo JSON
             val gson = Gson()
             val json = gson.toJson(datos)
-            // Creamos el fichero
-            val file = File(this@Settings.getExternalFilesDir(null), "data.json")
+
+            // Obtenemos la ruta de descargas
+            val downloadsFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            // Creamos el directorio si no existe
+            if (!downloadsFolder.exists()) {
+                downloadsFolder.mkdirs()
+            }
+            // Creamos el fichero dentro de la ruta de descargas
+            val file = File(downloadsFolder, "data.json")
             file.writeText(json)
+
+            // Notificamos al sistema que se ha creado el nuevo fichero
+            MediaScannerConnection.scanFile(
+                this@Settings,
+                arrayOf(file.toString()),
+                null,
+                null
+            )
+            Toast.makeText(this@Settings, "BetterYou ha sido exportado a descargas", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -220,7 +238,8 @@ class Settings : AppCompatActivity() {
             return
         }
 
-        filePath = filePath.replace("/document/raw:", "")
+        //Solucion para probar en emulador
+        //filePath = filePath.replace("/document/raw:", "")
 
         // Obtenemos la referencia al archivo JSON en el almacenamiento externo.
         val file = File(filePath)
