@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(main.root)
         bottomNav = BottomNavBinding.bind(main.bottomNav.root)
 
+
         cargarVistaVacia()
 
         main.calendarView.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
@@ -142,6 +143,8 @@ class MainActivity : AppCompatActivity() {
     private suspend fun existeNota(dao: BetterYouDao, id: Int): Nota? {
         return dao.getNota(id)
     }
+
+
 
 }
 

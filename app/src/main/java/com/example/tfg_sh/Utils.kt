@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.view.View
 import android.widget.AdapterView
@@ -30,13 +31,13 @@ object Utils {
     // creamos la lista inmutable de prioridades
     val prioridades = listOf("Alta", "Media", "Baja")
 
-    fun goToMainScreen(activity: Activity){
+    fun goToMainScreen(activity: Activity) {
         val intent = Intent(activity, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         activity.startActivity(intent)
     }
 
-    fun goToSettings(activity: Activity){
+    fun goToSettings(activity: Activity) {
         val intent = Intent(activity, Settings::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         activity.startActivity(intent)
@@ -55,7 +56,8 @@ object Utils {
         calendar.set(year, month, dayOfMonth)
         return calendar.time
     }
-    fun obtenerHora(horaSinFormatear: String):Date{
+
+    fun obtenerHora(horaSinFormatear: String): Date {
         val format = SimpleDateFormat("HH:mm")
         val hora: Date = format.parse(horaSinFormatear)
 
@@ -73,10 +75,16 @@ object Utils {
 
         // listener que se ejectutará cuando se ha seleccionado una prioridad
         dropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = parent.getItemAtPosition(position) as String
 
-                val dropDownShownItem = (context as Activity).findViewById<CheckedTextView>(R.id.dropdown_menu_layout)
+                val dropDownShownItem =
+                    (context as Activity).findViewById<CheckedTextView>(R.id.dropdown_menu_layout)
                 // evaluamos qué color se deberá mostrar cuando seleccionemos una prioridad
                 dropDownShownItem.setBackgroundColor(evaluarColor(selectedItem, context))
             }
@@ -88,11 +96,16 @@ object Utils {
     }
 
 
-
-     fun scheduleNotificacion(context: Context,titulo: String,textoCorto:String,textoDetallado : String,delay:Int) {
+    fun scheduleNotificacion(
+        context: Context,
+        titulo: String,
+        textoCorto: String,
+        textoDetallado: String,
+        delay: Int
+    ) {
         val intent = Intent(context, NotificacionAlarma::class.java).apply {
             putExtra("titulo", titulo)
-            putExtra("textoCorto",textoCorto )
+            putExtra("textoCorto", textoCorto)
             putExtra("textoDetallado", textoDetallado)
         }
         val pendingIntent = PendingIntent.getBroadcast(
@@ -131,6 +144,14 @@ object Utils {
             dropDownColor = ContextCompat.getColor(context, R.color.prioridad_baja_3)
         }
         return dropDownColor
+    }
+
+    fun arePermissionsGranted(context: Context, permission: String): Boolean {
+        val permissionStatus = ContextCompat.checkSelfPermission(context, permission)
+        if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+            return false
+        }
+        return true
     }
 
 }
