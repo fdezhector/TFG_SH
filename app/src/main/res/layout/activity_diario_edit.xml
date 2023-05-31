@@ -91,8 +91,6 @@
 
     </RelativeLayout>
 
-
-
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
@@ -103,7 +101,7 @@
             android:id="@+id/dayColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_marginBottom="10dp"
             android:text="Color del día:"
             android:textAlignment="center"
             android:textColor="@color/gris"
@@ -123,10 +121,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparent"
+                android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:tintMode="multiply"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                app:tint="@color/purple_depressed" />
+                android:tintMode="src_in"
+                app:srcCompat="@drawable/depressed_mood"
+                app:tint="@color/hintColor" />
 
             <ImageButton
                 android:id="@+id/color2"
@@ -134,11 +133,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparent"
-
+                android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:tintMode="multiply"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                app:tint="@color/purple_sad" />
+                android:tintMode="src_in"
+                app:srcCompat="@drawable/sad_mood"
+                app:tint="@color/hintColor" />
 
             <ImageButton
                 android:id="@+id/color3"
@@ -146,11 +145,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparent"
-
+                android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:tintMode="multiply"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                app:tint="@color/blue_neutral" />
+                android:tintMode="src_in"
+                app:srcCompat="@drawable/neutral_mood"
+                app:tint="@color/hintColor" />
 
             <ImageButton
                 android:id="@+id/color4"
@@ -158,10 +157,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparent"
+                android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:tintMode="multiply"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                app:tint="@color/green_joy" />
+                android:tintMode="src_in"
+                app:srcCompat="@drawable/joy_mood"
+                app:tint="@color/hintColor" />
 
             <ImageButton
                 android:id="@+id/color5"
@@ -169,11 +169,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/transparent"
-
+                android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:tintMode="multiply"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                app:tint="@color/green_super" />
+                android:tintMode="src_in"
+                app:srcCompat="@drawable/joy_mood"
+                app:tint="@color/hintColor" />
 
         </LinearLayout>
 
@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutEmotes"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@color/negro"
@@ -208,7 +208,7 @@
                     android:text="Emociones"
                     android:textAlignment="center"
                     android:textColor="@color/gris"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -274,7 +274,7 @@
                     android:padding="5dp"
                     android:hint="Selecciona las emociones que hayas sentido..."
                     android:textColorHint="@color/hintColor"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/gris"
                     android:textStyle="italic"/>
             </ScrollView>
@@ -297,7 +297,7 @@
             android:inputType="textMultiLine"
             android:overScrollMode="ifContentScrolls"
             android:textColor="@color/gris"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
     </RelativeLayout>
 

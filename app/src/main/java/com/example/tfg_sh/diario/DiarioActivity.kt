@@ -64,31 +64,31 @@ class DiarioActivity : AppCompatActivity() {
 
         diarioEdit.color1.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color1, imageButtons)
+            setBackgroundModeImageButton(diarioEdit.color1, imageButtons, R.color.purple_depressed)
             color = Integer.toHexString(ContextCompat.getColor(this, R.color.purple_depressed))
         }
 
         diarioEdit.color2.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color2, imageButtons)
+            setBackgroundModeImageButton(diarioEdit.color2, imageButtons, R.color.purple_sad)
             color = Integer.toHexString(ContextCompat.getColor(this, R.color.purple_sad))
         }
 
         diarioEdit.color3.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color3, imageButtons)
+            setBackgroundModeImageButton(diarioEdit.color3, imageButtons, R.color.blue_neutral)
             color = Integer.toHexString(ContextCompat.getColor(this, R.color.blue_neutral))
         }
 
         diarioEdit.color4.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color4, imageButtons)
+            setBackgroundModeImageButton(diarioEdit.color4, imageButtons, R.color.green_joy)
             color = Integer.toHexString(ContextCompat.getColor(this, R.color.green_joy))
         }
 
         diarioEdit.color5.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color5, imageButtons)
+            setBackgroundModeImageButton(diarioEdit.color5, imageButtons, R.color.green_super)
             color = Integer.toHexString(ContextCompat.getColor(this, R.color.green_super))
         }
 
@@ -426,16 +426,16 @@ class DiarioActivity : AppCompatActivity() {
         return imageButtons
     }
 
-    private fun setBackgroundModeImageButton(imageButtonSelected: ImageButton, imageButtons: MutableList<ImageButton>) {
+    private fun setBackgroundModeImageButton(imageButtonSelected: ImageButton, imageButtons: MutableList<ImageButton>, color: Int) {
         for (imageButton in imageButtons) {
             if (imageButton == imageButtonSelected) {
                 // Seleccionamos el botón actual y establecemos su tint mode como "add"
                 imageButton.isSelected = true
-                imageButton.imageTintMode = PorterDuff.Mode.ADD
+                imageButton.setColorFilter(ContextCompat.getColor(this, color))
             } else {
                 // Deseleccionamos los otros botones y establecemos su tint mode como "multiply"
                 imageButton.isSelected = false
-                imageButton.imageTintMode = PorterDuff.Mode.MULTIPLY
+                imageButton.setColorFilter(ContextCompat.getColor(this, R.color.hintColor))
             }
         }
     }
