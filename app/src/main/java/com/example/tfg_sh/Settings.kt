@@ -2,7 +2,6 @@ package com.example.tfg_sh
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
@@ -20,7 +19,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
@@ -28,8 +26,8 @@ import com.example.tfg_sh.bbdd.dao.BetterYouDao
 import com.example.tfg_sh.bbdd.entidades.DatosBBDD
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivitySettingsBinding
-import com.example.tfg_sh.notificacion.NotificacionAlarma.Companion.NOTIFICATION_ID
 import com.google.gson.Gson
+import com.jakewharton.processphoenix.ProcessPhoenix
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
@@ -66,29 +64,6 @@ class Settings : AppCompatActivity() {
 
         initDropDownMenu()
 
-        // FIXME
-        /*settings.horaNotificacionDiario.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedItem = parent.getItemAtPosition(position) as String
-
-                cancelNotification(this@Settings)
-
-                val horaNotificacion = Utils.obtenerHora(selectedItem.toString())
-                // Notificacion Diario
-                Utils.scheduleNotificacion(
-                    this@Settings,
-                    "Diario BetterYou",
-                    "Escribe en tu diario...",
-                    "¿Cómo te ha ido el día?",
-                    (horaNotificacion.time - Calendar.getInstance().timeInMillis).toInt()
-                )
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // NO APLICA | Maneja el caso en el que no se haya seleccionado ninguna opción
-            }
-        }*/
-
         settings.layoutAbout.setOnClickListener {
             val url = "https://github.com/fdezhector/TFG_SH"
             // Creamos un Intent con la acción ACTION_VIEW y la URL
@@ -115,7 +90,6 @@ class Settings : AppCompatActivity() {
                 requestBetterYouFilePermissions()
             } else {
                 alertDialogImportar()
-                Toast.makeText(this@Settings, "BetterYou importado", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -142,29 +116,9 @@ class Settings : AppCompatActivity() {
         }
     }
 
-    private fun alertDialogImportar() {
-        val alertDialog = AlertDialog.Builder(this)
-        val customView =
-            LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
-        alertDialog.setView(customView)
-        val dialog = alertDialog.create()
-        //Elementos alertDialog
-        val titulo = customView.findViewById<TextView>(R.id.Title)
-        val mensaje = customView.findViewById<TextView>(R.id.Message)
-        val aceptar = customView.findViewById<Button>(R.id.PositiveButton)
-        val cancelar = customView.findViewById<Button>(R.id.NegativeButton)
-        aceptar.text = "Importar"
-        cancelar.visibility = View.GONE
-
-        aceptar.setOnClickListener {
-            openFileDialog()
-            dialog.dismiss()
-        }
-
-        titulo.text = "Importar BetterYou"
-        mensaje.text = "Selecciona el archivo JSON que deseas importar"
-
-        dialog.show()
+    private fun requestBetterYouFilePermissions() {
+        requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private fun openFileDialog() {
@@ -275,18 +229,23 @@ class Settings : AppCompatActivity() {
                 // Convierte la cadena de texto JSON
                 val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
                 //Inserciones en la BBDD en segundo plano
-                lifecycleScope.launch {
-                    try {
-                        dao.insertAllNotas(datos.notas)
-                        dao.insertAllDiarios(datos.diarios)
-                        dao.insertAllEventos(datos.eventos)
-                        dao.insertAllTareas(datos.tareas)
-                    } catch (e: Exception) {
-                        Toast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG).show()
-                        Log.e("ERROR SQL", e.localizedMessage)
-                        Utils.goToSettings(this@Settings)
+                synchronized(this){
+                    lifecycleScope.launch {
+                        try {
+                            dao.insertAllNotas(datos.notas)
+                            dao.insertAllDiarios(datos.diarios)
+                            dao.insertAllEventos(datos.eventos)
+                            dao.insertAllTareas(datos.tareas)
+
+                        } catch (e: Exception) {
+                            Toast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG).show()
+                            Log.e("ERROR SQL", e.localizedMessage)
+                            Utils.goToSettings(this@Settings)
+                        }
                     }
                 }
+                Toast.makeText(this@Settings, "BetterYou importado", Toast.LENGTH_LONG).show()
+                alertDialogReiniciar()
             } else {
                 Toast.makeText(this, "No se pudo leer el archivo", Toast.LENGTH_LONG).show()
             }
@@ -297,6 +256,30 @@ class Settings : AppCompatActivity() {
         }
     }
 
+    private fun alertDialogImportar() {
+        val alertDialog = AlertDialog.Builder(this)
+        val customView =
+            LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+        alertDialog.setView(customView)
+        val dialog = alertDialog.create()
+        //Elementos alertDialog
+        val titulo = customView.findViewById<TextView>(R.id.Title)
+        val mensaje = customView.findViewById<TextView>(R.id.Message)
+        val aceptar = customView.findViewById<Button>(R.id.PositiveButton)
+        val cancelar = customView.findViewById<Button>(R.id.NegativeButton)
+        aceptar.text = "Importar"
+        cancelar.visibility = View.GONE
+
+        aceptar.setOnClickListener {
+            openFileDialog()
+            dialog.dismiss()
+        }
+
+        titulo.text = "Importar BetterYou"
+        mensaje.text = "Selecciona el archivo JSON que deseas importar"
+
+        dialog.show()
+    }
 
     private fun alertDialogExportar() {
         val alertDialog = AlertDialog.Builder(this)
@@ -323,19 +306,67 @@ class Settings : AppCompatActivity() {
         dialog.show()
     }
 
-    // Borrar la notificación // TODO
-    private fun cancelNotification(context: Context) {
-        // Obtener el NotificationManager
-        val notificationManager = NotificationManagerCompat.from(context)
+    private fun alertDialogReiniciar() {
+        val alertDialog = AlertDialog.Builder(this)
+        val customView =
+            LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+        alertDialog.setView(customView)
+        val dialog = alertDialog.create()
+        //Elementos alertDialog
+        val titulo = customView.findViewById<TextView>(R.id.Title)
+        val mensaje = customView.findViewById<TextView>(R.id.Message)
+        val aceptar = customView.findViewById<Button>(R.id.PositiveButton)
+        val cancelar = customView.findViewById<Button>(R.id.NegativeButton)
+        aceptar.text = "Reiniciar"
+        cancelar.visibility = View.GONE
 
-        // Cancelar la notificación
-        notificationManager.cancel(NOTIFICATION_ID)
+        aceptar.setOnClickListener {
+            ProcessPhoenix.triggerRebirth(applicationContext);
+        }
+
+        titulo.text = "Reiniciar BetterYou"
+        mensaje.text = "La aplicación necesita reiniciarse para aplicar los cambios"
+
+        dialog.show()
     }
 
-    private fun requestBetterYouFilePermissions() {
-        requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    }
-
+   /* fun doRestart(c: Context?) {
+        try {
+            //check if the context is given
+            if (c != null) {
+                //fetch the packagemanager so we can get the default launch activity
+                // (you can replace this intent with any other activity if you want
+                val pm = c.packageManager
+                //check if we got the PackageManager
+                if (pm != null) {
+                    //create the intent with the default start activity for your application
+                    val mStartActivity = pm.getLaunchIntentForPackage(
+                        c.packageName
+                    )
+                    if (mStartActivity != null) {
+                        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        //create a pending intent so the application is restarted after System.exit(0) was called.
+                        // We use an AlarmManager to call this intent in 100ms
+                        val mPendingIntentId = 223344
+                        val mPendingIntent = PendingIntent
+                            .getActivity(
+                                c, mPendingIntentId, mStartActivity,
+                                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                            )
+                        //kill the application
+                        System.exit(0)
+                    } else {
+                        Log.e("Restart", "Was not able to restart application, mStartActivity null")
+                    }
+                } else {
+                    Log.e("Restart", "Was not able to restart application, PM null")
+                }
+            } else {
+                Log.e("Restart", "Was not able to restart application, Context null")
+            }
+        } catch (ex: java.lang.Exception) {
+            Log.e("Restart", "Was not able to restart application")
+        }
+    }*/
 
 }
