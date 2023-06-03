@@ -5,11 +5,11 @@
     tools:context=".toDoList.UpdateTareaActivity"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/background">
+    android:background="?attr/background">
 
     <ImageButton
         android:id="@+id/button_cerrar"
-        app:tint="@color/gris"
+        app:tint="?attr/tint"
         android:scaleY="0.75"
         android:scaleX="0.75"
         android:layout_width="wrap_content"
@@ -31,25 +31,25 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:fontFamily="sans-serif"
             android:text="Actualizar"
             android:textAlignment="center"
-            android:textColor="@color/gris"
+            android:textColor="?attr/textFillColor"
             android:textSize="40sp"/>
 
         <EditText
             android:id="@+id/titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Título..."
             android:layout_marginTop="30dp"
+            android:maxLines="1"
+            android:lines="1"
             android:padding="15dp"
             android:background="@drawable/custom_edit_text"
-
             android:maxLength="25"
-            android:textColorHint="@color/gris"
-            android:textColor="@color/gris"/>
+            android:hint="Título..."
+            android:textColorHint="?attr/hintTextColor"
+            android:textColor="?attr/textFillColor"/>
 
         <Spinner
             android:id="@+id/prioridad"
@@ -59,7 +59,7 @@
             android:textColor="@color/gris"
             android:spinnerMode="dropdown"
             android:dropDownWidth="match_parent"
-            android:backgroundTint="@color/gris"
+            android:background="@drawable/custom_edit_text"
             style="@style/custom_spinner"/>
 
         <LinearLayout
@@ -75,9 +75,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
                 android:paddingVertical="15dp"
-                android:backgroundTint="@color/negro"
+                android:backgroundTint="@color/prioridad_alta_1"
                 android:text="Borrar"
-                android:textColor="@color/gris"/>
+                android:textColor="?attr/textFillColor"/>
 
             <Button
                 android:id="@+id/update_button"
@@ -86,10 +86,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
                 android:paddingVertical="15dp"
-
-                android:backgroundTint="@color/negro"
+                android:background="@drawable/custom_button"
                 android:text="Actualizar"
-                android:textColor="@color/gris"/>
+                android:textColor="?attr/textFillColor"/>
 
         </LinearLayout>
 

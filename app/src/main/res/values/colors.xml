@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Colores del día -->
+    <!-- Colores del dia -->
     <color name="purple_depressed">#6317DC</color>
     <color name="purple_sad">#4A11CD</color>
     <color name="blue_neutral">#039DDA</color>
@@ -29,11 +29,21 @@
     <color name="edit_green_medium">#388E3C</color>
     <color name="edit_green_dark">#1B5E20</color>
 
+    <!-- Light Theme -->
+    <color name="background">#FEFAE0</color>
+    <color name="primary">#CCD5AE</color>
+    <color name="primaryDark">#A16931</color>
+
+    <color name="colorContainer">#CCD59D</color>
+    <color name="primaryVariant">#DDB791</color>
+    <color name="secondary">#D4A373</color>
+    <color name="secondaryVariant">#ADC178</color>
+
 
     <!-- Colores neutros -->
     <color name="negro">#070707</color>
-    <color name="background">#111111</color>
-    <color name="separatorColor">#373737</color>
+    <color name="background2">#111111</color>
+    <color name="dark_grey">#373737</color>
     <color name="pressed">#88DADADA</color>
     <color name="focused">#A9DADADA</color>
     <color name="hintColor">#ACACAC</color>

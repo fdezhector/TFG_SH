@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="@color/negro"
+    android:background="?attr/background"
     android:textSize="17sp"
-    android:textColor="@color/gris">
+    android:textColor="?attr/textFillColor">
 
 </CheckedTextView>

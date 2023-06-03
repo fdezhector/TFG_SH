@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="?attr/background"
     android:orientation="vertical"
     tools:context=".toDoList.ToDoListMain">
 
     <ImageButton
         android:id="@+id/button_cerrar"
-        app:tint="@color/gris"
+        app:tint="?attr/tint"
         android:scaleY="0.75"
         android:scaleX="0.75"
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:layout_marginBottom="20dp"
         android:text="¡Vaya! Parece que no tienes tareas\nAñade tu primera tarea para visualizarla"
         android:textAlignment="center"
-        android:textColor="@color/gris"
+        android:textColor="?attr/textFillColor"
         android:textSize="16sp" />
 
     <Button
@@ -40,10 +40,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/messageSinTareas"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/negro"
+        android:backgroundTint="@color/white"
         android:paddingHorizontal="75dp"
         android:paddingVertical="15dp"
-        android:text="Añadir Tarea" />
+        android:text="Añadir Tarea"
+        android:textColor="@color/negro"/>
 
     <Button
         android:id="@+id/reset_filter"
@@ -51,12 +52,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_marginBottom="70dp"
         android:backgroundTint="@color/white"
         android:paddingVertical="15dp"
         android:text="Reiniciar Filtro"
-        android:textColor="@color/black"
-        android:visibility="gone" />
+        android:textColor="@color/negro"
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,7 +71,7 @@
             android:fontFamily="sans-serif"
             android:text="Tus Tareas"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="?attr/textFillColor"
             android:textSize="40sp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -88,11 +89,11 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="60dp"
-        android:backgroundTint="@color/white"
+        android:layout_marginBottom="70dp"
         android:src="@drawable/add_icon"
-        app:fabSize="normal"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FabCircle" />
+        android:backgroundTint="@color/white"
+        app:tint="?attr/colorPrimaryDark"
+        app:fabSize="normal"/>
 
     <include android:id="@+id/bottom_nav" layout="@layout/bottom_nav"/>
 

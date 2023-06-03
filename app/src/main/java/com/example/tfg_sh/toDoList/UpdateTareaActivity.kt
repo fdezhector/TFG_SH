@@ -1,6 +1,5 @@
 package com.example.tfg_sh.toDoList
 
-import android.icu.text.Transliterator.Position
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,20 +38,16 @@ class UpdateTareaActivity : AppCompatActivity() {
             updateTarea.updateButton.setOnClickListener {
                 updateTarea(tarea, position, dao)
                 Toast.makeText(this, "La tarea se ha actualizado correctamente", Toast.LENGTH_LONG).show()
-                // FIXME cambiar a que vaya a ToDoList Main
                 Utils.goToMainScreen(this)
             }
 
             updateTarea.deleteButton.setOnClickListener {
                 deleteTarea(tarea, position, dao)
                 Toast.makeText(this, tarea.titulo + " se ha borrado correctamente", Toast.LENGTH_LONG).show()
-                // FIXME cambiar a que vaya a ToDoList Main
                 Utils.goToMainScreen(this)
             }
         }
 
-
-        // TODO mirar cómo mejorar la navegación hacia atrás de las pantallas
         updateTarea.buttonCerrar.setOnClickListener {
             Utils.goToMainScreen(this)
         }

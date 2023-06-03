@@ -6,7 +6,7 @@
     android:id="@+id/diarioEmptyLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/background">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -27,7 +27,7 @@
 
         <ImageButton
             android:id="@+id/button_cerrar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:layout_width="wrap_content"
@@ -49,15 +49,12 @@
             android:layout_above="@+id/horizontal_guideline"
             android:layout_centerInParent="true"
             android:text="Escribir en el diario..."
-            android:textColor="@color/gris"
+            android:textColor="?attr/tint"
             android:textSize="16sp"
             android:textStyle="italic" />
 
         <ImageButton
             android:id="@+id/button_editar"
-            app:tint="@color/gris"
-            android:scaleY="0.75"
-            android:scaleX="0.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView"
@@ -67,7 +64,10 @@
             android:contentDescription="@string/editar"
             android:minWidth="45dp"
             android:minHeight="45dp"
-            app:srcCompat="@drawable/edit_icon" />
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            app:srcCompat="@drawable/edit_icon"
+            app:tint="?attr/tint"/>
 
     </RelativeLayout>
 

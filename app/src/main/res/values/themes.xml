@@ -1,34 +1,44 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.TFG_SH" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TFG_SH" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/negro</item>
-        <item name="colorPrimaryVariant">@color/background</item>
-        <item name="colorOnPrimary">@color/gris</item>
+        <item name="background">@color/background</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorContainer">@color/colorContainer</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/background</item>
+        <item name="colorSurface">@color/background</item>
+        <item name="textFillColor">@color/negro</item>
+        <item name="tint">@color/negro</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/black</item>
-        <item name="colorSecondaryVariant">@color/negro</item>
-        <item name="colorOnSecondary">@color/negro</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariant</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/secondary</item>
+        <item name="navigationIconTint">@color/negro</item>
+        <item name="navigationIcon">@color/primaryDark</item>
+        <item name="android:navigationBarColor">@color/secondary</item>
+        <item name="hintTextColor">@color/dark_grey</item>
         <!-- Customize your theme here. -->
     </style>
 
     <!-- CalendarView -->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/hintColor</item>
+        <item name="colorAccent">@color/colorContainer</item>
+        <item name="textFillColor">@color/primaryDark</item>
     </style>
 
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">@color/gris</item>
-        <item name="android:colorActivatedHighlight">@color/gris</item>
-        <item name="android:weekNumberColor">@color/gris</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="android:colorActivatedHighlight">@color/primaryDark</item>
+        <item name="android:weekNumberColor">@color/secondary</item>
     </style>
 
     <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">@color/gris</item>
+        <item name="android:textColor">@color/secondary</item>
     </style>
 
     <!-- Separator -->
@@ -36,7 +46,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginHorizontal">10dp</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/separatorColor</item>
+        <item name="android:background">@color/dark_grey</item>
     </style>
 
     <!-- FAB -->
@@ -47,8 +57,8 @@
 
     <!-- Spinner -->
     <style name="custom_spinner">
-        <item name="android:background">@color/negro</item>
-        <item name="android:textColor">@color/gris</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:textColor">@color/negro</item>
         <item name="android:dropDownVerticalOffset">50dp</item>
     </style>
 

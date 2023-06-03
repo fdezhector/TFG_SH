@@ -21,14 +21,8 @@ import java.util.Calendar
 import java.util.Date
 
 object Utils {
-    // FIXME mirar el tema de las flags y este método
-    /*fun goToPreviousScreen(activity: Activity, clase: KClass<*>){
-        val intent = Intent(activity, clase::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        activity.startActivity(intent)
-    }*/
 
-    // creamos la lista inmutable de prioridades
+    // Creamos la lista inmutable de prioridades
     val prioridades = listOf("Alta", "Media", "Baja")
 
     fun goToMainScreen(activity: Activity) {
@@ -137,11 +131,11 @@ object Utils {
     private fun evaluarColor(selectedItem: String, context: Context): Int {
         var dropDownColor: Int
         if (selectedItem.equals("Alta", ignoreCase = true)) {
-            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_alta_3)
+            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_alta_1)
         } else if (selectedItem.equals("Media", ignoreCase = true)) {
-            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_media_2)
+            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_media_1)
         } else {
-            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_baja_3)
+            dropDownColor = ContextCompat.getColor(context, R.color.colorContainer)
         }
         return dropDownColor
     }

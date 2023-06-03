@@ -19,7 +19,6 @@ import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
-import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityToDoListMainBinding
 import com.example.tfg_sh.databinding.BottomNavBinding
 import com.example.tfg_sh.databinding.ItemTareaBinding

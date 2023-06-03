@@ -5,7 +5,7 @@
     android:id="@+id/diarioEditLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="?attr/background"
     tools:context=".diario.DiarioActivity"
     android:isScrollContainer="true"
     android:overScrollMode="ifContentScrolls">
@@ -25,18 +25,9 @@
             android:background="@color/transparent"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/colorID"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/white"
-            android:visibility="visible"/>
-
         <ImageButton
             android:id="@+id/button_cerrar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:layout_width="wrap_content"
@@ -53,7 +44,7 @@
 
         <ImageButton
             android:id="@+id/button_guardar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:layout_width="wrap_content"
@@ -72,7 +63,7 @@
 
         <ImageButton
             android:id="@+id/button_borrar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:layout_width="wrap_content"
@@ -103,8 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Color del día:"
+            android:textColor="?attr/tint"
+            android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="@color/gris"
             android:textSize="13sp" />
 
         <LinearLayout
@@ -125,7 +117,7 @@
                 android:scaleType="center"
                 android:tintMode="src_in"
                 app:srcCompat="@drawable/depressed_mood"
-                app:tint="@color/hintColor" />
+                app:tint="@color/hintColor"/>
 
             <ImageButton
                 android:id="@+id/color2"
@@ -137,7 +129,7 @@
                 android:scaleType="center"
                 android:tintMode="src_in"
                 app:srcCompat="@drawable/sad_mood"
-                app:tint="@color/hintColor" />
+                app:tint="@color/hintColor"/>
 
             <ImageButton
                 android:id="@+id/color3"
@@ -149,7 +141,7 @@
                 android:scaleType="center"
                 android:tintMode="src_in"
                 app:srcCompat="@drawable/neutral_mood"
-                app:tint="@color/hintColor" />
+                app:tint="@color/hintColor"/>
 
             <ImageButton
                 android:id="@+id/color4"
@@ -161,7 +153,7 @@
                 android:scaleType="center"
                 android:tintMode="src_in"
                 app:srcCompat="@drawable/joy_mood"
-                app:tint="@color/hintColor" />
+                app:tint="@color/hintColor"/>
 
             <ImageButton
                 android:id="@+id/color5"
@@ -173,7 +165,7 @@
                 android:scaleType="center"
                 android:tintMode="src_in"
                 app:srcCompat="@drawable/joy_mood"
-                app:tint="@color/hintColor" />
+                app:tint="@color/hintColor"/>
 
         </LinearLayout>
 
@@ -186,9 +178,9 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/negro"
+            android:background="@drawable/custom_edit_text"
             android:orientation="vertical"
-            android:elevation="15dp"
+            android:elevation="10dp"
             android:paddingHorizontal="5dp"
             android:paddingVertical="15dp">
 
@@ -206,14 +198,14 @@
                     android:layout_centerVertical="true"
 
                     android:text="Emociones"
+                    android:textColor="?attr/textFillColor"
                     android:textAlignment="center"
-                    android:textColor="@color/gris"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <ImageButton
                     android:id="@+id/deselect_emotions_button"
-                    app:tint="@color/gris"
+                    app:tint="?attr/tint"
                     android:scaleY="0.75"
                     android:scaleX="0.75"
                     android:visibility="gone"
@@ -226,7 +218,7 @@
 
                 <ImageButton
                     android:id="@+id/done_edit_emotions_button"
-                    app:tint="@color/gris"
+                    app:tint="?attr/tint"
                     android:scaleY="0.75"
                     android:scaleX="0.75"
                     android:visibility="gone"
@@ -239,9 +231,9 @@
 
                 <ImageButton
                     android:id="@+id/edit_emotions_button"
-                    app:tint="@color/gris"
-                    android:scaleY="0.75"
-                    android:scaleX="0.75"
+                    app:tint="?attr/tint"
+                    android:scaleY="0.65"
+                    android:scaleX="0.65"
                     android:visibility="visible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -273,9 +265,8 @@
                     android:layout_margin="10dp"
                     android:padding="5dp"
                     android:hint="Selecciona las emociones que hayas sentido..."
-                    android:textColorHint="@color/hintColor"
+                    android:textColorHint="?attr/hintTextColor"
                     android:textSize="14sp"
-                    android:textColor="@color/gris"
                     android:textStyle="italic"/>
             </ScrollView>
         </LinearLayout>
@@ -284,7 +275,7 @@
             android:id="@+id/descripcionDiario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="15dp"
+            android:elevation="10dp"
             android:layout_below="@id/linearLayoutRecycler"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
@@ -293,10 +284,9 @@
             android:padding="15dp"
             android:background="@drawable/custom_edit_text"
             android:hint="Escribe cómo te has sentido hoy..."
-            android:textColorHint="@color/hintColor"
+            android:textColorHint="?attr/hintTextColor"
             android:inputType="textMultiLine"
             android:overScrollMode="ifContentScrolls"
-            android:textColor="@color/gris"
             android:textSize="14dp" />
 
     </RelativeLayout>

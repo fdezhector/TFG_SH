@@ -9,17 +9,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CheckedTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
@@ -61,8 +57,6 @@ class Settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         settings = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(settings.root)
-
-        initDropDownMenu()
 
         settings.layoutAbout.setOnClickListener {
             val url = "https://github.com/fdezhector/TFG_SH"
@@ -127,48 +121,6 @@ class Settings : AppCompatActivity() {
         data.type = "*/*"
         val chooserIntent = Intent.createChooser(data, "Selecciona un archivo")
         sActivityResultLauncher.launch(chooserIntent)
-    }
-
-    fun initDropDownMenu() {
-        val horas = listOf("20:00", "21:00", "22:00", "23:00")
-        // creamos el adaptador para el spinner
-        val adaptador = ArrayAdapter(this, R.layout.dropdown_menu, horas)
-        // definimos el estilo de los desplegables
-        adaptador.setDropDownViewResource(R.layout.dropdown_menu_item)
-        // relacionamos el adaptador con el spinner del xml
-        settings.horaNotificacionDiario.adapter = adaptador
-
-        // listener que se ejectutará cuando se ha seleccionado una prioridad
-        settings.horaNotificacionDiario.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    val selectedItem = parent.getItemAtPosition(position) as String
-
-                    val dropDownShownItem =
-                        this@Settings.findViewById<CheckedTextView>(R.id.dropdown_menu_layout)
-                    dropDownShownItem.setTextColor(
-                        ContextCompat.getColor(
-                            this@Settings,
-                            R.color.gris
-                        )
-                    )
-                    dropDownShownItem.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this@Settings,
-                            R.color.negro
-                        )
-                    )
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // NO APLICA | Maneja el caso en el que no se haya seleccionado ninguna opción
-                }
-            }
     }
 
     private fun exportarBBDD(dao: BetterYouDao) {
@@ -258,8 +210,7 @@ class Settings : AppCompatActivity() {
 
     private fun alertDialogImportar() {
         val alertDialog = AlertDialog.Builder(this)
-        val customView =
-            LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+        val customView = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
         alertDialog.setView(customView)
         val dialog = alertDialog.create()
         //Elementos alertDialog
@@ -329,44 +280,5 @@ class Settings : AppCompatActivity() {
 
         dialog.show()
     }
-
-   /* fun doRestart(c: Context?) {
-        try {
-            //check if the context is given
-            if (c != null) {
-                //fetch the packagemanager so we can get the default launch activity
-                // (you can replace this intent with any other activity if you want
-                val pm = c.packageManager
-                //check if we got the PackageManager
-                if (pm != null) {
-                    //create the intent with the default start activity for your application
-                    val mStartActivity = pm.getLaunchIntentForPackage(
-                        c.packageName
-                    )
-                    if (mStartActivity != null) {
-                        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        //create a pending intent so the application is restarted after System.exit(0) was called.
-                        // We use an AlarmManager to call this intent in 100ms
-                        val mPendingIntentId = 223344
-                        val mPendingIntent = PendingIntent
-                            .getActivity(
-                                c, mPendingIntentId, mStartActivity,
-                                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                            )
-                        //kill the application
-                        System.exit(0)
-                    } else {
-                        Log.e("Restart", "Was not able to restart application, mStartActivity null")
-                    }
-                } else {
-                    Log.e("Restart", "Was not able to restart application, PM null")
-                }
-            } else {
-                Log.e("Restart", "Was not able to restart application, Context null")
-            }
-        } catch (ex: java.lang.Exception) {
-            Log.e("Restart", "Was not able to restart application")
-        }
-    }*/
 
 }

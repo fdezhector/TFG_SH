@@ -6,7 +6,7 @@
     tools:context=".evento.EventoActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="?attr/background">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -18,7 +18,7 @@
 
         <ImageButton
             android:id="@+id/button_cerrar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:minWidth="40dp"
@@ -37,7 +37,7 @@
 
         <ImageButton
             android:id="@+id/button_guardar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:minWidth="40dp"
@@ -56,7 +56,7 @@
 
         <ImageButton
             android:id="@+id/button_borrar"
-            app:tint="@color/gris"
+            app:tint="?attr/tint"
             android:scaleY="0.75"
             android:scaleX="0.75"
             android:minWidth="40dp"
@@ -91,31 +91,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="@id/guideHor1"
-
         android:padding="15dp"
+        android:elevation="10dp"
         android:layout_margin="15dp"
-
-        android:background="@color/negro">
+        android:background="@drawable/custom_edit_text">
 
         <EditText
             android:id="@+id/titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gris"
-
+            android:backgroundTint="?attr/tint"
             android:hint="Título"
-            android:textColorHint="@color/hintColor"
-            android:textColor="@color/gris"/>
+            android:textColor="?attr/textFillColor"
+            android:textSize="16sp"
+            android:textColorHint="?attr/hintTextColor"/>
 
         <EditText
             android:id="@+id/ubicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gris"
-
+            android:backgroundTint="?attr/tint"
             android:hint="Ubicación"
-            android:textColorHint="@color/hintColor"
-            android:textColor="@color/gris"/>
+            android:textColor="?attr/textFillColor"
+            android:textSize="16sp"
+            android:textColorHint="?attr/hintTextColor"/>
 
         <LinearLayout
             android:id="@+id/layout_fecha_inicio"
@@ -131,8 +130,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hora inicio"
-                android:textSize="18sp"
-                android:textColor="@color/gris" />
+                android:textColor="?attr/textFillColor"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/text_hora_fecha_inicio"
@@ -141,9 +140,8 @@
                 android:layout_marginRight="10dp"
 
                 android:text="9:00"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/gris"
                 android:textAlignment="center"
                 android:background="@color/transparent" />
 
@@ -154,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="3dp"
-            android:background="@color/hintColor" />
+            android:background="?attr/tint" />
 
         <LinearLayout
             android:id="@+id/layout_fecha_fin"
@@ -170,19 +168,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hora fin"
-                android:textSize="18sp"
-                android:textColor="@color/gris"/>
+                android:textColor="?attr/textFillColor"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/text_hora_fecha_fin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-
                 android:text="18:00"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/gris"
                 android:textAlignment="center"
                 android:background="@color/transparent" />
 
@@ -208,35 +204,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="@id/guideHor2"
-
+        android:elevation="10dp"
         android:padding="15dp"
         android:layout_margin="15dp"
 
-        android:background="@color/negro">
+        android:background="@drawable/custom_edit_text">
 
         <EditText
             android:id="@+id/descripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gris"
-
+            android:backgroundTint="?attr/tint"
             android:maxLength="200"
             android:inputType="textMultiLine"
-
             android:hint="Descripción"
-            android:textColorHint="@color/hintColor"
-            android:textColor="@color/gris"/>
+            android:textColor="?attr/textFillColor"
+            android:textColorHint="?attr/hintTextColor"/>
 
         <TextView
             android:id="@+id/contador_palabras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-
             android:layout_gravity="right"
-
-            android:text="0 / 250"
-            android:textColor="@color/gris"/>
+            android:text="0 / 250"/>
 
     </LinearLayout>
 
