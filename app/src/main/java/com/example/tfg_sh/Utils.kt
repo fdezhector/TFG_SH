@@ -22,11 +22,13 @@ import java.util.Date
 
 object Utils {
 
-    // Creamos la lista inmutable de prioridades
+    // Creamos la lista inmutable de prioridades que se utilizara para las tareas
     val prioridades = listOf("Alta", "Media", "Baja")
 
     fun goToMainScreen(activity: Activity) {
         val intent = Intent(activity, MainActivity::class.java)
+        // FLAG_ACTIVITY_CLEAR_TOP permite eliminar todas las actividades que esten por encima de ella en la cola
+        // FLAG_ACTIVITY_SINGLE_TOP permite reutilizar la instancia existente de la activadad a la que se quiere llegar en lugar de crear una nueva
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         activity.startActivity(intent)
     }
@@ -39,7 +41,7 @@ object Utils {
 
     fun setId(fecha_nota: Date): Int {
         // el id será la fecha del día de la nota
-        // por ejemplo: 5 de abril de 2023 --> id = 5042023
+        // por ejemplo: 25 de abril de 2023 --> id = 25042023
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         val fecha = sdf.format(fecha_nota)
         return fecha.replace("/".toRegex(), "").toInt()
@@ -54,7 +56,6 @@ object Utils {
     fun obtenerHora(horaSinFormatear: String): Date {
         val format = SimpleDateFormat("HH:mm")
         val hora: Date = format.parse(horaSinFormatear)
-
         return hora
     }
 
@@ -67,7 +68,7 @@ object Utils {
         // relacionamos el adaptador con el spinner del xml
         dropDown.adapter = adaptador
 
-        // listener que se ejectutará cuando se ha seleccionado una prioridad
+        // listener que se ejectutara cuando se seleccione una prioridad
         dropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -77,20 +78,18 @@ object Utils {
             ) {
                 val selectedItem = parent.getItemAtPosition(position) as String
 
-                val dropDownShownItem =
-                    (context as Activity).findViewById<CheckedTextView>(R.id.dropdown_menu_layout)
-                // evaluamos qué color se deberá mostrar cuando seleccionemos una prioridad
-                dropDownShownItem.setBackgroundColor(evaluarColor(selectedItem, context))
+                val itemMostrado = (context as Activity).findViewById<CheckedTextView>(R.id.dropdown_menu_layout)
+                // evaluamos que color debera tener el fondo del item cuando seleccionemos una prioridad
+                itemMostrado.setBackgroundColor(evaluarColor(selectedItem, context))
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // NO APLICA | Maneja el caso en el que no se haya seleccionado ninguna opción
+                // NO APLICA | Aqui se manejaria el caso en el que no se haya seleccionado ninguna opción
             }
         }
     }
 
-
-    fun scheduleNotificacion(
+    fun programarNotificacion(
         context: Context,
         titulo: String,
         textoCorto: String,
@@ -114,6 +113,9 @@ object Utils {
         )
     }
 
+    /**
+     * Nos permite crear el canal de la notificación
+     */
     fun crearCanal(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -129,7 +131,8 @@ object Utils {
     }
 
     private fun evaluarColor(selectedItem: String, context: Context): Int {
-        var dropDownColor: Int
+        val dropDownColor: Int
+        // Depenediendo de la prioridad, pondremos un color de fondo diferente al elemnto
         if (selectedItem.equals("Alta", ignoreCase = true)) {
             dropDownColor = ContextCompat.getColor(context, R.color.prioridad_alta_1)
         } else if (selectedItem.equals("Media", ignoreCase = true)) {
@@ -140,7 +143,7 @@ object Utils {
         return dropDownColor
     }
 
-    fun arePermissionsGranted(context: Context, permission: String): Boolean {
+    fun isPermisoOtorgado(context: Context, permission: String): Boolean {
         val permissionStatus = ContextCompat.checkSelfPermission(context, permission)
         if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
             return false

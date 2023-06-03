@@ -34,18 +34,20 @@ class MainActivity : AppCompatActivity() {
         var id = 0
         setContentView(main.root)
         bottomNav = BottomNavBinding.bind(main.bottomNav.root)
-
-
-        cargarVistaVacia()
+        
+        cargarLogo()
 
         main.calendarView.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
             override fun onSelectedDayChange(calendario: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
-                // cargamos el layout
-                cargarVistaElementos()
-                // comprobamos si existe o no una nota
+                // Cargamos el layout que contiene los elementos de to-do-list, evento y diario
+                cargarElementos()
+                // Convertimos la fecha en el ID de la Nota
+                // Este ID lo utilizaremos como FK tanto en el evento como en el diario
                 val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
                 id = Utils.setId(fechaNota)
+                //Lanzamos una Corutina para hacer las consultas con la BBDD
                 lifecycleScope.launch {
+                    // Comprobamos si existe o no una nota
                     val nota: Nota?
                     nota = existeNota(dao, id)
                     //Si no existe, creamos todas las entidades
@@ -58,12 +60,16 @@ class MainActivity : AppCompatActivity() {
 
         main.vistaEvento.setOnClickListener {
             val vistaEventoActivty = Intent(this, EventoActivity::class.java)
+            // Pasamos el ID de la nota para poder realizar la consulta con la BBDD una vez nos encontremos en el Evento
+            // de esta manera si ya existe un evento, podremos cargar en su layout los datos de la BBDD
             vistaEventoActivty.putExtra("notaId",id)
             startActivity(vistaEventoActivty)
         }
 
         main.vistaDiario.setOnClickListener {
             val vistaDiarioActivity = Intent(this, DiarioActivity::class.java)
+            // Pasamos el ID de la nota para poder realizar la consulta con la BBDD una vez nos encontremos en el Diario
+            // de esta manera si ya existe un diario, podremos cargar en su layout los datos de la BBDD
             vistaDiarioActivity.putExtra("notaId",id)
             startActivity(vistaDiarioActivity)
         }
@@ -102,12 +108,12 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun cargarVistaVacia() {
+    private fun cargarLogo() {
         main.layoutElementos.visibility = View.GONE
         main.layoutLogo.visibility = View.VISIBLE
     }
 
-    private fun cargarVistaElementos(){
+    private fun cargarElementos(){
         if(main.layoutLogo.visibility == View.VISIBLE){
             main.layoutLogo.visibility = View.GONE
 
@@ -118,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onAnimationStart(animation: Animation?) {
                     // No aplica
                 }
-
+                // Una vez termine la animacion que ha invocado este listener, se ejecutara este metodo
                 override fun onAnimationEnd(animation: Animation?) {
                     main.layoutElementos.visibility = View.VISIBLE
 

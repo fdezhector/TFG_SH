@@ -19,19 +19,20 @@ class UpdateTareaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         updateTarea = ActivityUpdateTareaBinding.inflate(layoutInflater)
         setContentView(updateTarea.root)
-
+        // Instancia BBDD
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
 
-        // creamos el dropdown menu con las prioridades
+        // Cargamos el dropdown menu con las prioridades
         Utils.initDropDownMenu(updateTarea.prioridad,this)
 
-        // obtenemos la posición de la tarea en la lista
+        // obtenemos la posición de la tarea en la lista y si no trae información ponemos por defecto -1
         val position = intent.getIntExtra("position", -1)
+        // Obtenemos el objeto Tarea
         val tarea = ObjectTarea.getTarea(position)
-
+        //Si hay alguna tarea
         if(position != -1){
-            var titulo = tarea.titulo
-            var prioridad = tarea.prioridad
+            val titulo = tarea.titulo
+            val prioridad = tarea.prioridad
             updateTarea.titulo.setText(titulo)
             updateTarea.prioridad.setSelection(Utils.prioridades.indexOf(prioridad))
 
@@ -54,10 +55,10 @@ class UpdateTareaActivity : AppCompatActivity() {
     }
 
     private fun updateTarea(tarea: ItemTarea, position: Int, dao: BetterYouDao){
-        // obtenemos los nuevos valores
-        var titulo = updateTarea.titulo.text.toString()
-        var prioridad = updateTarea.prioridad.selectedItem.toString()
-        // actualizamos tanto el objeto en la lista como en la base de datos
+        //Obtenemos los nuevos valores
+        val titulo = updateTarea.titulo.text.toString()
+        val prioridad = updateTarea.prioridad.selectedItem.toString()
+        //Actualizamos tanto el objeto en la lista como en la base de datos
         ObjectTarea.updateTarea(position, titulo, prioridad)
         lifecycleScope.launch {
             dao.updateTarea(Tarea(tarea.id, titulo, prioridad))

@@ -19,13 +19,19 @@ import com.example.tfg_sh.bbdd.entidades.Tarea
     ],
     version = 1
 )
+
+/**
+ * Esta clase lo que va ha hacer es una patron de diseño Singleton,
+ * permite que sólo tenga una instancia y proporcionar un punto de acceso
+ * global a ella. Si no esta instanciada va a crear la BBDD y si ya esta creada coge
+ * la instancia de la BBDD creada.
+ */
 abstract class BetterYouBBDD : RoomDatabase() {
     abstract val betterYouDao:BetterYouDao
-    //Arquitectura singleton
+
     companion object {
         @Volatile
         private var INSTANCE : BetterYouBBDD? = null
-
         fun getInstance(context : Context):BetterYouBBDD{
             synchronized(this){
                 return INSTANCE ?: Room.databaseBuilder(

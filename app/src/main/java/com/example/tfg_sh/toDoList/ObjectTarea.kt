@@ -1,9 +1,15 @@
 package com.example.tfg_sh.toDoList
 
+/**
+ * Este sera el objeto auxiliar con el que trabajaremos como intermediario entre la entidad Tarea y la BBDD
+ */
 object ObjectTarea {
 
+    // Lista principal donde guardaremos las tareas que se visualizaran en el recyclerView
     var listaTareas = mutableListOf<ItemTarea>()
+    // Lista auxiliar que nos servirá como copia de seguridad a la hora de filtrar
     var listaAuxiliar = mutableListOf<ItemTarea>()
+
     fun getTarea(pos:Int): ItemTarea {
         return listaTareas[pos]
     }

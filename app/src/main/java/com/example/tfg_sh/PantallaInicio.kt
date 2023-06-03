@@ -25,12 +25,13 @@ class PantallaInicio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         main = ActivityPantallaInicioBinding.inflate(layoutInflater)
         setContentView(main.root)
-        //Instancia bbdd
+        //Instancia BBDD
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
+        //Consulta en una Corutina para conseguir todas las Tareas
         lifecycleScope.launch {
             ObjectTarea.listaTareas = dao.getAllTareas() as MutableList<ItemTarea>
         }
-
+        // Al arrancar la app, el handler iniciara el MainActivity después de ese 3 segundos
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

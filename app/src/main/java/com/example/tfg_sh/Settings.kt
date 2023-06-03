@@ -34,20 +34,27 @@ class Settings : AppCompatActivity() {
 
     private lateinit var settings: ActivitySettingsBinding
     private val dao = BetterYouBBDD.getInstance(this).betterYouDao
-    private val requestPermission =
+    /**
+     * Cuando se necesita algun permiso, se ejecuta una función de devolución de llamada que verifica
+     * si el permiso fue concedido.
+     */
+    private val pedirPermisos =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 Toast.makeText(this, "Permisos aceptados", Toast.LENGTH_LONG).show()
             }
         }
-
+    /**
+     * Aqui registramos un contrato para iniciar una actividad y recibir el resultado de la misma,
+     * y luego procesamos un archivo a partir de la URI obtenida del resultado.
+     */
     private val sActivityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             val uri: Uri? = data?.data
-            //Proceso el archivo
+            //Procesamos el archivo y lo importamos a la BBDD
             importarBBDD(dao, uri)
 
         }
@@ -58,6 +65,7 @@ class Settings : AppCompatActivity() {
         settings = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(settings.root)
 
+        // Enlace acerca de BetterYou
         settings.layoutAbout.setOnClickListener {
             val url = "https://github.com/fdezhector/TFG_SH"
             // Creamos un Intent con la acción ACTION_VIEW y la URL
@@ -65,39 +73,27 @@ class Settings : AppCompatActivity() {
 
             // Verificamos si hay aplicaciones disponibles para abrir la URL
             if (intent.resolveActivity(packageManager) != null) {
-                // Mostrar las opciones de "Abrir con"
+                // Mostramos las opciones de "Abrir con"
                 startActivity(Intent.createChooser(intent, "Abrir con"))
             }
 
         }
 
         settings.layoutImportar.setOnClickListener {
-            if (!Utils.arePermissionsGranted(
-                    this@Settings,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                && !Utils.arePermissionsGranted(
-                    this@Settings,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            ) {
-                requestBetterYouFilePermissions()
+            if (!Utils.isPermisoOtorgado(this@Settings, Manifest.permission.READ_EXTERNAL_STORAGE)
+                && !Utils.isPermisoOtorgado(this@Settings, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            {
+                pedirPermisosBetterYouFile()
             } else {
                 alertDialogImportar()
             }
         }
 
         settings.layoutExportar.setOnClickListener {
-            if (!Utils.arePermissionsGranted(
-                    this@Settings,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                && !Utils.arePermissionsGranted(
-                    this@Settings,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            ) {
-                requestBetterYouFilePermissions()
+            if (!Utils.isPermisoOtorgado(this@Settings, Manifest.permission.READ_EXTERNAL_STORAGE)
+                && !Utils.isPermisoOtorgado(this@Settings, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            {
+                pedirPermisosBetterYouFile()
             } else {
                 alertDialogExportar()
                 Toast.makeText(this@Settings, "BetterYou exportado", Toast.LENGTH_LONG).show()
@@ -110,17 +106,52 @@ class Settings : AppCompatActivity() {
         }
     }
 
-    private fun requestBetterYouFilePermissions() {
-        requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private fun pedirPermisosBetterYouFile() {
+        pedirPermisos.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        pedirPermisos.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
-    private fun openFileDialog() {
-        val data = Intent(Intent.ACTION_OPEN_DOCUMENT)
-        data.addCategory(Intent.CATEGORY_OPENABLE)
-        data.type = "*/*"
-        val chooserIntent = Intent.createChooser(data, "Selecciona un archivo")
-        sActivityResultLauncher.launch(chooserIntent)
+    private fun importarBBDD(dao: BetterYouDao, uri: Uri?) {
+        // Verificamos si no se seleccionó ningún archivo
+        if (uri == null) {
+            Toast.makeText(this, "No se seleccionó ningún archivo", Toast.LENGTH_LONG).show()
+            return
+        }
+        try {
+            // Abrimos un flujo de entrada para acceder al archivo a través del proveedor de documentos
+            val inputStream = contentResolver.openInputStream(uri)
+            // Leemos el contenido del archivo como una cadena de texto JSON
+            val jsonString = inputStream?.bufferedReader().use { it?.readText() }
+            // Verificamos si se pudo leer el archivo correctamente
+            if (jsonString != null) {
+                val gson = Gson()
+                //Convierte la cadena de texto JSON
+                val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
+                //Inserciones en la BBDD en una Corutina
+                synchronized(this){
+                    lifecycleScope.launch {
+                        try {
+                            dao.insertAllNotas(datos.notas)
+                            dao.insertAllDiarios(datos.diarios)
+                            dao.insertAllEventos(datos.eventos)
+                            dao.insertAllTareas(datos.tareas)
+                        } catch (e: Exception) {
+                            Toast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG).show()
+                            Log.e("ERROR SQL", e.localizedMessage)
+                            Utils.goToSettings(this@Settings)
+                        }
+                    }
+                }
+                Toast.makeText(this@Settings, "BetterYou importado", Toast.LENGTH_LONG).show()
+                alertDialogReiniciar()
+            } else {
+                Toast.makeText(this, "No se pudo leer el archivo", Toast.LENGTH_LONG).show()
+            }
+
+        } catch (e: IOException) {
+            Toast.makeText(this, "Error al acceder al archivo", Toast.LENGTH_LONG).show()
+            Log.e("ERROR IO", e.localizedMessage)
+        }
     }
 
     private fun exportarBBDD(dao: BetterYouDao) {
@@ -137,10 +168,10 @@ class Settings : AppCompatActivity() {
             val gson = Gson()
             val json = gson.toJson(datos)
 
-            // Obtén la ruta del directorio personalizado dentro del almacenamiento externo
+            // Obténemos la ruta del directorio personalizado dentro del almacenamiento externo
             val backupDirectory = File(getExternalFilesDir(null), "Backups")
 
-            // Crea el directorio si no existe
+            // Creamos el directorio si no existe
             if (!backupDirectory.exists()) {
                 backupDirectory.mkdirs()
             }
@@ -164,48 +195,12 @@ class Settings : AppCompatActivity() {
         }
     }
 
-    private fun importarBBDD(dao: BetterYouDao, uri: Uri?) {
-        // Verifica si no se seleccionó ningún archivo
-        if (uri == null) {
-            Toast.makeText(this, "No se seleccionó ningún archivo", Toast.LENGTH_LONG).show()
-            return
-        }
-        try {
-            // Abre un flujo de entrada para acceder al archivo a través del proveedor de documentos
-            val inputStream = contentResolver.openInputStream(uri)
-            // Lee el contenido del archivo como una cadena de texto JSON
-            val jsonString = inputStream?.bufferedReader().use { it?.readText() }
-            // Verifica si se pudo leer el archivo correctamente
-            if (jsonString != null) {
-                val gson = Gson()
-                // Convierte la cadena de texto JSON
-                val datos = gson.fromJson(jsonString, DatosBBDD::class.java)
-                //Inserciones en la BBDD en segundo plano
-                synchronized(this){
-                    lifecycleScope.launch {
-                        try {
-                            dao.insertAllNotas(datos.notas)
-                            dao.insertAllDiarios(datos.diarios)
-                            dao.insertAllEventos(datos.eventos)
-                            dao.insertAllTareas(datos.tareas)
-
-                        } catch (e: Exception) {
-                            Toast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG).show()
-                            Log.e("ERROR SQL", e.localizedMessage)
-                            Utils.goToSettings(this@Settings)
-                        }
-                    }
-                }
-                Toast.makeText(this@Settings, "BetterYou importado", Toast.LENGTH_LONG).show()
-                alertDialogReiniciar()
-            } else {
-                Toast.makeText(this, "No se pudo leer el archivo", Toast.LENGTH_LONG).show()
-            }
-
-        } catch (e: IOException) {
-            Toast.makeText(this, "Error al acceder al archivo", Toast.LENGTH_LONG).show()
-            Log.e("ERROR IO", e.localizedMessage)
-        }
+    private fun openFileDialog() {
+        val data = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        data.addCategory(Intent.CATEGORY_OPENABLE)
+        data.type = "*/*"
+        val chooserIntent = Intent.createChooser(data, "Selecciona un archivo")
+        sActivityResultLauncher.launch(chooserIntent)
     }
 
     private fun alertDialogImportar() {
@@ -234,8 +229,7 @@ class Settings : AppCompatActivity() {
 
     private fun alertDialogExportar() {
         val alertDialog = AlertDialog.Builder(this)
-        val customView =
-            LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+        val customView = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
         alertDialog.setView(customView)
         val dialog = alertDialog.create()
         //Elementos alertDialog
@@ -259,8 +253,7 @@ class Settings : AppCompatActivity() {
 
     private fun alertDialogReiniciar() {
         val alertDialog = AlertDialog.Builder(this)
-        val customView =
-            LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
+        val customView = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null)
         alertDialog.setView(customView)
         val dialog = alertDialog.create()
         //Elementos alertDialog
@@ -272,6 +265,7 @@ class Settings : AppCompatActivity() {
         cancelar.visibility = View.GONE
 
         aceptar.setOnClickListener {
+            // Utilizamos la libreria de ProcessPhoenix que nos facilita el proceso de reiniciar la app
             ProcessPhoenix.triggerRebirth(applicationContext);
         }
 

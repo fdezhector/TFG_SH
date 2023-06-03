@@ -20,10 +20,10 @@ class InsertTareaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         insertTarea = ActivityInsertTareaBinding.inflate(layoutInflater)
         setContentView(insertTarea.root)
-
+        //Instancia BBDD
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
 
-        // creamos el dropdown menu con las prioridades
+        // Cargamos el dropdown menu con las prioridades
         Utils.initDropDownMenu(insertTarea.prioridad, this)
 
         // Operación INSERT
@@ -32,9 +32,9 @@ class InsertTareaActivity : AppCompatActivity() {
             if(insertTarea.titulo.text.isNullOrEmpty()) {
                 Toast.makeText(this, "La tarea debe tener un título", Toast.LENGTH_LONG).show()
             } else {
-                var id = Date().time as Long
-                var titulo = insertTarea.titulo.text.toString()
-                var prioridad = insertTarea.prioridad.selectedItem.toString()
+                val id = Date().time
+                val titulo = insertTarea.titulo.text.toString()
+                val prioridad = insertTarea.prioridad.selectedItem.toString()
                 lifecycleScope.launch {
                     val tarea = Tarea(id = id, titulo = titulo, prioridad = prioridad)
                     dao.insertTarea(tarea)
@@ -47,10 +47,8 @@ class InsertTareaActivity : AppCompatActivity() {
 
         }
 
-        // FIXME mirar cómo mejorar la navegación hacia atrás de las pantallas
         insertTarea.buttonCerrar.setOnClickListener {
             Utils.goToMainScreen(this)
         }
-
-    }// onCreate()
+    }
 }

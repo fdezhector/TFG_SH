@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_sh.R
 
+/**
+ * Clase que nos va a permitir cargar el recyclerView
+ */
 class  TareaAdapter(private val listaTareas: List<ItemTarea>, private val context: Context) : RecyclerView.Adapter<TareaViewHolder>() {
-    // TODO comentar
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TareaViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return TareaViewHolder(layoutInflater.inflate(R.layout.item_tarea, parent, false), context)
@@ -18,6 +21,7 @@ class  TareaAdapter(private val listaTareas: List<ItemTarea>, private val contex
         val item = listaTareas[position]
         holder.render(item)
 
+        // Listener que nos llevara a la actividad para actualizar la tarea que se ha pulsado
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, UpdateTareaActivity::class.java)
@@ -25,7 +29,6 @@ class  TareaAdapter(private val listaTareas: List<ItemTarea>, private val contex
             intent.putExtra("position", position)
             context.startActivity(intent)
         }
-
     }
 
     override fun getItemCount(): Int {

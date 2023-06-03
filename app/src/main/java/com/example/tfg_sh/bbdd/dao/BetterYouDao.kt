@@ -13,6 +13,9 @@ import com.example.tfg_sh.bbdd.entidades.Nota
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.toDoList.ItemTarea
 
+/**
+ * Esta es la interfaz de Room que va a realizar las consultas a la BBDD
+ */
 @Dao
 interface BetterYouDao {
     //NOTA

@@ -28,10 +28,12 @@ class EventoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         eventoBinding = ActivityEventoBinding.inflate(layoutInflater)
         setContentView(eventoBinding.root)
+        // Recibimos el ID de la nota a la que pertenece el Evento
         val notaId = intent.getIntExtra("notaId", -1)
         var evento: Evento? = null
         val dao = BetterYouBBDD.getInstance(this).betterYouDao
 
+        // Hacemos la consulta a la BBDD para obtener el objeto Evento
         lifecycleScope.launch {
             evento = dao.getEventoNotaId(notaId)
             cargarEvento(evento)
@@ -48,8 +50,7 @@ class EventoActivity : AppCompatActivity() {
         }
 
         eventoBinding.buttonGuardar.setOnClickListener {
-            //FIXME Refactorizar esto y optimizar en un método
-            //Comprobaciones para los campos
+            // Validaciones tanto del titulo como de la hora de inicio y la hora de fin
             if (eventoBinding.titulo.text.isNullOrEmpty()) {
                 Toast.makeText(this, "El evento debe tener un título", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -61,7 +62,7 @@ class EventoActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-            //Comprobamos la seleccion de la fecha sea correcta
+            //Comprobamos que la hora de fin no sea anterior a la hora de inicio
             val horaInicio = Utils.obtenerHora(eventoBinding.textHoraFechaInicio.text.toString())
             val horaFin = Utils.obtenerHora(eventoBinding.textHoraFechaFin.text.toString())
 
@@ -77,15 +78,15 @@ class EventoActivity : AppCompatActivity() {
                 "Evento guardado: " + eventoBinding.titulo.text.toString(),
                 Toast.LENGTH_LONG
             ).show()
-
-            Utils.scheduleNotificacion(
+            // Una vez programada la notificacion, la app generara esa notificacion 15 minutos antes de que empiece el evento y antes de que finalice
+            Utils.programarNotificacion(
                 this,
                 "Evento BetterYou",
                 "Evento: " + eventoBinding.titulo.text.toString() + " esta a punto de comenzar",
                 "Tu evento comienza a las " + eventoBinding.textHoraFechaInicio.text.toString(),
                 ((horaInicio.time-900000) - Calendar.getInstance().timeInMillis).toInt()
             )
-            Utils.scheduleNotificacion(
+            Utils.programarNotificacion(
                 this,
                 "Evento BetterYou",
                 "Evento: " + eventoBinding.titulo.text.toString() + " esta a punto de finalizar",
@@ -93,11 +94,14 @@ class EventoActivity : AppCompatActivity() {
                 ((horaFin.time-900000) - Calendar.getInstance().timeInMillis).toInt()
             )
         }
+
         eventoBinding.buttonBorrar.setOnClickListener {
             borrarEvento(dao, evento, notaId)
         }
+
         eventoBinding.buttonCerrar.setOnClickListener { Utils.goToMainScreen(this) }
 
+        // La descripcion contiene un limite de palabras, en la interfaz existe un textView donde el usuario puede ver la cantidad de caracteres que tiene disponible
         actualizarContadorPalabras()
     }
 
@@ -113,7 +117,7 @@ class EventoActivity : AppCompatActivity() {
         val cancelar = customView.findViewById<Button>(R.id.NegativeButton)
 
         aceptar.setOnClickListener {
-
+            // Borrar el evento significa establecer sus campos a null
             lifecycleScope.launch {
                 dao.updateEvento(
                     Evento(
@@ -146,6 +150,7 @@ class EventoActivity : AppCompatActivity() {
     }
 
     private fun cargarEvento(evento: Evento?) {
+        // Cargamos en el layout los atributos del Evento
         if (evento != null) {
             eventoBinding.titulo.setText(evento.titulo)
             eventoBinding.descripcion.setText(evento.descripcion)
@@ -157,13 +162,13 @@ class EventoActivity : AppCompatActivity() {
 
 
     private fun actualizarEvento(dao: BetterYouDao, notaId: Int, evento: Evento?) {
-
+        // Cogemos los valores de los campos
         val titulo: String = eventoBinding.titulo.text.toString()
         val ubicacion: String = eventoBinding.ubicacion.text.toString()
         val horaInicio: String = eventoBinding.textHoraFechaInicio.text.toString()
         val horaFin: String = eventoBinding.textHoraFechaFin.text.toString()
         val descripcion: String = eventoBinding.descripcion.text.toString()
-
+        // Realizamos la actualizacion sobre la BBDD
         lifecycleScope.launch {
             if (evento != null) {
                 dao.updateEvento(
@@ -187,6 +192,7 @@ class EventoActivity : AppCompatActivity() {
         timePicker.show(supportFragmentManager, "timePicker")
     }
 
+    // Establece el la hora seleccionada como texto en la interfaz
     private fun onTimeSelected(time: String, textView: TextView) {
         textView.setText("$time")
     }
@@ -196,17 +202,17 @@ class EventoActivity : AppCompatActivity() {
 
         eventoBinding.descripcion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(texto: Editable?) {
-                // Obtenemos la longitud actual de la descripción aún si 'texto' es null utilizando '?'
+                // Obtenemos la longitud actual de la descripción aun si 'texto' es null utilizando '?'
                 val longitudTexto = texto?.length ?: 0
                 eventoBinding.contadorPalabras.text = "$longitudTexto / $longitudMaxima"
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                //
+                // NO APLICA
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                //
+                // NO APLICA
             }
         })
     }

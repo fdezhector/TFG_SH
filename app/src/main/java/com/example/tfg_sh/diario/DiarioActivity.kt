@@ -360,6 +360,8 @@ class DiarioActivity : AppCompatActivity() {
         }
     }
 
+
+    //Este metodo carga las emociones predeterminadas que se utilizara en el diario
     private fun cargarEmocionesPredeterminadas() {
         val listaEmocionesPredeterminadas = listOf(
             ItemEmocion("Felicidad"),
@@ -382,8 +384,7 @@ class DiarioActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerEmociones() {
-        diarioEdit.emotionList.layoutManager =
-            GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false)
+        diarioEdit.emotionList.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false)
         diarioEdit.emotionList.adapter = EmocionesAdapter(ObjectEmocion.getAll())
     }
 
@@ -446,18 +447,14 @@ class DiarioActivity : AppCompatActivity() {
         return imageButtons
     }
 
-    private fun setBackgroundModeImageButton(
-        imageButtonSelected: ImageButton,
-        imageButtons: MutableList<ImageButton>,
-        color: Int
-    ) {
+    private fun setBackgroundModeImageButton(imageButtonSelected: ImageButton, imageButtons: MutableList<ImageButton>, color: Int) {
         for (imageButton in imageButtons) {
             if (imageButton == imageButtonSelected) {
-                // Seleccionamos el botón actual y establecemos su tint mode como "add"
+                // Seleccionamos el botón actual y establecemos su color
                 imageButton.isSelected = true
                 imageButton.setColorFilter(ContextCompat.getColor(this, color))
             } else {
-                // Deseleccionamos los otros botones y establecemos su tint mode como "multiply"
+                // Deseleccionamos los otros botones y establecemos su color a uno predeterminado
                 imageButton.isSelected = false
                 imageButton.setColorFilter(ContextCompat.getColor(this, R.color.hintColor))
             }
