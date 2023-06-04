@@ -27,6 +27,13 @@
         android:layout_above="@id/bottom_nav"
         android:layout_below="@+id/calendarView">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/logo"
+            android:layout_centerInParent="true"
+            android:src="@drawable/betteryou_v2" />
+
         <TextView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
@@ -52,7 +59,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/layout_elementos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

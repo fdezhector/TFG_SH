@@ -144,8 +144,8 @@ class EventoActivity : AppCompatActivity() {
             eventoBinding.titulo.setText(evento.titulo)
             eventoBinding.descripcion.setText(evento.descripcion)
             eventoBinding.ubicacion.setText(evento.ubicacion)
-            eventoBinding.textHoraFechaInicio.setText(evento.horaInicio)
-            eventoBinding.textHoraFechaFin.setText(evento.horaFin)
+            eventoBinding.textHoraFechaInicio.text = evento.horaInicio
+            eventoBinding.textHoraFechaFin.text = evento.horaFin
         }
     }
 
@@ -183,7 +183,7 @@ class EventoActivity : AppCompatActivity() {
 
     // Establece el la hora seleccionada como texto en la interfaz
     private fun onTimeSelected(time: String, textView: TextView) {
-        textView.setText("$time")
+        textView.text = "$time"
     }
 
     private fun actualizarContadorPalabras() {

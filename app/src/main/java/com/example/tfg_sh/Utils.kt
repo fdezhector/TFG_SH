@@ -131,14 +131,14 @@ object Utils {
     }
 
     private fun evaluarColor(selectedItem: String, context: Context): Int {
-        val dropDownColor: Int
         // Depenediendo de la prioridad, pondremos un color de fondo diferente al elemnto
+        val dropDownColor: Int =
         if (selectedItem.equals("Alta", ignoreCase = true)) {
-            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_alta_1)
+            ContextCompat.getColor(context, R.color.prioridad_alta_1)
         } else if (selectedItem.equals("Media", ignoreCase = true)) {
-            dropDownColor = ContextCompat.getColor(context, R.color.prioridad_media_1)
+            ContextCompat.getColor(context, R.color.prioridad_media_1)
         } else {
-            dropDownColor = ContextCompat.getColor(context, R.color.colorContainer)
+            ContextCompat.getColor(context, R.color.colorContainer)
         }
         return dropDownColor
     }

@@ -97,7 +97,6 @@ class Settings : AppCompatActivity() {
                 pedirPermisosBetterYouFile()
             } else {
                 alertDialogExportar()
-                StyleableToast.makeText(this, "BetterYou exportado", Toast.LENGTH_LONG, R.style.toast_by).show()
             }
 
         }
@@ -192,7 +191,7 @@ class Settings : AppCompatActivity() {
                 null,
                 null
             )
-
+            StyleableToast.makeText(this@Settings, "BetterYou exportado", Toast.LENGTH_LONG, R.style.toast_by).show()
         }
     }
 
@@ -267,7 +266,7 @@ class Settings : AppCompatActivity() {
 
         aceptar.setOnClickListener {
             // Utilizamos la libreria de ProcessPhoenix que nos facilita el proceso de reiniciar la app
-            ProcessPhoenix.triggerRebirth(applicationContext);
+            ProcessPhoenix.triggerRebirth(applicationContext)
         }
 
         titulo.text = "Reiniciar BetterYou"

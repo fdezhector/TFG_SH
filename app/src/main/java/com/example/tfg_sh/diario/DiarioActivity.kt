@@ -3,8 +3,6 @@ package com.example.tfg_sh.diario
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -13,8 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
@@ -30,7 +26,6 @@ class DiarioActivity : AppCompatActivity() {
 
     private lateinit var diarioEmpty: ActivityDiarioEmptyBinding
     private lateinit var diarioEdit: ActivityDiarioEditBinding
-    private var listaEmocionesStringMarcadas = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.CalendarView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tfg_sh.bbdd.BetterYouBBDD
@@ -37,26 +36,23 @@ class MainActivity : AppCompatActivity() {
         
         cargarLogo()
 
-        main.calendarView.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
-            override fun onSelectedDayChange(calendario: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
-                // Cargamos el layout que contiene los elementos de to-do-list, evento y diario
-                cargarElementos()
-                // Convertimos la fecha en el ID de la Nota
-                // Este ID lo utilizaremos como FK tanto en el evento como en el diario
-                val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
-                id = Utils.setId(fechaNota)
-                //Lanzamos una Corutina para hacer las consultas con la BBDD
-                lifecycleScope.launch {
-                    // Comprobamos si existe o no una nota
-                    val nota: Nota?
-                    nota = existeNota(dao, id)
-                    //Si no existe, creamos todas las entidades
-                    if (nota == null) {
-                        insertarTodasEntidades(nota, id, fechaNota, dao)
-                    }
+        main.calendarView.setOnDateChangeListener { calendario, year, month, dayOfMonth ->
+            // Cargamos el layout que contiene los elementos de to-do-list, evento y diario
+            cargarElementos()
+            // Convertimos la fecha en el ID de la Nota
+            // Este ID lo utilizaremos como FK tanto en el evento como en el diario
+            val fechaNota = Utils.obtenerFechaNota(year, month, dayOfMonth)
+            id = Utils.setId(fechaNota)
+            //Lanzamos una Corutina para hacer las consultas con la BBDD
+            lifecycleScope.launch {
+                // Comprobamos si existe o no una nota
+                val nota: Nota? = existeNota(dao, id)
+                //Si no existe, creamos todas las entidades
+                if (nota == null) {
+                    insertarTodasEntidades(nota, id, fechaNota, dao)
                 }
             }
-        })
+        }
 
         main.vistaEvento.setOnClickListener {
             val vistaEventoActivty = Intent(this, EventoActivity::class.java)
@@ -88,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     private suspend fun insertarTodasEntidades(
         nota: Nota?, id: Int, fechaNota: Date, dao: BetterYouDao
     ) {
-        var nota1 = Nota(id, fechaNota.toString())
+        val nota1 = Nota(id, fechaNota.toString())
         dao.insertNota(nota1)
         dao.insertDiario(
             Diario(

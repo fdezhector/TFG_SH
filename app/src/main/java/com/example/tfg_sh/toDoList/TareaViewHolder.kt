@@ -18,13 +18,13 @@ class TareaViewHolder(view : View, private val context: Context) : RecyclerView.
     }
 
     private fun evaluarColorBorde(prioridad : String): Int{
-        var colorBorde: Int
+        val colorBorde: Int =
         if (prioridad.equals("Alta", ignoreCase = true)) {
-            colorBorde = ContextCompat.getColor(context, R.color.prioridad_alta_1)
+            ContextCompat.getColor(context, R.color.prioridad_alta_1)
         } else if (prioridad.equals("Media", ignoreCase = true)) {
-            colorBorde = ContextCompat.getColor(context, R.color.prioridad_media_1)
+            ContextCompat.getColor(context, R.color.prioridad_media_1)
         } else {
-            colorBorde = ContextCompat.getColor(context, R.color.colorContainer)
+            ContextCompat.getColor(context, R.color.colorContainer)
         }
         return colorBorde
     }
