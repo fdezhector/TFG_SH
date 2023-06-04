@@ -19,7 +19,7 @@ import com.example.tfg_sh.toDoList.ItemTarea
 @Dao
 interface BetterYouDao {
     //NOTA
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllNotas(notas: List<Nota>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -33,7 +33,7 @@ interface BetterYouDao {
     suspend fun getAllNotas(): List<Nota>
 
     //EVENTO
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllEventos(eventos: List<Evento>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -53,7 +53,7 @@ interface BetterYouDao {
 
 
     //DIARIO
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllDiarios(diario: List<Diario>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -73,7 +73,7 @@ interface BetterYouDao {
 
 
     //TAREA
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllTareas(tarea: List<Tarea>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

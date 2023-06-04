@@ -17,29 +17,34 @@
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondaryVariant</item>
         <!-- Status bar color. -->
+        <item name="android:windowLightNavigationBar">false</item>
         <item name="android:statusBarColor">@color/secondary</item>
         <item name="navigationIconTint">@color/negro</item>
         <item name="navigationIcon">@color/primaryDark</item>
         <item name="android:navigationBarColor">@color/secondary</item>
         <item name="hintTextColor">@color/dark_grey</item>
         <!-- Customize your theme here. -->
+        <item name="android:timePickerDialogTheme">@style/TimePicker</item>
     </style>
 
     <!-- CalendarView -->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
         <item name="colorAccent">@color/colorContainer</item>
-        <item name="textFillColor">@color/primaryDark</item>
+        <item name="android:textColorPrimary">@color/primaryDark</item>
     </style>
 
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textColor">@color/primaryDark</item>
         <item name="android:colorActivatedHighlight">@color/primaryDark</item>
         <item name="android:weekNumberColor">@color/secondary</item>
     </style>
 
     <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">@color/secondary</item>
+        <item name="android:textColor">@color/primaryDark</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
+
 
     <!-- Separator -->
     <style name="Separator">
@@ -63,14 +68,42 @@
     </style>
 
     <!-- TimePicker -->
-    <style name="TimePicker" parent="android:Theme.Material.Light.Dialog">
-        <item name="android:background">@color/background</item>
-        <item name="android:colorAccent">@color/background</item>
-        <item name="android:colorControlActivated">@color/background</item>
-        <item name="android:colorControlNormal">@color/negro</item>
-        <item name="android:textColorPrimary">@color/negro</item>
-        <item name="android:textColorSecondary">@color/negro</item>
-        <item name="android:colorControlHighlight">@color/focused</item>
+    <style name="TimePicker" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:timePickerStyle">@style/TimePickerDialogStyle</item>
+        <item name="colorAccent">@color/primaryDark</item>
     </style>
+
+    <style name="TimePickerDialogStyle" parent="@android:style/Widget.Material.Light.TimePicker">
+        <item name="colorAccent">@color/primaryDark</item>
+        <item name="android:timePickerMode">clock</item>
+        <item name="android:headerBackground">@color/primaryDark</item>
+        <item name="android:headerTimeTextAppearance">@style/TextAppearance.TimePickerDialogStyle.TimeLabel</item>
+        <item name="android:numbersTextColor">@color/primaryDark</item>
+        <item name="android:numbersSelectorColor">@color/colorContainer</item>
+        <item name="android:numbersBackgroundColor">@color/background</item>
+        <item name="android:textColorPrimary">@color/primaryDark</item>
+        <item name="android:textColorSecondary">@color/primaryDark</item>
+        <item name="android:colorControlHighlight">@color/secondaryVariant</item>
+        <item name="android:colorControlActivated">@color/secondaryVariant</item>
+        <item name="android:colorControlNormal">@color/primaryDark</item>
+    </style>
+
+    <style name="TextAppearance.TimePickerDialogStyle.TimeLabel" parent="@android:style/TextAppearance.Material">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/background</item>
+    </style>
+
+    <!-- Toast personalizado -->
+    <style name="toast_by">
+        <item name="stTextBold">false</item>
+        <item name="stTextColor">@color/negro</item>
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">@color/colorContainer</item>
+        <item name="stSolidBackground">true</item>
+        <!--<item name="stIconStart">@drawable/logo</item>-->
+        <item name="stLength">LONG</item>
+        <item name="stRadius">10dp</item>
+    </style>
+
 
 </resources>

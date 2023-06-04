@@ -5,21 +5,12 @@
     android:padding="10dp">
 
     <ImageButton
-        android:id="@+id/swipe_delete_button"
+        android:id="@+id/edit_button"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingHorizontal="10dp"
-        android:background="@color/delete_red_medium"
-        android:src="@drawable/delete_icon"/>
-
-    <ImageButton
-        android:id="@+id/swipe_edit_button"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="10dp"
-        android:background="@color/edit_green_light"
+        android:background="@color/prioridad_baja_2"
         android:src="@drawable/edit_icon"/>
 
     <View
@@ -36,7 +27,7 @@
         android:elevation="20dp">
 
         <LinearLayout
-            android:id="@+id/mylayout"
+            android:id="@+id/layoutTarea"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"

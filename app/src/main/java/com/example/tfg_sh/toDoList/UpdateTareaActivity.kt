@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.tfg_sh.R
 import com.example.tfg_sh.Utils
 import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
 import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivityUpdateTareaBinding
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
 
 class UpdateTareaActivity : AppCompatActivity() {
@@ -37,14 +39,18 @@ class UpdateTareaActivity : AppCompatActivity() {
             updateTarea.prioridad.setSelection(Utils.prioridades.indexOf(prioridad))
 
             updateTarea.updateButton.setOnClickListener {
+                if(updateTarea.titulo.text.isNullOrEmpty()) {
+                    StyleableToast.makeText(this, "La tarea debe tener un título", Toast.LENGTH_LONG, R.style.toast_by).show()
+                    return@setOnClickListener
+                }
                 updateTarea(tarea, position, dao)
-                Toast.makeText(this, "La tarea se ha actualizado correctamente", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "La tarea se ha actualizado correctamente", Toast.LENGTH_LONG, R.style.toast_by).show()
                 Utils.goToMainScreen(this)
             }
 
             updateTarea.deleteButton.setOnClickListener {
                 deleteTarea(tarea, position, dao)
-                Toast.makeText(this, tarea.titulo + " se ha borrado correctamente", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, tarea.titulo + " se ha borrado correctamente", Toast.LENGTH_LONG, R.style.toast_by).show()
                 Utils.goToMainScreen(this)
             }
         }

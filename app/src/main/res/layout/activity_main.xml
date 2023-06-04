@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:dateTextAppearance="@style/CalenderViewDateCustomText"
         android:theme="@style/CalenderViewCustom"
-        android:weekDayTextAppearance="@style/TextAppearance.AppCompat.Body2"
+        style="@style/CalenderViewCustom"
+        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +52,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/layout_elementos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,13 +69,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/guideHorizontalHalf"
+                android:paddingVertical="15dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="?attr/colorPrimaryDark"
+                android:background="@drawable/custom_edit_text"
                 android:clickable="true"
-                app:tint="?attr/hintTextColor"
+                app:tint="@color/colorContainerIcon"
                 android:src="@drawable/event_icon" />
 
             <View
@@ -93,9 +95,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="?attr/colorPrimaryDark"
+                android:paddingVertical="15dp"
+                android:background="@drawable/custom_edit_text"
                 android:clickable="true"
-                app:tint="?attr/hintTextColor"
+                app:tint="@color/colorContainerIcon"
                 android:src="@drawable/todolist_icon" />
 
         </RelativeLayout>
@@ -120,9 +123,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="?attr/colorPrimaryDark"
+                android:padding="25dp"
+                android:background="@drawable/custom_edit_text"
                 android:clickable="true"
-                app:tint="?attr/hintTextColor"
+                app:tint="@color/colorContainerIcon"
                 android:src="@drawable/diary_icon" />
 
         </RelativeLayout>

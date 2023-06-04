@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/item_recyclerEmotion"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutEmotion"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:padding="10dp"
-    android:background="@color/background"
-    app:buttonTint="@color/gris"
-    android:elevation="25dp"
-    android:text="Emotion"
-    android:textSize="14sp"
-    android:textColor="@color/gris">
-</CheckBox>
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="5dp"
+    android:textAlignment="center"
+    android:background="@drawable/custom_emotion">
+
+    <TextView
+        android:id="@+id/emocion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textAlignment="center"
+        android:text="emotion"
+        android:textColor="?attr/textFillColor"
+        android:textSize="13sp"
+        android:textStyle="italic"/>
+
+</RelativeLayout>
+

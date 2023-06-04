@@ -95,7 +95,6 @@
             android:layout_marginBottom="10dp"
             android:text="Color del día:"
             android:textColor="?attr/tint"
-            android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="13sp" />
 
@@ -169,116 +168,14 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayoutRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layoutEmotes"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/custom_edit_text"
-            android:orientation="vertical"
-            android:elevation="10dp"
-            android:paddingHorizontal="5dp"
-            android:paddingVertical="15dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-
-                    android:text="Emociones"
-                    android:textColor="?attr/textFillColor"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/deselect_emotions_button"
-                    app:tint="?attr/tint"
-                    android:scaleY="0.75"
-                    android:scaleX="0.75"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_toLeftOf="@id/done_edit_emotions_button"
-                    android:src="@drawable/deselect_icon"
-                    android:background="@color/transparent"/>
-
-                <ImageButton
-                    android:id="@+id/done_edit_emotions_button"
-                    app:tint="?attr/tint"
-                    android:scaleY="0.75"
-                    android:scaleX="0.75"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/done_icon"
-                    android:background="@color/transparent"/>
-
-                <ImageButton
-                    android:id="@+id/edit_emotions_button"
-                    app:tint="?attr/tint"
-                    android:scaleY="0.65"
-                    android:scaleX="0.65"
-                    android:visibility="visible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/edit_icon"
-                    android:layout_centerVertical="true"
-                    android:background="@color/transparent"/>
-            </RelativeLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/emotionList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                tools:listitem="@layout/item_emotion"
-                android:layout_margin="5dp"/>
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textViewEmociones"
-                    android:visibility="visible"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:padding="5dp"
-                    android:hint="Selecciona las emociones que hayas sentido..."
-                    android:textColorHint="?attr/hintTextColor"
-                    android:textSize="14sp"
-                    android:textStyle="italic"/>
-            </ScrollView>
-        </LinearLayout>
-
         <EditText
             android:id="@+id/descripcionDiario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="10dp"
-            android:layout_below="@id/linearLayoutRecycler"
+            android:layout_below="@id/layoutEmotes"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:padding="15dp"

@@ -17,6 +17,7 @@ import com.example.tfg_sh.bbdd.dao.BetterYouDao
 import com.example.tfg_sh.bbdd.entidades.Evento
 import com.example.tfg_sh.databinding.ActivityEventoBinding
 import com.example.tfg_sh.evento.timePicker.TimePickerFragment
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -52,14 +53,10 @@ class EventoActivity : AppCompatActivity() {
         eventoBinding.buttonGuardar.setOnClickListener {
             // Validaciones tanto del titulo como de la hora de inicio y la hora de fin
             if (eventoBinding.titulo.text.isNullOrEmpty()) {
-                Toast.makeText(this, "El evento debe tener un título", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "El evento debe tener un título", Toast.LENGTH_LONG, R.style.toast_by).show()
                 return@setOnClickListener
             } else if (eventoBinding.textHoraFechaInicio.text.isNullOrEmpty() && eventoBinding.textHoraFechaFin.text.isNullOrEmpty()) {
-                Toast.makeText(
-                    this,
-                    "Tienes que tener seleccionada una hora de inicio/fin",
-                    Toast.LENGTH_LONG
-                ).show()
+                StyleableToast.makeText(this, "Tienes que te seleccionar una hora de inicio/fin", Toast.LENGTH_LONG, R.style.toast_by).show()
                 return@setOnClickListener
             }
             //Comprobamos que la hora de fin no sea anterior a la hora de inicio
@@ -67,17 +64,13 @@ class EventoActivity : AppCompatActivity() {
             val horaFin = Utils.obtenerHora(eventoBinding.textHoraFechaFin.text.toString())
 
             if (horaInicio > horaFin && horaFin < horaInicio) {
-                Toast.makeText(this, "La hora de fin debe ser posterior a la hora de inicio", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "La hora de fin debe ser posterior a la hora de inicio", Toast.LENGTH_LONG, R.style.toast_by).show()
                 return@setOnClickListener
             }
 
             actualizarEvento(dao, notaId, evento)
             Utils.goToMainScreen(this)
-            Toast.makeText(
-                this,
-                "Evento guardado: " + eventoBinding.titulo.text.toString(),
-                Toast.LENGTH_LONG
-            ).show()
+            StyleableToast.makeText(this, "Evento guardado: " + eventoBinding.titulo.text.toString(), Toast.LENGTH_LONG, R.style.toast_by).show()
             // Una vez programada la notificacion, la app generara esa notificacion 15 minutos antes de que empiece el evento y antes de que finalice
             Utils.programarNotificacion(
                 this,
@@ -133,11 +126,7 @@ class EventoActivity : AppCompatActivity() {
             }
             Utils.goToMainScreen(this)
             dialog.dismiss()
-            Toast.makeText(
-                this,
-                "Se ha borrado " + eventoBinding.titulo.text.toString() + " el evento correctamente",
-                Toast.LENGTH_LONG
-            ).show()
+            StyleableToast.makeText(this, "Se ha borrado " + eventoBinding.titulo.text.toString() + " el evento correctamente", Toast.LENGTH_LONG, R.style.toast_by).show()
         }
 
         cancelar.setOnClickListener {

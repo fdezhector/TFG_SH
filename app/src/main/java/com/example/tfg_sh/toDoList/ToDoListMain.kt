@@ -18,6 +18,7 @@ import com.example.tfg_sh.bbdd.BetterYouBBDD
 import com.example.tfg_sh.bbdd.dao.BetterYouDao
 import com.example.tfg_sh.databinding.ActivityToDoListMainBinding
 import com.example.tfg_sh.databinding.BottomNavBinding
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
 
 class ToDoListMain : AppCompatActivity() {
@@ -71,6 +72,7 @@ class ToDoListMain : AppCompatActivity() {
             ObjectTarea.listaTareas = ObjectTarea.listaAuxiliar.toMutableList()
             // Limpiamos la lista auxiliar
             ObjectTarea.listaAuxiliar.clear()
+            toDoList.fab.visibility = View.VISIBLE
             actualizarVisibilidadBotonFiltro()
             // cargamos de nuevo el recyclerView, ahora con todas las tareas existentes
             initRecyclerView()
@@ -119,6 +121,7 @@ class ToDoListMain : AppCompatActivity() {
                         )
                     } as MutableList<ItemTarea>
                     actualizarRecyclerFiltrado(listaFiltrada)
+                    toDoList.fab.visibility = View.GONE
                     initRecyclerView()
                     true
                 }
@@ -131,6 +134,7 @@ class ToDoListMain : AppCompatActivity() {
                         )
                     } as MutableList<ItemTarea>
                     actualizarRecyclerFiltrado(listaFiltrada)
+                    toDoList.fab.visibility = View.GONE
                     initRecyclerView()
                     true
                 }
@@ -143,11 +147,12 @@ class ToDoListMain : AppCompatActivity() {
                         )
                     } as MutableList<ItemTarea>
                     actualizarRecyclerFiltrado(listaFiltrada)
+                    toDoList.fab.visibility = View.GONE
                     initRecyclerView()
                     true
                 }
-
                 else -> false
+
             }
         }
         popupMenuFiltrar.show()
@@ -193,8 +198,7 @@ class ToDoListMain : AppCompatActivity() {
                 dao.deleteAllTareas()
             }
             initRecyclerView()
-            Toast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG)
-                .show()
+            StyleableToast.makeText(this, "Se han borrado las tareas correctamente", Toast.LENGTH_LONG, R.style.toast_by).show()
             dialog.dismiss()
         }
 

@@ -24,6 +24,7 @@ import com.example.tfg_sh.bbdd.entidades.Tarea
 import com.example.tfg_sh.databinding.ActivitySettingsBinding
 import com.google.gson.Gson
 import com.jakewharton.processphoenix.ProcessPhoenix
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
@@ -41,7 +42,7 @@ class Settings : AppCompatActivity() {
     private val pedirPermisos =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                Toast.makeText(this, "Permisos aceptados", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "Permisos aceptados", Toast.LENGTH_LONG, R.style.toast_by).show()
             }
         }
     /**
@@ -96,7 +97,7 @@ class Settings : AppCompatActivity() {
                 pedirPermisosBetterYouFile()
             } else {
                 alertDialogExportar()
-                Toast.makeText(this@Settings, "BetterYou exportado", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "BetterYou exportado", Toast.LENGTH_LONG, R.style.toast_by).show()
             }
 
         }
@@ -114,7 +115,7 @@ class Settings : AppCompatActivity() {
     private fun importarBBDD(dao: BetterYouDao, uri: Uri?) {
         // Verificamos si no se seleccionó ningún archivo
         if (uri == null) {
-            Toast.makeText(this, "No se seleccionó ningún archivo", Toast.LENGTH_LONG).show()
+            StyleableToast.makeText(this, "No se seleccionó ningún archivo", Toast.LENGTH_LONG, R.style.toast_by).show()
             return
         }
         try {
@@ -136,20 +137,20 @@ class Settings : AppCompatActivity() {
                             dao.insertAllEventos(datos.eventos)
                             dao.insertAllTareas(datos.tareas)
                         } catch (e: Exception) {
-                            Toast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG).show()
+                            StyleableToast.makeText(this@Settings, "Error al importar el archivo", Toast.LENGTH_LONG, R.style.toast_by).show()
                             Log.e("ERROR SQL", e.localizedMessage)
                             Utils.goToSettings(this@Settings)
                         }
                     }
                 }
-                Toast.makeText(this@Settings, "BetterYou importado", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this@Settings, "BetterYou importado", Toast.LENGTH_LONG, R.style.toast_by).show()
                 alertDialogReiniciar()
             } else {
-                Toast.makeText(this, "No se pudo leer el archivo", Toast.LENGTH_LONG).show()
+                StyleableToast.makeText(this, "No se pudo leer el archivo", Toast.LENGTH_LONG, R.style.toast_by).show()
             }
 
         } catch (e: IOException) {
-            Toast.makeText(this, "Error al acceder al archivo", Toast.LENGTH_LONG).show()
+            StyleableToast.makeText(this, "Error al acceder al archivo", Toast.LENGTH_LONG, R.style.toast_by).show()
             Log.e("ERROR IO", e.localizedMessage)
         }
     }

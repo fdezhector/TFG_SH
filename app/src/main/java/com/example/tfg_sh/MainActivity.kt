@@ -88,12 +88,11 @@ class MainActivity : AppCompatActivity() {
     private suspend fun insertarTodasEntidades(
         nota: Nota?, id: Int, fechaNota: Date, dao: BetterYouDao
     ) {
-        var nota1 = nota
-        nota1 = Nota(id, fechaNota.toString())
+        var nota1 = Nota(id, fechaNota.toString())
         dao.insertNota(nota1)
         dao.insertDiario(
             Diario(
-                emociones = null, descripcion = null, color = null ,notaId = nota1.id
+                descripcion = null, color = null ,notaId = nota1.id
             )
         )
         dao.insertEvento(
