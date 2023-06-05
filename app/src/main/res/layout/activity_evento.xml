@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".evento.EventoActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/background">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/button_cerrar"
+            app:tint="?attr/tint"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/cerrar"
+            app:srcCompat="@drawable/close_icon" />
+
+        <ImageButton
+            android:id="@+id/button_guardar"
+            app:tint="?attr/tint"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/guardar"
+            app:srcCompat="@drawable/save_icon" />
+
+        <ImageButton
+            android:id="@+id/button_borrar"
+            app:tint="?attr/tint"
+            android:scaleY="0.75"
+            android:scaleX="0.75"
+            android:minWidth="40dp"
+            android:minHeight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toLeftOf="@id/button_guardar"
+            android:background="@color/transparent"
+            android:contentDescription="@string/borrar_dia"
+            app:srcCompat="@drawable/delete_icon" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.075"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/guideHor1"
+        android:padding="15dp"
+        android:elevation="5dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/custom_edit_text">
+
+        <EditText
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/tint"
+            android:hint="Título"
+            android:textColor="?attr/textFillColor"
+            android:textSize="16sp"
+            android:textColorHint="?attr/hintTextColor"/>
+
+        <EditText
+            android:id="@+id/ubicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/tint"
+            android:hint="Ubicación"
+            android:textColor="?attr/textFillColor"
+            android:textSize="16sp"
+            android:textColorHint="?attr/hintTextColor"/>
+
+        <LinearLayout
+            android:id="@+id/layout_fecha_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="3dp"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/text_fecha_inicio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hora inicio"
+                android:textColor="?attr/textFillColor"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/text_hora_fecha_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:text="09:00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:background="@color/transparent" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="3dp"
+            android:background="?attr/tint" />
+
+        <LinearLayout
+            android:id="@+id/layout_fecha_fin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="3dp"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/text_fecha_fin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hora fin"
+                android:textColor="?attr/textFillColor"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/text_hora_fecha_fin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="18:00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:background="@color/transparent" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideHor2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/guideHor2"
+        android:elevation="5dp"
+        android:padding="15dp"
+        android:layout_margin="15dp"
+
+        android:background="@drawable/custom_edit_text">
+
+        <EditText
+            android:id="@+id/descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/tint"
+            android:maxLength="200"
+            android:inputType="textMultiLine"
+            android:hint="Descripción"
+            android:textColor="?attr/textFillColor"
+            android:textSize="14sp"
+            android:textColorHint="?attr/hintTextColor"/>
+
+        <TextView
+            android:id="@+id/contador_palabras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="right"
+            android:text="0 / 250"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

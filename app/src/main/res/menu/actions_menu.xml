@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/agregarTarea"
+        android:title="Agregar tarea" />
+    <item
+        android:id="@+id/eliminarTareas"
+        android:title="Eliminar todo" />
+    <item
+        android:id="@+id/filtrar"
+        android:title="Filtrar por prioridad" />
+</menu>

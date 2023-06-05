@@ -2,29 +2,81 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <queries>
+        <!-- Verifica si hay al menos un navegador disponible en el dispositivo  -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/betteryou_logo_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/betteryou_logo_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG_SH"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".Settings"
+            android:exported="false"
+            android:configChanges="uiMode"/>
+        <activity
+            android:name=".toDoList.UpdateTareaActivity"
+            android:exported="false"
+            android:configChanges="uiMode"/>
+        <activity
+            android:name=".toDoList.InsertTareaActivity"
+            android:exported="false"
+            android:configChanges="uiMode"/>
+        <activity
+            android:name=".toDoList.ToDoListMain"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:configChanges="uiMode"/>
+        <activity
+            android:name=".PantallaInicio"
+            android:exported="true"
+            android:noHistory="true"
+            android:configChanges="uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
+
+        <receiver
+            android:name=".notificacion.NotificacionAlarma"
+            android:enabled="true" />
+
+        <activity
+            android:name=".evento.EventoActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
+        <activity
+            android:name=".diario.DiarioActivity"
+            android:configChanges="uiMode"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="uiMode"
+            android:exported="true"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

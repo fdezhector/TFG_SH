@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".toDoList.InsertTareaActivity"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="?attr/background" >
+
+    <ImageButton
+        android:id="@+id/button_cerrar"
+        app:tint="?attr/tint"
+        android:scaleY="0.75"
+        android:scaleX="0.75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/transparent"
+        android:contentDescription="@string/cerrar"
+        app:srcCompat="@drawable/close_icon"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Crear"
+            android:textColor="?attr/textFillColor"
+            android:textAlignment="center"
+            android:textSize="40sp"/>
+
+        <EditText
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:maxLines="1"
+            android:lines="1"
+            android:padding="15dp"
+            android:background="@drawable/custom_edit_text"
+            android:maxLength="25"
+            android:hint="Título..."
+            android:textColorHint="?attr/hintTextColor"
+            android:textColor="?attr/textFillColor"/>
+
+        <Spinner
+            android:id="@+id/prioridad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/custom_edit_text"
+            android:textColor="?attr/textFillColor"
+            android:spinnerMode="dropdown"
+            android:dropDownWidth="match_parent"
+            style="@style/custom_spinner"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:layout_gravity="center"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="75dp"
+            android:background="@drawable/custom_button"
+            android:text="Guardar"
+            android:textColor="?attr/textFillColor"/>
+
+    </LinearLayout>
+</RelativeLayout>
+

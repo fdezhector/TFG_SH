@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores del dia -->
+    <color name="very_sad_mood">#C12929</color>
+    <color name="sad_mood">#E38946</color>
+    <color name="neutral_mood">#039DDA</color>
+    <color name="happy_mood">#D8A5FF48</color>
+    <color name="super_happy_mood">#3B9515</color>
+
+    <!-- Colores de las prioridades -->
+    <color name="prioridad_alta_1">#FFB3B3</color>
+    <color name="prioridad_alta_2">#FF8C8C</color>
+    <color name="prioridad_alta_3">#FF7A7A</color>
+
+    <color name="prioridad_media_1">#FFF0B3</color>
+    <color name="prioridad_media_2">#FFE68C</color>
+    <color name="prioridad_media_3">#FFE38C</color>
+
+    <color name="prioridad_baja_1">#B3FFB3</color>
+    <color name="prioridad_baja_2">#89E489</color>
+    <color name="prioridad_baja_3">#7AFF7A</color>
+
+    <!-- Otros -->
+    <color name="delete_red_light">#E57373</color>
+    <color name="delete_red_medium">#E65151</color>
+    <color name="delete_red_dark">#8B0000</color>
+
+    <color name="edit_green_light">#4CAF50</color>
+    <color name="edit_green_medium">#388E3C</color>
+    <color name="edit_green_dark">#1B5E20</color>
+
+    <!-- Light Theme -->
+    <color name="background">#FEFAE0</color>
+    <color name="primary">#CCD5AE</color>
+    <color name="primaryDark">#A16931</color>
+
+    <color name="colorContainer">#CCD59D</color>
+    <color name="colorContainerIcon">#889159</color>
+    <color name="primaryVariant">#DDB791</color>
+    <color name="secondary">#D4A373</color>
+    <color name="secondaryVariant">#ADC178</color>
+
+
+    <!-- Colores neutros -->
+    <color name="negro">#070707</color>
+    <color name="background2">#111111</color>
+    <color name="dark_grey">#373737</color>
+    <color name="pressed">#88DADADA</color>
+    <color name="focused">#A9DADADA</color>
+    <color name="hintColor">#ACACAC</color>
+    <color name="gris">#D1D1D1</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <!-- Default -->
     <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_250">#B957FF</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
