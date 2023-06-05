@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Colores del dia -->
-    <color name="purple_depressed">#6317DC</color>
-    <color name="purple_sad">#4A11CD</color>
-    <color name="blue_neutral">#039DDA</color>
-    <color name="green_joy">#D881CD33</color>
-    <color name="green_super">#329E04</color>
+    <color name="very_sad_mood">#C12929</color>
+    <color name="sad_mood">#E38946</color>
+    <color name="neutral_mood">#039DDA</color>
+    <color name="happy_mood">#D8A5FF48</color>
+    <color name="super_happy_mood">#3B9515</color>
 
     <!-- Colores de las prioridades -->
     <color name="prioridad_alta_1">#FFB3B3</color>

@@ -6,7 +6,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.tfg_sh.MainActivity
 import com.example.tfg_sh.R
@@ -29,7 +28,7 @@ class EventoNotificacionService(
         )
 
         val notificacion = NotificationCompat.Builder(context, CANAL_EVENTO_ID)
-            .setSmallIcon(R.drawable.betteryou_v2)
+            .setSmallIcon(R.drawable.betteryou_logo)
             .setContentTitle(titulo)
             .setContentText(texto)
             .setContentIntent(pendingIntent)

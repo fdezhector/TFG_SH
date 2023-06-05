@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
 
-                android:text="9:00"
+                android:text="09:00"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -219,6 +219,7 @@
             android:inputType="textMultiLine"
             android:hint="Descripción"
             android:textColor="?attr/textFillColor"
+            android:textSize="14sp"
             android:textColorHint="?attr/hintTextColor"/>
 
         <TextView

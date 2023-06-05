@@ -54,32 +54,32 @@ class DiarioActivity : AppCompatActivity() {
 
         diarioEdit.color1.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color1, imageButtons, R.color.purple_depressed)
-            color = Integer.toHexString(ContextCompat.getColor(this, R.color.purple_depressed))
+            setBackgroundModeImageButton(diarioEdit.color1, imageButtons, R.color.very_sad_mood)
+            color = Integer.toHexString(ContextCompat.getColor(this, R.color.very_sad_mood))
         }
 
         diarioEdit.color2.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color2, imageButtons, R.color.purple_sad)
-            color = Integer.toHexString(ContextCompat.getColor(this, R.color.purple_sad))
+            setBackgroundModeImageButton(diarioEdit.color2, imageButtons, R.color.sad_mood)
+            color = Integer.toHexString(ContextCompat.getColor(this, R.color.sad_mood))
         }
 
         diarioEdit.color3.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color3, imageButtons, R.color.blue_neutral)
-            color = Integer.toHexString(ContextCompat.getColor(this, R.color.blue_neutral))
+            setBackgroundModeImageButton(diarioEdit.color3, imageButtons, R.color.neutral_mood)
+            color = Integer.toHexString(ContextCompat.getColor(this, R.color.neutral_mood))
         }
 
         diarioEdit.color4.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color4, imageButtons, R.color.green_joy)
-            color = Integer.toHexString(ContextCompat.getColor(this, R.color.green_joy))
+            setBackgroundModeImageButton(diarioEdit.color4, imageButtons, R.color.happy_mood)
+            color = Integer.toHexString(ContextCompat.getColor(this, R.color.happy_mood))
         }
 
         diarioEdit.color5.setOnClickListener {
             diarioEdit.isColorSelected.visibility = View.VISIBLE
-            setBackgroundModeImageButton(diarioEdit.color5, imageButtons, R.color.green_super)
-            color = Integer.toHexString(ContextCompat.getColor(this, R.color.green_super))
+            setBackgroundModeImageButton(diarioEdit.color5, imageButtons, R.color.super_happy_mood)
+            color = Integer.toHexString(ContextCompat.getColor(this, R.color.super_happy_mood))
         }
 
         diarioEdit.buttonGuardar.setOnClickListener {
@@ -118,52 +118,52 @@ class DiarioActivity : AppCompatActivity() {
                 Integer.toHexString(
                     ContextCompat.getColor(
                         this@DiarioActivity,
-                        R.color.purple_depressed
+                        R.color.very_sad_mood
                     )
                 ), ignoreCase = true
             )
         ) {
-            diarioEdit.color1.setColorFilter(ContextCompat.getColor(this, R.color.purple_depressed))
+            diarioEdit.color1.setColorFilter(ContextCompat.getColor(this, R.color.very_sad_mood))
         } else if (diario.color.equals(
                 Integer.toHexString(
                     ContextCompat.getColor(
                         this@DiarioActivity,
-                        R.color.purple_sad
+                        R.color.sad_mood
                     )
                 ), ignoreCase = true
             )
         ) {
-            diarioEdit.color2.setColorFilter(ContextCompat.getColor(this, R.color.purple_sad))
+            diarioEdit.color2.setColorFilter(ContextCompat.getColor(this, R.color.sad_mood))
         } else if (diario.color.equals(
                 Integer.toHexString(
                     ContextCompat.getColor(
                         this@DiarioActivity,
-                        R.color.blue_neutral
+                        R.color.neutral_mood
                     )
                 ), ignoreCase = true
             )
         ) {
-            diarioEdit.color3.setColorFilter(ContextCompat.getColor(this, R.color.blue_neutral))
+            diarioEdit.color3.setColorFilter(ContextCompat.getColor(this, R.color.neutral_mood))
         } else if (diario.color.equals(
                 Integer.toHexString(
                     ContextCompat.getColor(
                         this@DiarioActivity,
-                        R.color.green_joy
+                        R.color.happy_mood
                     )
                 ), ignoreCase = true
             )
         ) {
-            diarioEdit.color4.setColorFilter(ContextCompat.getColor(this, R.color.green_joy))
+            diarioEdit.color4.setColorFilter(ContextCompat.getColor(this, R.color.happy_mood))
         } else if (diario.color.equals(
                 Integer.toHexString(
                     ContextCompat.getColor(
                         this@DiarioActivity,
-                        R.color.green_super
+                        R.color.super_happy_mood
                     )
                 ), ignoreCase = true
             )
         ) {
-            diarioEdit.color5.setColorFilter(ContextCompat.getColor(this, R.color.green_super))
+            diarioEdit.color5.setColorFilter(ContextCompat.getColor(this, R.color.super_happy_mood))
         }
     }
 

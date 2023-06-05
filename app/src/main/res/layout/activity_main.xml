@@ -30,9 +30,11 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
             android:layout_above="@id/logo"
             android:layout_centerInParent="true"
-            android:src="@drawable/betteryou_v2" />
+            android:src="@drawable/betteryou_logo" />
 
         <TextView
             android:id="@+id/logo"

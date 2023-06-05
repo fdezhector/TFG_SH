@@ -17,7 +17,7 @@
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondaryVariant</item>
         <!-- Status bar color. -->
-        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
         <item name="android:statusBarColor">@color/secondary</item>
         <item name="navigationIconTint">@color/negro</item>
         <item name="navigationIcon">@color/primaryDark</item>
@@ -98,7 +98,7 @@
         <item name="stTextBold">false</item>
         <item name="stTextColor">@color/negro</item>
         <item name="stTextSize">14sp</item>
-        <item name="stColorBackground">@color/colorContainer</item>
+        <item name="stColorBackground">@color/secondaryVariant</item>
         <item name="stSolidBackground">true</item>
         <!--<item name="stIconStart">@drawable/logo</item>-->
         <item name="stLength">LONG</item>
