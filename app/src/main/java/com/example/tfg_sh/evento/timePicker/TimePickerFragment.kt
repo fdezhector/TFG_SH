@@ -12,7 +12,9 @@ import java.util.Calendar
 class TimePickerFragment(val listener:(String) -> Unit) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        listener("$hourOfDay:$minute")
+        val formattedHour = String.format("%02d", hourOfDay)
+        val formattedMinute = String.format("%02d", minute)
+        listener("$formattedHour:$formattedMinute")
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -3,6 +3,7 @@ package com.example.tfg_sh.evento
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -19,7 +20,6 @@ import com.example.tfg_sh.databinding.ActivityEventoBinding
 import com.example.tfg_sh.evento.timePicker.TimePickerFragment
 import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 class EventoActivity : AppCompatActivity() {
 
@@ -59,11 +59,15 @@ class EventoActivity : AppCompatActivity() {
                 StyleableToast.makeText(this, "Tienes que te seleccionar una hora de inicio/fin", Toast.LENGTH_LONG, R.style.toast_by).show()
                 return@setOnClickListener
             }
-            //Comprobamos que la hora de fin no sea anterior a la hora de inicio
-            val horaInicio = Utils.obtenerHora(eventoBinding.textHoraFechaInicio.text.toString())
-            val horaFin = Utils.obtenerHora(eventoBinding.textHoraFechaFin.text.toString())
 
-            if (horaInicio > horaFin && horaFin < horaInicio) {
+            //Comprobamos que la hora de fin no sea anterior a la hora de inicio
+            val horaInicioString = eventoBinding.textHoraFechaInicio.text.toString()
+            val horaFinString = eventoBinding.textHoraFechaFin.text.toString()
+
+            val horaInicioTime = Utils.obtenerHora(horaInicioString)
+            val horaFinTime = Utils.obtenerHora(horaFinString)
+
+            if (horaInicioTime > horaFinTime && horaFinTime < horaInicioTime) {
                 StyleableToast.makeText(this, "La hora de fin debe ser posterior a la hora de inicio", Toast.LENGTH_LONG, R.style.toast_by).show()
                 return@setOnClickListener
             }
@@ -71,21 +75,26 @@ class EventoActivity : AppCompatActivity() {
             actualizarEvento(dao, notaId, evento)
             Utils.goToMainScreen(this)
             StyleableToast.makeText(this, "Evento guardado: " + eventoBinding.titulo.text.toString(), Toast.LENGTH_LONG, R.style.toast_by).show()
-            // Una vez programada la notificacion, la app generara esa notificacion 15 minutos antes de que empiece el evento y antes de que finalice
-            Utils.programarNotificacion(
-                this,
-                "Evento BetterYou",
-                "Evento: " + eventoBinding.titulo.text.toString() + " esta a punto de comenzar",
-                "Tu evento comienza a las " + eventoBinding.textHoraFechaInicio.text.toString(),
-                ((horaInicio.time-900000) - Calendar.getInstance().timeInMillis).toInt()
-            )
-            Utils.programarNotificacion(
-                this,
-                "Evento BetterYou",
-                "Evento: " + eventoBinding.titulo.text.toString() + " esta a punto de finalizar",
-                "Tu evento finaliza a las " + eventoBinding.textHoraFechaFin.text.toString(),
-                ((horaFin.time-900000) - Calendar.getInstance().timeInMillis).toInt()
-            )
+
+            // Programamos la notificacion 15 minutos antes de que empiece el evento
+            val eventoNotificacionService = EventoNotificacionService(this)
+
+            var fecha = evento!!.notaId.toString()
+
+            if(fecha.length < 8){
+                fecha = "0$fecha"
+            }
+
+            val anno = fecha.substring(fecha.length - 4, fecha.length).toInt()
+            val mes = fecha.substring(2, 4).toInt()
+            val dia = fecha.substring(0, 2).toInt()
+            val hora = horaInicioString.substring(0, 2).toInt()
+            val minuto = horaInicioString.substring(3, 5).toInt()
+            val titulo = "BetterYou Evento"
+            val texto = "${eventoBinding.titulo.text} está a punto de comenzar"
+
+            eventoNotificacionService.programarNotificacion(anno, mes, dia, hora, minuto, titulo, texto)
+
         }
 
         eventoBinding.buttonBorrar.setOnClickListener {

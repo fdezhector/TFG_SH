@@ -22,9 +22,6 @@ import java.util.Date
 
 object Utils {
 
-    // Creamos la lista inmutable de prioridades que se utilizara para las tareas
-    val prioridades = listOf("Alta", "Media", "Baja")
-
     fun goToMainScreen(activity: Activity) {
         val intent = Intent(activity, MainActivity::class.java)
         // FLAG_ACTIVITY_CLEAR_TOP permite eliminar todas las actividades que esten por encima de ella en la cola
@@ -59,6 +56,9 @@ object Utils {
         return hora
     }
 
+    // Creamos la lista inmutable de prioridades que se utilizara para las tareas
+    val prioridades = listOf("Alta", "Media", "Baja")
+
     fun initDropDownMenu(dropDown: Spinner, context: Context) {
         // creamos el adaptador para el spinner
         val adaptador = ArrayAdapter(context, R.layout.dropdown_menu, prioridades)
@@ -86,47 +86,6 @@ object Utils {
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // NO APLICA | Aqui se manejaria el caso en el que no se haya seleccionado ninguna opción
             }
-        }
-    }
-
-    fun programarNotificacion(
-        context: Context,
-        titulo: String,
-        textoCorto: String,
-        textoDetallado: String,
-        delay: Int
-    ) {
-        val intent = Intent(context, NotificacionAlarma::class.java).apply {
-            putExtra("titulo", titulo)
-            putExtra("textoCorto", textoCorto)
-            putExtra("textoDetallado", textoDetallado)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            NotificacionAlarma.NOTIFICATION_ID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setExact(
-            AlarmManager.RTC_WAKEUP, Calendar.getInstance().timeInMillis + delay, pendingIntent
-        )
-    }
-
-    /**
-     * Nos permite crear el canal de la notificación
-     */
-    fun crearCanal(context: Context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                PantallaInicio.ID_CANAL, "CanalBetterYou", NotificationManager.IMPORTANCE_DEFAULT
-            ).apply {
-                description = "Canal para la notificacion de la aplicacion BetterYou"
-            }
-
-            val notificationManager: NotificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
         }
     }
 
